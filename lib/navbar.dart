@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'cardlist.dart';
 
 class BasicBottomNavBar extends StatefulWidget {
   const BasicBottomNavBar({Key? key}) : super(key: key);
@@ -11,17 +12,15 @@ class BasicBottomNavBar extends StatefulWidget {
 class _BasicBottomNavBarState extends State<BasicBottomNavBar> {
   int _selectedIndex = 0;
 
-  static const List<Widget> _pages = <Widget>[
-    ListTile(
-      title: Text('Plomeria'),
-      subtitle: Text('Privada del Rocio'),
-      leading: Icon(Icons.vpn_key_rounded),
-      trailing: Icon(Icons.star),
-    ),
+  static const List <Widget> _pages = <Widget>[
+      Scaffold(
+        body: Center(),
+      ),
     Icon(
       Icons.camera,
       size: 150,
     ),
+
 
   ];
 
@@ -42,7 +41,6 @@ class _BasicBottomNavBarState extends State<BasicBottomNavBar> {
           BottomNavigationBarItem(
             icon: Icon(Icons.archive_outlined),
             label: 'Trabajos Realizados',
-            
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.camera),

@@ -24,9 +24,9 @@ class Loginpage extends StatelessWidget {
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.only(
-                    topRight: Radius.circular(30.0),
+                    topRight: Radius.circular(100.0),
                     topLeft: Radius.circular(10.0),
-                    bottomLeft: Radius.circular(30.0),
+                    bottomLeft: Radius.circular(100.0),
                     bottomRight: Radius.circular(30.0)
                   ),
                 ),
@@ -61,7 +61,6 @@ class Loginpage extends StatelessWidget {
                         TextStyle
                           (color: Colors.white70),
                         border: InputBorder.none,
-
                         icon:
                         Icon
                           (Icons.lock, color: Colors.white30,)
