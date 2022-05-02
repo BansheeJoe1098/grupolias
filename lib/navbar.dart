@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:grupolias/Tickets/ui/screens/tickets.page.dart';
 
 class BasicBottomNavBar extends StatefulWidget {
   const BasicBottomNavBar({Key? key}) : super(key: key);
@@ -12,7 +13,9 @@ class _BasicBottomNavBarState extends State<BasicBottomNavBar> {
 
   static const List<Widget> _pages = <Widget>[
     Scaffold(
-      body: Center(),
+      body: Center(
+        child: TicketsPage(),
+      ),
     ),
     Icon(
       Icons.camera,

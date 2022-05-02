@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+import '../../service/ticket.service.dart';
 
 class TicketsPage extends StatelessWidget {
   const TicketsPage({Key? key}) : super(key: key);
@@ -6,11 +9,43 @@ class TicketsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Tickets'),
-      ),
-      body: const Center(
-        child: Text('Tickets'),
+      body: Column(
+        children: [
+          SafeArea(
+            child: Column(
+              children: [
+                const Text(
+                  'Bienvenido Luis',
+                  style: TextStyle(
+                    fontSize: 30,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const Text(
+                  'Estos son los tickets dispoibles para ti',
+                  style: TextStyle(
+                    fontSize: 20,
+                  ),
+                ),
+                Container(
+                  height: 100,
+                  margin: EdgeInsets.all(20),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(10),
+                    boxShadow: const [
+                      BoxShadow(
+                        color: Colors.grey,
+                        blurRadius: 20,
+                        offset: Offset(0, 10),
+                      ),
+                    ],
+                  ),
+                )
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }
