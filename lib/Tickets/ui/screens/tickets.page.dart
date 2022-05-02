@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-
-import '../../service/ticket.service.dart';
 
 class TicketsPage extends StatelessWidget {
   const TicketsPage({Key? key}) : super(key: key);
@@ -29,7 +26,7 @@ class TicketsPage extends StatelessWidget {
                 ),
                 Container(
                   height: 100,
-                  margin: EdgeInsets.all(20),
+                  margin: const EdgeInsets.all(20),
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(10),
