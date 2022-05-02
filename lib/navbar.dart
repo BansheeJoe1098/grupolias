@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'cardlist.dart';
 
 class BasicBottomNavBar extends StatefulWidget {
   const BasicBottomNavBar({Key? key}) : super(key: key);
@@ -12,16 +10,14 @@ class BasicBottomNavBar extends StatefulWidget {
 class _BasicBottomNavBarState extends State<BasicBottomNavBar> {
   int _selectedIndex = 0;
 
-  static const List <Widget> _pages = <Widget>[
-      Scaffold(
-        body: Center(),
-      ),
+  static const List<Widget> _pages = <Widget>[
+    Scaffold(
+      body: Center(),
+    ),
     Icon(
       Icons.camera,
       size: 150,
     ),
-
-
   ];
 
   void _onItemTapped(int index) {

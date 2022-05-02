@@ -16,13 +16,14 @@ class ListViewHome extends StatelessWidget {
           return Card(
               child: ListTile(
                   onTap: () {
+                    // ignore: deprecated_member_use
                     Scaffold.of(context).showSnackBar(SnackBar(
                       content: Text(titles[index] + ' pressed!'),
                     ));
                   },
                   title: Text(titles[index]),
                   subtitle: Text(subtitles[index]),
-                  leading: CircleAvatar(
+                  leading: const CircleAvatar(
                       backgroundImage: NetworkImage(
                           "https://images.unsplash.com/photo-1547721064-da6cfb341d50")),
                   trailing: Icon(icons[index])));
