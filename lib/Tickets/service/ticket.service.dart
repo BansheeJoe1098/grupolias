@@ -1,23 +1,23 @@
+import 'dart:convert';
+
+import 'package:grupolias/constants.dart';
 import 'package:http/http.dart' as http;
 
 import '../model/ticket.model.dart';
 
-Uri url = Uri.parse('http://192.168.0.62/tickets/1');
+class TicketService {
+  String url = '${Constants.API_URL}/tickets';
 
-Future<List<Ticket>> geTickets() async {
-  final response = await http.get(url);
-  if (response.statusCode == 200) {
-    return ticketFromJson(response.body) as List<Ticket>;
-  } else {
-    throw Exception('Failed to load tickets');
+  Future<List<Ticket>> getAll() async {
+    final response = await http.get(Uri.parse(url));
+
+    final jsonData = json.decode(response.body);
+    return List<Ticket>.from(jsonData.map((item) => Ticket.fromJson(item)));
   }
-}
 
-Future<Ticket> getTicket(int id) async {
-  final response = await http.get(url);
-  if (response.statusCode == 200) {
-    return ticketFromJson(response.body);
-  } else {
-    throw Exception('Failed to load ticket');
+  Future<Ticket> getTicketById(int id) async {
+    final response = await http.get(Uri.parse('$url/$id'));
+
+    return Ticket.fromRawJson(response.body);
   }
 }

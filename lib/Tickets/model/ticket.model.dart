@@ -1,8 +1,10 @@
+// To parse this JSON data, do
+//
+//     final ticket = ticketFromJson(jsonString);
+
+// ignore_for_file: prefer_if_null_operators, prefer_null_aware_operators, unnecessary_null_comparison
+
 import 'dart:convert';
-
-Ticket ticketFromJson(String str) => Ticket.fromJson(json.decode(str));
-
-String ticketToJson(Ticket data) => json.encode(data.toJson());
 
 class Ticket {
   Ticket({
@@ -37,10 +39,10 @@ class Ticket {
     required this.updatedAt,
   });
 
-  int id;
+  int? id;
   String numExpediente;
   bool asistenciaVial;
-  DateTime fechaLlamada;
+  DateTime? fechaLlamada;
   String nombreAsesorAseguradora;
   String nombreAsesorGpoLias;
   String nombreUsuarioFinal;
@@ -52,82 +54,113 @@ class Ticket {
   String colonia;
   String calle;
   String numeroDomicilio;
-  int banderazo;
-  int totalSalida;
-  int cobertura;
+  String banderazo;
+  String totalSalida;
+  String cobertura;
   String cotizacionGpoLias;
-  int deducible;
+  String deducible;
   int kilometraje;
-  int total;
-  int anticipo;
-  DateTime horaCierre;
+  String total;
+  String anticipo;
+  dynamic horaCierre;
   int casetas;
-  int costoGpoLias;
+  String costoGpoLias;
   String estado;
-  DateTime createdAt;
-  DateTime updatedAt;
+  DateTime? createdAt;
+  DateTime? updatedAt;
+
+  factory Ticket.fromRawJson(String str) => Ticket.fromJson(json.decode(str));
+
+  String toRawJson() => json.encode(toJson());
 
   factory Ticket.fromJson(Map<String, dynamic> json) => Ticket(
-        id: json["id"],
-        numExpediente: json["num_expediente"],
-        asistenciaVial: json["asistencia_vial"],
-        fechaLlamada: DateTime.parse(json["fecha_llamada"]),
-        nombreAsesorAseguradora: json["nombre_asesor_aseguradora"],
-        nombreAsesorGpoLias: json["nombre_asesor_gpo_lias"],
-        nombreUsuarioFinal: json["nombre_usuario_final"],
-        tituloTicket: json["titulo_ticket"],
-        asistenciaId: json["asistenciaId"],
-        aseguradoraId: json["aseguradoraId"],
-        problematica: json["problematica"],
-        ciudad: json["ciudad"],
-        colonia: json["colonia"],
-        calle: json["calle"],
-        numeroDomicilio: json["numero_domicilio"],
-        banderazo: json["banderazo"],
-        totalSalida: json["total_salida"],
-        cobertura: json["cobertura"],
-        cotizacionGpoLias: json["cotizacion_gpo_lias"],
-        deducible: json["deducible"],
-        kilometraje: json["kilometraje"],
-        total: json["total"],
-        anticipo: json["anticipo"],
-        horaCierre: DateTime.parse(json["hora_cierre"]),
-        casetas: json["casetas"],
-        costoGpoLias: json["costo_gpo_lias"],
-        estado: json["estado"],
-        createdAt: DateTime.parse(json["createdAt"]),
-        updatedAt: DateTime.parse(json["updatedAt"]),
+        id: json["id"] == null ? null : json["id"],
+        numExpediente:
+            json["num_expediente"] == null ? null : json["num_expediente"],
+        asistenciaVial:
+            json["asistencia_vial"] == null ? null : json["asistencia_vial"],
+        fechaLlamada: json["fecha_llamada"] == null
+            ? null
+            : DateTime.parse(json["fecha_llamada"]),
+        nombreAsesorAseguradora: json["nombre_asesor_aseguradora"] == null
+            ? null
+            : json["nombre_asesor_aseguradora"],
+        nombreAsesorGpoLias: json["nombre_asesor_gpo_lias"] == null
+            ? null
+            : json["nombre_asesor_gpo_lias"],
+        nombreUsuarioFinal: json["nombre_usuario_final"] == null
+            ? null
+            : json["nombre_usuario_final"],
+        tituloTicket:
+            json["titulo_ticket"] == null ? null : json["titulo_ticket"],
+        asistenciaId:
+            json["asistenciaId"] == null ? null : json["asistenciaId"],
+        aseguradoraId:
+            json["aseguradoraId"] == null ? null : json["aseguradoraId"],
+        problematica:
+            json["problematica"] == null ? null : json["problematica"],
+        ciudad: json["ciudad"] == null ? null : json["ciudad"],
+        colonia: json["colonia"] == null ? null : json["colonia"],
+        calle: json["calle"] == null ? null : json["calle"],
+        numeroDomicilio:
+            json["numero_domicilio"] == null ? null : json["numero_domicilio"],
+        banderazo: json["banderazo"] == null ? null : json["banderazo"],
+        totalSalida: json["total_salida"] == null ? null : json["total_salida"],
+        cobertura: json["cobertura"] == null ? null : json["cobertura"],
+        cotizacionGpoLias: json["cotizacion_gpo_lias"] == null
+            ? null
+            : json["cotizacion_gpo_lias"],
+        deducible: json["deducible"] == null ? null : json["deducible"],
+        kilometraje: json["kilometraje"] == null ? null : json["kilometraje"],
+        total: json["total"] == null ? null : json["total"],
+        anticipo: json["anticipo"] == null ? null : json["anticipo"],
+        horaCierre: json["hora_cierre"],
+        casetas: json["casetas"] == null ? null : json["casetas"],
+        costoGpoLias:
+            json["costo_gpo_lias"] == null ? null : json["costo_gpo_lias"],
+        estado: json["estado"] == null ? null : json["estado"],
+        createdAt: json["createdAt"] == null
+            ? null
+            : DateTime.parse(json["createdAt"]),
+        updatedAt: json["updatedAt"] == null
+            ? null
+            : DateTime.parse(json["updatedAt"]),
       );
 
   Map<String, dynamic> toJson() => {
-        "id": id,
-        "num_expediente": numExpediente,
-        "asistencia_vial": asistenciaVial,
-        "fecha_llamada": fechaLlamada.toIso8601String(),
-        "nombre_asesor_aseguradora": nombreAsesorAseguradora,
-        "nombre_asesor_gpo_lias": nombreAsesorGpoLias,
-        "nombre_usuario_final": nombreUsuarioFinal,
-        "titulo_ticket": tituloTicket,
-        "asistenciaId": asistenciaId,
-        "aseguradoraId": aseguradoraId,
-        "problematica": problematica,
-        "ciudad": ciudad,
-        "colonia": colonia,
-        "calle": calle,
-        "numero_domicilio": numeroDomicilio,
-        "banderazo": banderazo,
-        "total_salida": totalSalida,
-        "cobertura": cobertura,
-        "cotizacion_gpo_lias": cotizacionGpoLias,
-        "deducible": deducible,
-        "kilometraje": kilometraje,
-        "total": total,
-        "anticipo": anticipo,
-        "hora_cierre": horaCierre.toIso8601String(),
-        "casetas": casetas,
-        "costo_gpo_lias": costoGpoLias,
-        "estado": estado,
-        "createdAt": createdAt.toIso8601String(),
-        "updatedAt": updatedAt.toIso8601String(),
+        "id": id == null ? null : id,
+        "num_expediente": numExpediente == null ? null : numExpediente,
+        "asistencia_vial": asistenciaVial == null ? null : asistenciaVial,
+        "fecha_llamada":
+            fechaLlamada == null ? null : fechaLlamada?.toIso8601String(),
+        "nombre_asesor_aseguradora":
+            nombreAsesorAseguradora == null ? null : nombreAsesorAseguradora,
+        "nombre_asesor_gpo_lias":
+            nombreAsesorGpoLias == null ? null : nombreAsesorGpoLias,
+        "nombre_usuario_final":
+            nombreUsuarioFinal == null ? null : nombreUsuarioFinal,
+        "titulo_ticket": tituloTicket == null ? null : tituloTicket,
+        "asistenciaId": asistenciaId == null ? null : asistenciaId,
+        "aseguradoraId": aseguradoraId == null ? null : aseguradoraId,
+        "problematica": problematica == null ? null : problematica,
+        "ciudad": ciudad == null ? null : ciudad,
+        "colonia": colonia == null ? null : colonia,
+        "calle": calle == null ? null : calle,
+        "numero_domicilio": numeroDomicilio == null ? null : numeroDomicilio,
+        "banderazo": banderazo == null ? null : banderazo,
+        "total_salida": totalSalida == null ? null : totalSalida,
+        "cobertura": cobertura == null ? null : cobertura,
+        "cotizacion_gpo_lias":
+            cotizacionGpoLias == null ? null : cotizacionGpoLias,
+        "deducible": deducible == null ? null : deducible,
+        "kilometraje": kilometraje == null ? null : kilometraje,
+        "total": total == null ? null : total,
+        "anticipo": anticipo == null ? null : anticipo,
+        "hora_cierre": horaCierre,
+        "casetas": casetas == null ? null : casetas,
+        "costo_gpo_lias": costoGpoLias == null ? null : costoGpoLias,
+        "estado": estado == null ? null : estado,
+        "createdAt": createdAt == null ? null : createdAt?.toIso8601String(),
+        "updatedAt": updatedAt == null ? null : updatedAt?.toIso8601String(),
       };
 }
