@@ -5,6 +5,12 @@ class CotizacionesPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold();
+    return Container(
+      height: 10,
+      decoration: BoxDecoration(color: Colors.red),
+      child: Center(
+        child: Text('Cotizaciones'),
+      ),
+    );
   }
 }

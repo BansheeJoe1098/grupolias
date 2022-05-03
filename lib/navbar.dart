@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:grupolias/Cotizaciones/ui/pages/cotizaciones.page.dart';
 import 'package:grupolias/Tickets/ui/screens/tickets.page.dart';
 
 class BasicBottomNavBar extends StatefulWidget {
@@ -17,10 +18,7 @@ class _BasicBottomNavBarState extends State<BasicBottomNavBar> {
         child: TicketsPage(),
       ),
     ),
-    Icon(
-      Icons.camera,
-      size: 150,
-    ),
+    CotizacionesPage(),
   ];
 
   void _onItemTapped(int index) {

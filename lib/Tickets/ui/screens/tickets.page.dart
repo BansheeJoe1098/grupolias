@@ -67,7 +67,7 @@ class TicketsPage extends StatelessWidget {
                       future: TicketService().getAll(),
                       builder: (context, snapshot) {
                         if (snapshot.connectionState == ConnectionState.done) {
-                          var titulo = snapshot.data![0].tituloTicket;
+                          var titulo = snapshot.data![1].tituloTicket;
                           return Text(titulo);
                         } else {
                           return const CircularProgressIndicator();
