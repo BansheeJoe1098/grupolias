@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:grupolias/Tickets/model/ticket.model.dart';
 import 'package:grupolias/Tickets/service/ticket.service.dart';
 
-class TicketsPage extends StatelessWidget {
-  const TicketsPage({Key? key}) : super(key: key);
+class TicketsScreen extends StatelessWidget {
+  const TicketsScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

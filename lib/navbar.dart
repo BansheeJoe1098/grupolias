@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:grupolias/Cotizaciones/ui/pages/cotizaciones.page.dart';
-import 'package:grupolias/Tickets/ui/screens/tickets.page.dart';
+import 'package:grupolias/Cotizaciones/ui/screens/cotizaciones.screen.dart';
+import 'package:grupolias/Tickets/ui/screens/tickets.screen.dart';
 
 class BasicBottomNavBar extends StatefulWidget {
   const BasicBottomNavBar({Key? key}) : super(key: key);
@@ -14,11 +14,9 @@ class _BasicBottomNavBarState extends State<BasicBottomNavBar> {
 
   static const List<Widget> _pages = <Widget>[
     Scaffold(
-      body: Center(
-        child: TicketsPage(),
-      ),
+      body: TicketsScreen(),
     ),
-    CotizacionesPage(),
+    CotizacionesScreen(),
   ];
 
   void _onItemTapped(int index) {

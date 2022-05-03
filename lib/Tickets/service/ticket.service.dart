@@ -10,8 +10,8 @@ class TicketService {
 
   Future<List<Ticket>> getAll() async {
     final response = await http.get(Uri.parse(url));
-
     final jsonData = json.decode(response.body);
+    print(response.body);
     return List<Ticket>.from(jsonData.map((item) => Ticket.fromJson(item)));
   }
 
