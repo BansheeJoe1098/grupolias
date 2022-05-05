@@ -41,7 +41,7 @@ class _BasicBottomNavBarState extends State<BasicBottomNavBar> {
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.camera),
-              label: 'Camera',
+              label: 'Cotizacion',
             ),
           ],
           currentIndex: _selectedIndex,
