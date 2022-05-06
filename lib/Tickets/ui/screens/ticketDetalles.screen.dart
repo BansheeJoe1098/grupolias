@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:grupolias/Tickets/model/ticket.model.dart';
 import 'package:grupolias/Tickets/service/ticket.service.dart';
+
+import 'map.screen.dart';
 
 class Ticketdetalles extends StatelessWidget {
   const Ticketdetalles({Key? key, required this.titulo, required this.idTicket})
@@ -59,7 +62,7 @@ class Ticketdetalles extends StatelessWidget {
               ElevatedButton(
                 child: const Text("Tomar Ticket"),
                 onPressed: () {
-                  print("hola");
+                  Get.to(MapScreen());
                 },
               )
             ],

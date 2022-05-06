@@ -129,7 +129,7 @@ class CotizacionesScreen extends StatelessWidget {
                     Row(
                       children: <Widget>[
                         Container(
-                          margin: EdgeInsets.only(
+                          margin: const EdgeInsets.only(
                             top: 5,
                             left: 10,
                             right: 5,
