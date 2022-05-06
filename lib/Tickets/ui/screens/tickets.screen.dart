@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
-import 'package:get/get.dart';
 import 'package:grupolias/Tickets/model/ticket.model.dart';
 import 'package:grupolias/Tickets/service/ticket.service.dart';
 import 'package:grupolias/Tickets/ui/widgets/CardListTickets.widget.dart';
-
-import 'ticketDetalles.screen.dart';
 
 class TicketsScreen extends StatelessWidget {
   const TicketsScreen({Key? key}) : super(key: key);
