@@ -31,7 +31,7 @@ class TicketsScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: const [
                         Text(
-                          'Bienvenido Luis',
+                          'Bienvenido Jose',
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 30,

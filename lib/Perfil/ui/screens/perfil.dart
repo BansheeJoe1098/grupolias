@@ -15,7 +15,7 @@ class perfil extends StatelessWidget {
             SizedBox(
               height: 50.0,
             ),
-            Container(
+            Center(
               child: CircleAvatar(
                 backgroundImage: AssetImage('assets/profile.png'),
                 radius: 60.0,
