@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:grupolias/AcuerdosConformidad/ui/screens/acuerdo.screen.dart';
 import 'package:grupolias/Cotizaciones/ui/screens/cotizaciones.screen.dart';
 import 'package:grupolias/Tickets/ui/screens/tickets.screen.dart';
 
@@ -16,6 +17,7 @@ class _BasicBottomNavBarState extends State<BasicBottomNavBar> {
     Scaffold(
       body: TicketsScreen(),
     ),
+    AcuerdoConformidad(),
     CotizacionesScreen(),
   ];
 
@@ -38,6 +40,9 @@ class _BasicBottomNavBarState extends State<BasicBottomNavBar> {
             BottomNavigationBarItem(
               icon: Icon(Icons.archive_outlined),
               label: 'Trabajos Realizados',
+            ), BottomNavigationBarItem(
+              icon: Icon(Icons.border_color),
+              label: 'Cotizacion',
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.camera),
