@@ -63,6 +63,17 @@ class CotizacionesScreen extends StatelessWidget {
                     const SizedBox(
                       height: 20,
                     ),
+
+                    //                 showDatePicker(
+                    //   context: context,
+                    //   initialDate: selectedDate,
+                    //   firstDate: DateTime(2010),
+                    //   lastDate: DateTime(2025),
+                    //   helpText: "SELECT BOOKING DATE",
+                    //   cancelText: "NOT NOW",
+                    //   confirmText: "BOOK NOW",
+                    //   initialDatePickerMode: DatePickerMode.year
+                    // );
                     const SizedBox(
                       height: 20,
                     ),
