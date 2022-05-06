@@ -50,6 +50,36 @@ class CotizacionesScreen extends StatelessWidget {
                       height: 20,
                     ),
                     const TextField(
+                      decoration: InputDecoration(
+                          labelText: 'Descripcion del problema',
+                          labelStyle: TextStyle(fontSize: 20),
+                          hintText: 'Descripcion',
+                          border: OutlineInputBorder(),
+                          filled: true,
+                          fillColor: Color.fromARGB(71, 226, 208, 208),
+                          hintMaxLines: 50,
+                          contentPadding: EdgeInsets.all(20.0)),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+
+
+
+                    showDatePicker(
+      context: context,
+      initialDate: selectedDate,
+      firstDate: DateTime(2010),
+      lastDate: DateTime(2025),
+      helpText: "SELECT BOOKING DATE",
+      cancelText: "NOT NOW",
+      confirmText: "BOOK NOW",
+      initialDatePickerMode: DatePickerMode.year
+    );
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    const TextField(
                       // controller: costoController,
                       decoration: InputDecoration(
                         hintText: '0.00',
@@ -107,20 +137,6 @@ class CotizacionesScreen extends StatelessWidget {
                       textInputAction: TextInputAction.done,
                     ),
                     const SizedBox(
-                      height: 25,
-                    ),
-                    const TextField(
-                      decoration: InputDecoration(
-                          labelText: 'Descripcion del problema',
-                          labelStyle: TextStyle(fontSize: 20),
-                          hintText: 'Descripcion',
-                          border: OutlineInputBorder(),
-                          filled: true,
-                          fillColor: Color.fromARGB(71, 226, 208, 208),
-                          hintMaxLines: 50,
-                          contentPadding: EdgeInsets.all(50.0)),
-                    ),
-                    const SizedBox(
                       height: 20,
                     ),
                     Row(
@@ -128,14 +144,26 @@ class CotizacionesScreen extends StatelessWidget {
                         Container(
                           margin: EdgeInsets.only(
                             top: 5,
-                            left: 230,
+                            left: 10,
                             right: 5,
                           ),
-                          child: ElevatedButton(
-                              child: Text("Guardar"), onPressed: () {}),
+                          child: Row(
+                            children: [
+                              SizedBox(
+                                width: 125,
+                              ),
+                              ElevatedButton(
+                                  child: Text("Guardar"), onPressed: () {}),
+                              SizedBox(
+                                width: 15,
+                              ),
+                              ElevatedButton(
+                                  child: Text("Enviar"), onPressed: () {}),
+                            ],
+                          ),
                         )
                       ],
-                    )
+                    ),
                   ],
                 ),
               ),
