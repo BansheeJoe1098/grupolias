@@ -67,6 +67,7 @@ flutter:
   assets:
     - assets/Lias.png
     - assets/gpolias.png
+    - assets/profile.png
 
 
   # An image assets can refer to one or more resolution-specific "variants", see

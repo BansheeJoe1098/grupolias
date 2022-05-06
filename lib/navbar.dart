@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:grupolias/AcuerdosConformidad/ui/screens/acuerdo.screen.dart';
 import 'package:grupolias/Cotizaciones/ui/screens/cotizaciones.screen.dart';
 import 'package:grupolias/Tickets/ui/screens/tickets.screen.dart';
+import 'package:grupolias/Perfil/ui/screens/perfil.dart';
 
 class BasicBottomNavBar extends StatefulWidget {
   const BasicBottomNavBar({Key? key}) : super(key: key);
@@ -19,6 +20,7 @@ class _BasicBottomNavBarState extends State<BasicBottomNavBar> {
     ),
     AcuerdoConformidad(),
     CotizacionesScreen(),
+    perfil(),
   ];
 
   void _onItemTapped(int index) {
@@ -47,6 +49,10 @@ class _BasicBottomNavBarState extends State<BasicBottomNavBar> {
             BottomNavigationBarItem(
               icon: Icon(Icons.camera),
               label: 'Cotizacion',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.add_alarm_sharp),
+              label: 'Perfil',
             ),
           ],
           currentIndex: _selectedIndex,
