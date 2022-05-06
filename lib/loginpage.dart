@@ -7,7 +7,7 @@ class Loginpage extends StatelessWidget {
   Widget _buildPageContent(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(20.0),
-      color: Colors.blue.shade800,
+      color: Colors.white,
       child: ListView(
         children: <Widget>[
           Column(
@@ -26,45 +26,44 @@ class Loginpage extends StatelessWidget {
                   color: Colors.white,
                   borderRadius: BorderRadius.only(
                       topRight: Radius.circular(100.0),
-                      topLeft: Radius.circular(10.0),
+                      topLeft: Radius.circular(100.0),
                       bottomLeft: Radius.circular(100.0),
-                      bottomRight: Radius.circular(30.0)),
+                      bottomRight: Radius.circular(100.0)),
                 ),
               ),
               const SizedBox(
                 height: 50,
               ),
-
               const ListTile(
                   title: TextField(
-                style: TextStyle(color: Colors.white),
+                style: TextStyle(color: Colors.black),
                 decoration: InputDecoration(
                     hintText: "Email address:",
-                    hintStyle: TextStyle(color: Colors.white70),
+                    hintStyle: TextStyle(color: Colors.black),
                     border: InputBorder.none,
                     icon: Icon(
                       Icons.email,
-                      color: Colors.white30,
+                      color: Colors.black,
                     )),
               )),
               const Divider(
-                color: Colors.greenAccent,
+                color: Colors.black,
               ),
               const ListTile(
                   title: TextField(
                 obscureText: true,
-                style: TextStyle(color: Colors.white),
+                style: TextStyle(color: Colors.black),
                 decoration: InputDecoration(
                     hintText: "Password:",
-                    hintStyle: TextStyle(color: Colors.white70),
+                    hintStyle: TextStyle(color: Colors.black),
                     border: InputBorder.none,
                     icon: Icon(
                       Icons.lock,
-                      color: Colors.white30,
+                      color: Colors.black,
                     )),
               )),
               const Divider(
-                color: Colors.greenAccent,
+                color: Colors.black,
               ),
               const SizedBox(
                 height: 20,
@@ -83,7 +82,7 @@ class Loginpage extends StatelessWidget {
                       },
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(30.0)),
-                      color: Colors.green,
+                      color: Colors.black,
                       child: const Text(
                         'Login',
                         style: TextStyle(color: Colors.white70, fontSize: 16.0),
