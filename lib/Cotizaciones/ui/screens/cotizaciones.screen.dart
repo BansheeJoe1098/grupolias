@@ -1,14 +1,133 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class CotizacionesScreen extends StatelessWidget {
   const CotizacionesScreen({Key? key}) : super(key: key);
 
+  /* DateTime selectedDate = DateTime.now();
+  final firstDate = DateTime(2010, 1);
+  final lastDate = DateTime(2022, 12);
+*/
+  opciones(context){
+    showDialog(
+      context: context,
+       builder: (BuildContext context){
+         return AlertDialog(
+           contentPadding: EdgeInsets.all(0),
+           content: SingleChildScrollView(
+             child: Column(
+               children: [
+                 InkWell(
+                   onTap: (){
+
+                   },
+                   child: Container(
+                     padding: EdgeInsets.all(20),
+                     decoration: BoxDecoration(
+                       border: Border (bottom: BorderSide(
+                         width: 1,
+                         color: Colors.grey
+                       ))
+                     ),
+                     child: Row(
+                       children: [
+                         Expanded(
+                         child: Text("Tomar una foto", 
+                         style: TextStyle(fontSize: 16
+                         ),),
+                         ),
+                         Icon(Icons.camera_alt, color: Colors.blue,)
+                       ]),
+                   ),
+                 ),
+                       InkWell(
+                   onTap: (){
+
+                   },
+                   child: Container(
+                     padding: EdgeInsets.all(20),
+                     child: Row(
+                       children: [
+                         Expanded(
+                         child: Text("Seleccionar una foto", 
+                         style: TextStyle(fontSize: 16
+                         ),),
+                         ),
+                         Icon(Icons.image, color: Colors.blue,)
+                       ]),
+                   ),
+                 ),
+                   InkWell(
+                   onTap: (){
+                     Navigator.of(context).pop();
+
+                   },
+                   child: Container(
+                     padding: EdgeInsets.all(20),
+                     decoration: BoxDecoration(
+                       color: Colors.red
+                     ),
+                     child: Row(
+                       children: [
+                         Expanded(
+                         child: Text("Cancelar", 
+                         style: TextStyle(fontSize: 16,
+                         color: Colors.white,
+                         ),
+                         textAlign: TextAlign.center),
+                         ),
+                         
+                         Icon(Icons.close, color: Colors.grey,)
+                       ]),
+                   ),
+                 ),
+               ],
+             )
+           ),
+         ),
+       },),
+  }
+
   @override
   Widget build(BuildContext context) {
+    var date = null.obs;
     var onPressed;
     return Scaffold(
       body: Stack(
         children: [
+          SizedBox(height: 10),
+          /* Text(
+            '$selectedDate'.split('')[0],
+            style: TextStyle(fontSize: 24),
+          ),
+          Divider(),
+          SizedBox(height: 10),
+          ElevatedButton(
+            onPressed: () => _openDatePicker(context),
+            child: Text("Seleccionar Datos"),
+          ),
+          Divider(),
+          CalendarDatePicker(
+            initialDate: selectedDate,
+            firstDate: firstDate,
+            lastDate: lastDate,
+            onDateChanged: (newDate) {},
+          ),
+          Divider(),
+          Container(
+            height: 200,
+            child: CupertinoDatePicker(
+              mode: CupertinoDatePickerMode.dateAndTime,
+              initialDateTime: selectedDate,
+              minimumDate: firstDate,
+              maximumDate: lastDate,
+              onDateTimeChanged: (newDate) {
+                Obx(() => Text("$date"));
+              },
+            ),
+          ),
+          */
           Container(
             height: MediaQuery.of(context).size.height / 4,
             width: MediaQuery.of(context).size.width,
@@ -64,16 +183,11 @@ class CotizacionesScreen extends StatelessWidget {
                       height: 20,
                     ),
 
-                    //                 showDatePicker(
-                    //   context: context,
-                    //   initialDate: selectedDate,
-                    //   firstDate: DateTime(2010),
-                    //   lastDate: DateTime(2025),
-                    //   helpText: "SELECT BOOKING DATE",
-                    //   cancelText: "NOT NOW",
-                    //   confirmText: "BOOK NOW",
-                    //   initialDatePickerMode: DatePickerMode.year
-                    // );
+                    //DatePickerDialog(
+                    //firstDate: DateTime.now(),
+                    //initialDate: DateTime.now(),
+                    //lastDate: DateTime.now(),
+                    //),
                     const SizedBox(
                       height: 20,
                     ),
@@ -140,7 +254,7 @@ class CotizacionesScreen extends StatelessWidget {
                     Row(
                       children: <Widget>[
                         Container(
-                          margin: const EdgeInsets.only(
+                          margin: EdgeInsets.only(
                             top: 5,
                             left: 10,
                             right: 5,
@@ -151,7 +265,10 @@ class CotizacionesScreen extends StatelessWidget {
                                 width: 125,
                               ),
                               ElevatedButton(
-                                  child: Text("Guardar"), onPressed: () {}),
+                                  child: Text("Subir"),
+                                  onPressed: () {
+                                    opciones(context);
+                                  }),
                               SizedBox(
                                 width: 15,
                               ),
@@ -171,4 +288,20 @@ class CotizacionesScreen extends StatelessWidget {
       ),
     );
   }
+
+  /*_openDatePicker(BuildContext context) async {
+    final DateTime date = await showDatePicker(
+      context: context,
+      initialDate: selectedDate,
+      firstDate: firstDate,
+      lastDate: lastDate,
+    );
+
+    if (date != null) {
+      setState(() {
+        selectedDate = date;
+      });
+    }
+  }
+  */
 }
