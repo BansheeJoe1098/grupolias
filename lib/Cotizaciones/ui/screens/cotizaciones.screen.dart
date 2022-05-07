@@ -93,24 +93,6 @@ class CotizacionesScreen extends StatelessWidget {
     return Scaffold(
       body: Stack(
         children: [
-          SizedBox(height: 10),
-          /* Text(
-            '$selectedDate'.split('')[0],
-            style: TextStyle(fontSize: 24),
-          ),
-          Divider(),
-          SizedBox(height: 10),
-          ElevatedButton(
-            onPressed: () => _openDatePicker(context),
-            child: Text("Seleccionar Datos"),
-          ),
-          Divider(),
-          CalendarDatePicker(
-            initialDate: selectedDate,
-            firstDate: firstDate,
-            lastDate: lastDate,
-            onDateChanged: (newDate) {},
-          ),
           Divider(),
           Container(
             height: MediaQuery.of(context).size.height / 6,
@@ -257,20 +239,4 @@ class CotizacionesScreen extends StatelessWidget {
       ),
     );
   }
-
-  /*_openDatePicker(BuildContext context) async {
-    final DateTime date = await showDatePicker(
-      context: context,
-      initialDate: selectedDate,
-      firstDate: firstDate,
-      lastDate: lastDate,
-    );
-
-    if (date != null) {
-      setState(() {
-        selectedDate = date;
-      });
-    }
-  }
-  */
 }
