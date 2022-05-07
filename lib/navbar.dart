@@ -18,8 +18,6 @@ class _BasicBottomNavBarState extends State<BasicBottomNavBar> {
     Scaffold(
       body: TicketsScreen(),
     ),
-    AcuerdoConformidad(),
-    CotizacionesScreen(),
     perfil(),
   ];
 
@@ -38,20 +36,15 @@ class _BasicBottomNavBarState extends State<BasicBottomNavBar> {
       bottomNavigationBar: Container(
         margin: const EdgeInsets.all(8),
         child: BottomNavigationBar(
+          selectedItemColor: Colors.black,
+          unselectedItemColor: Colors.grey,
           items: const <BottomNavigationBarItem>[
             BottomNavigationBarItem(
               icon: Icon(Icons.archive_outlined),
-              label: 'Trabajos Realizados',
-            ), BottomNavigationBarItem(
-              icon: Icon(Icons.border_color),
-              label: 'Cotizacion',
+              label: 'Tickets Disponibles',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.camera),
-              label: 'Cotizacion',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.add_alarm_sharp),
+              icon: Icon(Icons.person),
               label: 'Perfil',
             ),
           ],

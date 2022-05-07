@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:grupolias/AcuerdosConformidad/ui/screens/acuerdo.screen.dart';
 
 class CotizacionesScreen extends StatelessWidget {
   const CotizacionesScreen({Key? key}) : super(key: key);
@@ -89,8 +90,6 @@ class CotizacionesScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var date = null.obs;
-    var onPressed;
     return Scaffold(
       body: Stack(
         children: [
@@ -114,26 +113,14 @@ class CotizacionesScreen extends StatelessWidget {
           ),
           Divider(),
           Container(
-            height: 200,
-            child: CupertinoDatePicker(
-              mode: CupertinoDatePickerMode.dateAndTime,
-              initialDateTime: selectedDate,
-              minimumDate: firstDate,
-              maximumDate: lastDate,
-              onDateTimeChanged: (newDate) {
-                Obx(() => Text("$date"));
-              },
-            ),
-          ),
-          */
-          Container(
-            height: MediaQuery.of(context).size.height / 4,
+            height: MediaQuery.of(context).size.height / 6,
             width: MediaQuery.of(context).size.width,
             padding: const EdgeInsets.only(
               top: 30,
+              left: 20,
             ),
             decoration: const BoxDecoration(
-              color: Colors.red,
+              color: Colors.black,
             ),
             child: const Text(
               'Crear una cotizacion',
@@ -166,7 +153,8 @@ class CotizacionesScreen extends StatelessWidget {
                     const SizedBox(
                       height: 20,
                     ),
-                    const TextField(
+                    TextFormField(
+                      maxLines: 8,
                       decoration: InputDecoration(
                           labelText: 'Descripcion del problema',
                           labelStyle: TextStyle(fontSize: 20),
@@ -174,7 +162,6 @@ class CotizacionesScreen extends StatelessWidget {
                           border: OutlineInputBorder(),
                           filled: true,
                           fillColor: Color.fromARGB(71, 226, 208, 208),
-                          hintMaxLines: 50,
                           contentPadding: EdgeInsets.all(20.0)),
                     ),
                     const SizedBox(
@@ -252,28 +239,12 @@ class CotizacionesScreen extends StatelessWidget {
                     Row(
                       children: <Widget>[
                         Container(
-                          margin: EdgeInsets.only(
-                            top: 5,
-                            left: 10,
-                            right: 5,
-                          ),
-                          child: Row(
-                            children: [
-                              SizedBox(
-                                width: 125,
-                              ),
-                              ElevatedButton(
-                                  child: Text("Subir"),
-                                  onPressed: () {
-                                    opciones(context);
-                                  }),
-                              SizedBox(
-                                width: 15,
-                              ),
-                              ElevatedButton(
-                                  child: Text("Enviar"), onPressed: () {}),
-                            ],
-                          ),
+                          alignment: Alignment.center,
+                          child: ElevatedButton(
+                              child: Text("Enviar"),
+                              onPressed: () {
+                                Get.to(AcuerdoConformidad());
+                              }),
                         )
                       ],
                     ),

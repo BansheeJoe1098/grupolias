@@ -8,22 +8,11 @@ class AcuerdoConformidad extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
           title: Text("Llenado de acuerdo de conformidad"),
-          backgroundColor: Colors.red),
+          backgroundColor: Colors.black),
       body: SingleChildScrollView(
+        padding: EdgeInsets.all(8),
         child: Column(
           children: [
-            Container(
-              padding: EdgeInsets.only(top: 20),
-              decoration: BoxDecoration(color: Colors.black),
-              child: Text(
-                'Llenado del acuerdo de conformidad',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 30,
-                  fontWeight: FontWeight.w900,
-                ),
-              ),
-            ),
             TextField(
               decoration: InputDecoration(
                 labelText: "Expediente",
@@ -85,11 +74,10 @@ class AcuerdoConformidad extends StatelessWidget {
                 labelText: "Usuario Final",
               ),
             ),
-            //DatePickerDialog(
-            //firstDate: DateTime.now(),
-            //initialDate: DateTime.now(),
-            //lastDate: DateTime.now(),
-            // )
+            ElevatedButton(
+              onPressed: () {},
+              child: Text("Firmar"),
+            )
           ],
         ),
       ),

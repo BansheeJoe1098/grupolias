@@ -85,7 +85,9 @@ class TicketsScreen extends StatelessWidget {
 
                         return Column(children: list);
                       } else {
-                        return const CircularProgressIndicator();
+                        return const AlertDialog(
+                          title: Text("Verifique su conexion a internet"),
+                        );
                       }
                     },
                   ),
