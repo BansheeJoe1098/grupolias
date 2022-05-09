@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:grupolias/AcuerdosConformidad/ui/screens/acuerdo.screen.dart';
@@ -15,18 +14,18 @@ class CotizacionesScreen extends StatelessWidget {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          contentPadding: EdgeInsets.all(0),
+          contentPadding: const EdgeInsets.all(0),
           content: SingleChildScrollView(
               child: Column(
             children: [
               InkWell(
                 onTap: () {},
                 child: Container(
-                  padding: EdgeInsets.all(20),
-                  decoration: BoxDecoration(
+                  padding: const EdgeInsets.all(20),
+                  decoration: const BoxDecoration(
                       border: Border(
                           bottom: BorderSide(width: 1, color: Colors.grey))),
-                  child: Row(children: [
+                  child: Row(children: const [
                     Expanded(
                       child: Text(
                         "Tomar una foto",
@@ -43,8 +42,8 @@ class CotizacionesScreen extends StatelessWidget {
               InkWell(
                 onTap: () {},
                 child: Container(
-                  padding: EdgeInsets.all(20),
-                  child: Row(children: [
+                  padding: const EdgeInsets.all(20),
+                  child: Row(children: const [
                     Expanded(
                       child: Text(
                         "Seleccionar una foto",
@@ -63,9 +62,9 @@ class CotizacionesScreen extends StatelessWidget {
                   Navigator.of(context).pop();
                 },
                 child: Container(
-                  padding: EdgeInsets.all(20),
-                  decoration: BoxDecoration(color: Colors.red),
-                  child: Row(children: [
+                  padding: const EdgeInsets.all(20),
+                  decoration: const BoxDecoration(color: Colors.red),
+                  child: Row(children: const [
                     Expanded(
                       child: Text("Cancelar",
                           style: TextStyle(
@@ -93,7 +92,7 @@ class CotizacionesScreen extends StatelessWidget {
     return Scaffold(
       body: Stack(
         children: [
-          Divider(),
+          const Divider(),
           Container(
             height: MediaQuery.of(context).size.height / 6,
             width: MediaQuery.of(context).size.width,
@@ -137,7 +136,7 @@ class CotizacionesScreen extends StatelessWidget {
                     ),
                     TextFormField(
                       maxLines: 8,
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                           labelText: 'Descripcion del problema',
                           labelStyle: TextStyle(fontSize: 20),
                           hintText: 'Descripcion',
@@ -223,9 +222,9 @@ class CotizacionesScreen extends StatelessWidget {
                         Container(
                           alignment: Alignment.center,
                           child: ElevatedButton(
-                              child: Text("Enviar"),
+                              child: const Text("Enviar"),
                               onPressed: () {
-                                Get.to(AcuerdoConformidad());
+                                Get.to(const AcuerdoConformidad());
                               }),
                         )
                       ],

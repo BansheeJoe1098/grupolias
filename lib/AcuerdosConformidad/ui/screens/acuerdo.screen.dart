@@ -7,18 +7,18 @@ class AcuerdoConformidad extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          title: Text("Llenado de acuerdo de conformidad"),
+          title: const Text("Llenado de acuerdo de conformidad"),
           backgroundColor: Colors.black),
       body: SingleChildScrollView(
-        padding: EdgeInsets.all(8),
+        padding: const EdgeInsets.all(8),
         child: Column(
           children: [
-            TextField(
+            const TextField(
               decoration: InputDecoration(
                 labelText: "Expediente",
               ),
             ),
-            TextField(
+            const TextField(
               decoration: InputDecoration(
                 labelText: "Fecha Acuerdo",
               ),
@@ -28,11 +28,11 @@ class AcuerdoConformidad extends StatelessWidget {
                   4, // any number you need (It works as the rows for the textarea)
               keyboardType: TextInputType.multiline,
               maxLines: null,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: "Descripción del Problema",
               ),
             ),
-            TextField(
+            const TextField(
               decoration: InputDecoration(
                 labelText: "Direccion",
               ),
@@ -42,7 +42,7 @@ class AcuerdoConformidad extends StatelessWidget {
                   4, // any number you need (It works as the rows for the textarea)
               keyboardType: TextInputType.multiline,
               maxLines: null,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: "Observaciones",
               ),
             ),
@@ -50,33 +50,33 @@ class AcuerdoConformidad extends StatelessWidget {
               minLines: 4,
               keyboardType: TextInputType.multiline,
               maxLines: null,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: "Actividades realizadas",
               ),
             ),
-            TextField(
+            const TextField(
               decoration: InputDecoration(
                 labelText: "Hora recepcion del Servicio",
               ),
             ),
-            TextField(
+            const TextField(
               decoration: InputDecoration(
                 labelText: "Hora de Llegada de Servicio",
               ),
             ),
-            TextField(
+            const TextField(
               decoration: InputDecoration(
                 labelText: "Acuerdo Firmado",
               ),
             ),
-            TextField(
+            const TextField(
               decoration: InputDecoration(
                 labelText: "Usuario Final",
               ),
             ),
             ElevatedButton(
               onPressed: () {},
-              child: Text("Firmar"),
+              child: const Text("Firmar"),
             )
           ],
         ),

@@ -1,30 +1,30 @@
 import 'package:flutter/material.dart';
 
-class perfil extends StatelessWidget {
-  const perfil({Key? key}) : super(key: key);
+class Perfil extends StatelessWidget {
+  const Perfil({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
       body: Container(
-        margin: new EdgeInsets.only(left: 20.0),
+        margin: const EdgeInsets.only(left: 20.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(
+            const SizedBox(
               height: 50.0,
             ),
-            Center(
+            const Center(
               child: CircleAvatar(
                 backgroundImage: AssetImage('assets/profile.png'),
                 radius: 60.0,
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 50.0,
             ),
-            Text(
+            const Text(
               'Jose Garcia',
               style: TextStyle(
                 color: Colors.black,
@@ -36,7 +36,7 @@ class perfil extends StatelessWidget {
             const SizedBox(
               height: 10.0,
             ),
-            Text(
+            const Text(
               '4431256540',
               style: TextStyle(
                 color: Colors.black,
@@ -48,7 +48,7 @@ class perfil extends StatelessWidget {
             const SizedBox(
               height: 10.0,
             ),
-            Text(
+            const Text(
               'Plomero\nElectricista',
               style: TextStyle(
                 color: Color.fromARGB(255, 102, 100, 100),
@@ -58,7 +58,7 @@ class perfil extends StatelessWidget {
             const SizedBox(
               height: 10.0,
             ),
-            Text(
+            const Text(
               'Mexico,DF',
               style: TextStyle(
                 color: Color.fromARGB(255, 95, 94, 92),
@@ -71,12 +71,12 @@ class perfil extends StatelessWidget {
               height: 10.0,
             ),
             Row(
-              children: [
+              children: const [
                 Icon(
                   Icons.email,
                   color: Colors.black,
                 ),
-                const SizedBox(
+                SizedBox(
                   width: 10.0,
                 ),
                 Text(

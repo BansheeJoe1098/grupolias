@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:grupolias/AcuerdosConformidad/ui/screens/acuerdo.screen.dart';
-import 'package:grupolias/Cotizaciones/ui/screens/cotizaciones.screen.dart';
 import 'package:grupolias/Tickets/ui/screens/tickets.screen.dart';
 import 'package:grupolias/Perfil/ui/screens/perfil.dart';
 
@@ -18,7 +16,7 @@ class _BasicBottomNavBarState extends State<BasicBottomNavBar> {
     Scaffold(
       body: TicketsScreen(),
     ),
-    perfil(),
+    Perfil(),
   ];
 
   void _onItemTapped(int index) {

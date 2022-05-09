@@ -55,16 +55,16 @@ class Ticketdetalles extends StatelessWidget {
                         style: const TextStyle(fontSize: 20),
                       ),
                       const SizedBox(height: 20),
-                      Text("Expediente"),
+                      const Text("Expediente"),
                       Text("${data?.numExpediente}"),
                       const SizedBox(height: 10),
-                      Text("Ciudad"),
+                      const Text("Ciudad"),
                       Text("${data?.ciudad}"),
                       const SizedBox(height: 20),
-                      Text("Colonia"),
+                      const Text("Colonia"),
                       Text("${data?.colonia}"),
                       const SizedBox(height: 20),
-                      Text("Calle"),
+                      const Text("Calle"),
                       Text("${data?.calle}"),
                     ],
                   );
@@ -73,7 +73,7 @@ class Ticketdetalles extends StatelessWidget {
               ElevatedButton(
                 child: const Text("Tomar Ticket"),
                 onPressed: () {
-                  Get.to(MapScreen());
+                  Get.to(const MapScreen());
                 },
               )
             ],

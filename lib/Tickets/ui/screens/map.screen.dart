@@ -9,40 +9,38 @@ class MapScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        child: Column(
-          children: [
-            FutureBuilder<void>(
-              future: Mapita().abrirMapa(19.7066752, -101.1843072),
-              builder: (context, snapshot) {
-                return Column(
-                  children: [
-                    Container(
-                      padding: EdgeInsets.only(top: 30),
-                      child: Text(
-                        'Haz Llegado! Realiza tu cotizacion',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 30,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                      decoration: BoxDecoration(color: Colors.black),
-                    ),
-                    Center(
-                      child: ElevatedButton(
-                        child: Text("Crear Cotizacion"),
-                        onPressed: () {
-                          Get.to(CotizacionesScreen());
-                        },
+      body: Column(
+        children: [
+          FutureBuilder<void>(
+            future: Mapita().abrirMapa(19.7066752, -101.1843072),
+            builder: (context, snapshot) {
+              return Column(
+                children: [
+                  Container(
+                    padding: const EdgeInsets.only(top: 30),
+                    child: const Text(
+                      'Haz Llegado! Realiza tu cotizacion',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 30,
+                        fontWeight: FontWeight.w900,
                       ),
                     ),
-                  ],
-                );
-              },
-            )
-          ],
-        ),
+                    decoration: const BoxDecoration(color: Colors.black),
+                  ),
+                  Center(
+                    child: ElevatedButton(
+                      child: const Text("Crear Cotizacion"),
+                      onPressed: () {
+                        Get.to(const CotizacionesScreen());
+                      },
+                    ),
+                  ),
+                ],
+              );
+            },
+          )
+        ],
       ),
     );
   }
