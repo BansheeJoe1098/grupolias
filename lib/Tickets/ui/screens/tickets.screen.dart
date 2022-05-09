@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:grupolias/Tickets/model/ticket.model.dart';
 import 'package:grupolias/Tickets/service/ticket.service.dart';
 import 'package:grupolias/Tickets/ui/widgets/CardListTickets.widget.dart';
 
-class TicketsScreen extends StatelessWidget {
-  const TicketsScreen({Key? key}) : super(key: key);
+import '../../controller/ticket.controller.dart';
 
+class TicketsScreen extends StatelessWidget {
+  TicketsScreen({Key? key}) : super(key: key);
+
+  final controller = Get.put(TicketController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -76,8 +80,7 @@ class TicketsScreen extends StatelessWidget {
                                 ],
                               ),
                               child: CardListWidget(
-                                tituloTicket: element.tituloTicket,
-                                ticketId: element.id,
+                                ticket: element,
                               ),
                             ),
                           );

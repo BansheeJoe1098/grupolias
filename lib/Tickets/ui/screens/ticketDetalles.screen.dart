@@ -1,16 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:grupolias/Tickets/controller/ticket.controller.dart';
 import 'package:grupolias/Tickets/model/ticket.model.dart';
 import 'package:grupolias/Tickets/service/ticket.service.dart';
+import 'package:grupolias/Tickets/service/ticketDetalles.service.dart';
 
 import 'map.screen.dart';
 
 class Ticketdetalles extends StatelessWidget {
-  const Ticketdetalles({Key? key, required this.titulo, required this.idTicket})
+  Ticketdetalles({Key? key, required this.titulo, required this.idTicket})
       : super(key: key);
 
   final String titulo;
   final int? idTicket;
+
+  final TicketController controller = Get.put(TicketController());
 
   @override
   Widget build(BuildContext context) {
@@ -73,6 +77,22 @@ class Ticketdetalles extends StatelessWidget {
               ElevatedButton(
                 child: const Text("Tomar Ticket"),
                 onPressed: () {
+                  var ticketActualizado = controller.ticket.value;
+                  ticketActualizado.estado = "PENDIENTE";
+
+                  FutureBuilder<Ticket>(
+                    future: TicketDetallesService().actualizarEstado(
+                        ticketActualizado.id,
+                        ticketActualizado.estado.toString()),
+                    builder: (context, snapshot) {
+                      if (snapshot.hasData) {
+                        return Text(snapshot.data!.estado.toString());
+                      } else if (snapshot.hasError) {
+                        return Text('${snapshot.error}');
+                      }
+                      return const CircularProgressIndicator();
+                    },
+                  );
                   Get.to(const MapScreen());
                 },
               )

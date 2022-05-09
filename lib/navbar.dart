@@ -12,11 +12,9 @@ class BasicBottomNavBar extends StatefulWidget {
 class _BasicBottomNavBarState extends State<BasicBottomNavBar> {
   int _selectedIndex = 0;
 
-  static const List<Widget> _pages = <Widget>[
-    Scaffold(
-      body: TicketsScreen(),
-    ),
-    Perfil(),
+  static final List<Widget> _pages = <Widget>[
+    TicketsScreen(),
+    const Perfil(),
   ];
 
   void _onItemTapped(int index) {

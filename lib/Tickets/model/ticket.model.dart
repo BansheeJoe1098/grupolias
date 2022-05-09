@@ -1,71 +1,67 @@
-// To parse this JSON data, do
-//
-//     final ticket = ticketFromJson(jsonString);
-
-// ignore_for_file: prefer_if_null_operators, prefer_null_aware_operators, unnecessary_null_comparison
+// ignore_for_file: prefer_if_null_operators
 
 import 'dart:convert';
 
 class Ticket {
   Ticket({
-    required this.id,
-    required this.numExpediente,
-    required this.asistenciaVial,
-    required this.fechaLlamada,
-    required this.nombreAsesorAseguradora,
-    required this.nombreAsesorGpoLias,
-    required this.nombreUsuarioFinal,
-    required this.tituloTicket,
-    required this.asistenciaId,
-    required this.aseguradoraId,
-    required this.problematica,
-    required this.ciudad,
-    required this.colonia,
-    required this.calle,
-    required this.numeroDomicilio,
-    required this.banderazo,
-    required this.totalSalida,
-    required this.cobertura,
-    required this.cotizacionGpoLias,
-    required this.deducible,
-    required this.kilometraje,
-    required this.total,
-    required this.anticipo,
-    required this.horaCierre,
-    required this.casetas,
-    required this.costoGpoLias,
-    required this.estado,
-    required this.createdAt,
-    required this.updatedAt,
+    this.id,
+    this.numExpediente,
+    this.asistenciaVial,
+    this.fechaLlamada,
+    this.nombreAsesorAseguradora,
+    this.nombreAsesorGpoLias,
+    this.nombreUsuarioFinal,
+    this.tituloTicket,
+    this.asistenciaId,
+    this.aseguradoraId,
+    this.problematica,
+    this.ciudad,
+    this.colonia,
+    this.calle,
+    this.numeroDomicilio,
+    this.banderazo,
+    this.totalSalida,
+    this.cobertura,
+    this.cotizacionGpoLias,
+    this.deducible,
+    this.kilometraje,
+    this.total,
+    this.anticipo,
+    this.horaCierre,
+    this.casetas,
+    this.costoGpoLias,
+    this.estado,
+    this.createdAt,
+    this.updatedAt,
   });
 
   int? id;
-  String numExpediente;
-  bool asistenciaVial;
+  String? numExpediente;
+  bool? asistenciaVial;
   DateTime? fechaLlamada;
-  String nombreAsesorAseguradora;
-  String nombreAsesorGpoLias;
-  String nombreUsuarioFinal;
-  String tituloTicket;
-  int asistenciaId;
-  int aseguradoraId;
-  String problematica;
-  String ciudad;
-  String colonia;
-  String calle;
-  String numeroDomicilio;
-  String banderazo;
-  String totalSalida;
-  String cobertura;
-  String cotizacionGpoLias;
-  String deducible;
-  int kilometraje;
-  String total;
-  String anticipo;
-  dynamic horaCierre;
-  int casetas;
-  String costoGpoLias;
-  String estado;
+  String? nombreAsesorAseguradora;
+  String? nombreAsesorGpoLias;
+  String? nombreUsuarioFinal;
+  String? tituloTicket;
+  int? asistenciaId;
+  int? aseguradoraId;
+  String? problematica;
+  String? ciudad;
+  String? colonia;
+  String? calle;
+  String? numeroDomicilio;
+  String? banderazo;
+  String? totalSalida;
+  String? cobertura;
+  String? cotizacionGpoLias;
+  String? deducible;
+  int? kilometraje;
+  String? total;
+  String? anticipo;
+  dynamic? horaCierre;
+  int? casetas;
+  String? costoGpoLias;
+  String? estado;
   DateTime? createdAt;
   DateTime? updatedAt;
 
