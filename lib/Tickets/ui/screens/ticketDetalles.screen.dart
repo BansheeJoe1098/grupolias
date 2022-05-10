@@ -78,7 +78,7 @@ class Ticketdetalles extends StatelessWidget {
                 child: const Text("Tomar Ticket"),
                 onPressed: () {
                   var ticketActualizado = controller.ticket.value;
-                  ticketActualizado.estado = "PENDIENTE";
+                  ticketActualizado.estado = "TOMADO";
 
                   FutureBuilder<Ticket>(
                     future: TicketDetallesService().actualizarEstado(
