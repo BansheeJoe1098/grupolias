@@ -93,7 +93,7 @@ class Ticketdetalles extends StatelessWidget {
                       return const CircularProgressIndicator();
                     },
                   );
-                  Get.to(const MapScreen());
+                  Get.to(MapScreen());
                 },
               )
             ],

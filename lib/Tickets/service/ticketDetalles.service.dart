@@ -10,8 +10,6 @@ class TicketDetallesService {
   Future<Ticket> actualizarEstado(int? id, String estado) async {
     var data = '{"estado": "$estado"}';
 
-    print(data);
-
     final response = await http.patch(
       Uri.parse('$url/$id'),
       headers: <String, String>{
@@ -21,10 +19,8 @@ class TicketDetallesService {
     );
 
     if (response.statusCode == 200) {
-      print(response.body);
       return Ticket.fromJson(jsonDecode(response.body));
     } else {
-      print(response.body);
       throw Exception('Fallo al realizar la actualización');
     }
   }

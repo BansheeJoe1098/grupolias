@@ -3,8 +3,12 @@ import 'package:get/get.dart';
 import 'package:grupolias/Cotizaciones/ui/screens/cotizaciones.screen.dart';
 import 'package:grupolias/Tickets/service/map.service.dart';
 
+import '../../controller/ticket.controller.dart';
+
 class MapScreen extends StatelessWidget {
-  const MapScreen({Key? key}) : super(key: key);
+  MapScreen({Key? key}) : super(key: key);
+
+  final TicketController controller = Get.put(TicketController());
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +16,7 @@ class MapScreen extends StatelessWidget {
       body: Column(
         children: [
           FutureBuilder<void>(
-            future: Mapita().abrirMapa(19.7066752, -101.1843072),
+            future: Mapita().abrirMapa(controller.ticket.value),
             builder: (context, snapshot) {
               return Column(
                 children: [

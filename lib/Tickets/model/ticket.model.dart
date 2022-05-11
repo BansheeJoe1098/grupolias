@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_if_null_operators
+// ignore_for_file: prefer_if_null_operators, prefer_null_aware_operators
 
 import 'dart:convert';
 
@@ -58,7 +58,7 @@ class Ticket {
   int? kilometraje;
   String? total;
   String? anticipo;
-  dynamic? horaCierre;
+  dynamic horaCierre;
   int? casetas;
   String? costoGpoLias;
   String? estado;

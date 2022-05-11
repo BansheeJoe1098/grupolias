@@ -1,11 +1,23 @@
+import 'package:grupolias/Tickets/model/ticket.model.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class Mapita {
-  Future<void> abrirMapa(double latitude, double longitude) async {
-    longitude = 19.7214739;
-    latitude = -101.1859148;
-    Uri googleUrl = Uri.parse(
-        'google.navigation:q=Instituto+Tecnológico+de+Morelia&avoid=tf');
+  Future<void> abrirMapa(Ticket ticket) async {
+    var calle = ticket.calle.toString();
+    var colonia = ticket.colonia.toString();
+    var ciudad = ticket.ciudad.toString();
+    var numero = ticket.numeroDomicilio.toString();
+
+    calle = calle.replaceAll(" ", "+");
+    colonia = colonia.replaceAll(" ", "+");
+    ciudad = ciudad.replaceAll(" ", "+");
+    numero = numero.replaceAll(" ", "+");
+
+    var direccion = "$calle+$colonia+$numero+$ciudad";
+
+    print(direccion);
+
+    Uri googleUrl = Uri.parse('google.navigation:q=$direccion&avoid=tf');
 
     if (await canLaunchUrl(googleUrl)) {
       await launchUrl(
