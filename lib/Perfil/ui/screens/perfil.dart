@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 
 class perfil extends StatelessWidget {
@@ -6,9 +8,21 @@ class perfil extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          'GRUPO LIAS',
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 25.0,
+            letterSpacing: 2.0,
+          ),
+        ),
+        automaticallyImplyLeading: false,
+        backgroundColor: Colors.black,
+      ),
       backgroundColor: Colors.white,
       body: Container(
-        margin: new EdgeInsets.only(left: 20.0),
+        margin: const EdgeInsets.only(left: 50.0, top: 50.0, right: 50.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
