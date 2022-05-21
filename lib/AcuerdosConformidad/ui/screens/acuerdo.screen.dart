@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:grupolias/Signature_Form/ui/signature.dart';
 
 class AcuerdoConformidad extends StatelessWidget {
   const AcuerdoConformidad({Key? key}) : super(key: key);
@@ -7,76 +10,118 @@ class AcuerdoConformidad extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          title: Text("Llenado de acuerdo de conformidad"),
-          backgroundColor: Colors.black),
+        title: const Text(
+          "Llenado de \n acuerdo  de \n conformidad",
+          style: TextStyle(fontStyle: FontStyle.italic),
+        ),
+        backgroundColor: Color.fromARGB(255, 40, 144, 214),
+        toolbarHeight: 100,
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.only(
+                bottomLeft: Radius.circular(40),
+                bottomRight: Radius.circular(40))),
+        actions: <Widget>[
+          ImageIcon(
+            AssetImage('assets/gpolias.png'),
+            size: 150,
+          ),
+        ],
+      ),
       body: SingleChildScrollView(
-        padding: EdgeInsets.all(8),
+        padding: const EdgeInsets.all(8),
         child: Column(
           children: [
-            TextField(
+            SizedBox(
+              height: 50,
+            ),
+            const TextField(
               decoration: InputDecoration(
                 labelText: "Expediente",
               ),
             ),
-            TextField(
+            SizedBox(
+              height: 50,
+            ),
+            const TextField(
               decoration: InputDecoration(
                 labelText: "Fecha Acuerdo",
-              ),
-            ),
-            TextFormField(
-              minLines:
-                  4, // any number you need (It works as the rows for the textarea)
-              keyboardType: TextInputType.multiline,
-              maxLines: null,
-              decoration: InputDecoration(
-                labelText: "Descripción del Problema",
-              ),
-            ),
-            TextField(
-              decoration: InputDecoration(
-                labelText: "Direccion",
-              ),
-            ),
-            TextFormField(
-              minLines:
-                  4, // any number you need (It works as the rows for the textarea)
-              keyboardType: TextInputType.multiline,
-              maxLines: null,
-              decoration: InputDecoration(
-                labelText: "Observaciones",
               ),
             ),
             TextFormField(
               minLines: 4,
               keyboardType: TextInputType.multiline,
               maxLines: null,
+              decoration: const InputDecoration(
+                labelText: "Descripción del Problema",
+              ),
+            ),
+            SizedBox(
+              height: 50,
+            ),
+            const TextField(
               decoration: InputDecoration(
+                labelText: "Direccion",
+              ),
+            ),
+            SizedBox(
+              height: 50,
+            ),
+            TextFormField(
+              decoration: const InputDecoration(
+                labelText: "Observaciones",
+              ),
+            ),
+            SizedBox(
+              height: 50,
+            ),
+            TextFormField(
+              minLines: 4,
+              keyboardType: TextInputType.multiline,
+              maxLines: null,
+              decoration: const InputDecoration(
                 labelText: "Actividades realizadas",
               ),
             ),
-            TextField(
+            SizedBox(
+              height: 50,
+            ),
+            const TextField(
               decoration: InputDecoration(
                 labelText: "Hora recepcion del Servicio",
               ),
             ),
-            TextField(
+            SizedBox(
+              height: 50,
+            ),
+            const TextField(
               decoration: InputDecoration(
                 labelText: "Hora de Llegada de Servicio",
               ),
             ),
-            TextField(
+            SizedBox(
+              height: 50,
+            ),
+            const TextField(
               decoration: InputDecoration(
                 labelText: "Acuerdo Firmado",
               ),
             ),
-            TextField(
+            SizedBox(
+              height: 50,
+            ),
+            const TextField(
               decoration: InputDecoration(
                 labelText: "Usuario Final",
               ),
             ),
+            SizedBox(
+              height: 50,
+            ),
             ElevatedButton(
-              onPressed: () {},
-              child: Text("Firmar"),
+              onPressed: () {
+                Get.to(signatureform());
+              },
+              child: const Text("Firmar"),
             )
           ],
         ),

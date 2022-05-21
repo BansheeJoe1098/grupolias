@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:grupolias/AcuerdosConformidad/ui/screens/acuerdo.screen.dart';
-import 'package:grupolias/Cotizaciones/ui/screens/cotizaciones.screen.dart';
 import 'package:grupolias/Tickets/ui/screens/tickets.screen.dart';
 import 'package:grupolias/Perfil/ui/screens/perfil.dart';
 
@@ -14,11 +12,9 @@ class BasicBottomNavBar extends StatefulWidget {
 class _BasicBottomNavBarState extends State<BasicBottomNavBar> {
   int _selectedIndex = 0;
 
-  static const List<Widget> _pages = <Widget>[
-    Scaffold(
-      body: TicketsScreen(),
-    ),
-    perfil(),
+  static final List<Widget> _pages = <Widget>[
+    TicketsScreen(),
+    const Perfil(),
   ];
 
   void _onItemTapped(int index) {
@@ -36,8 +32,8 @@ class _BasicBottomNavBarState extends State<BasicBottomNavBar> {
       bottomNavigationBar: Container(
         margin: const EdgeInsets.all(8),
         child: BottomNavigationBar(
-          selectedItemColor: Colors.black,
-          unselectedItemColor: Colors.grey,
+          selectedItemColor: Color.fromARGB(255, 40, 144, 214),
+          unselectedItemColor: Colors.black,
           items: const <BottomNavigationBarItem>[
             BottomNavigationBarItem(
               icon: Icon(Icons.archive_outlined),

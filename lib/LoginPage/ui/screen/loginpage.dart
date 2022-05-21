@@ -5,10 +5,8 @@ class Loginpage extends StatelessWidget {
   const Loginpage({Key? key}) : super(key: key);
 
   Widget _buildPageContent(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(20.0),
-      color: Colors.white,
-      child: ListView(
+    return Scaffold(
+      body: ListView(
         children: <Widget>[
           Column(
             children: <Widget>[
@@ -43,7 +41,7 @@ class Loginpage extends StatelessWidget {
                     border: InputBorder.none,
                     icon: Icon(
                       Icons.email,
-                      color: Colors.black,
+                      color: Color.fromARGB(255, 40, 144, 214),
                     )),
               )),
               const Divider(
@@ -59,7 +57,7 @@ class Loginpage extends StatelessWidget {
                     border: InputBorder.none,
                     icon: Icon(
                       Icons.lock,
-                      color: Colors.black,
+                      color: Color.fromARGB(255, 40, 144, 214),
                     )),
               )),
               const Divider(
@@ -82,10 +80,13 @@ class Loginpage extends StatelessWidget {
                       },
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(30.0)),
-                      color: Colors.black,
+                      color: Color.fromARGB(255, 40, 144, 214),
                       child: const Text(
-                        'Login',
-                        style: TextStyle(color: Colors.white70, fontSize: 16.0),
+                        'LOGIN',
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 16.0,
+                            fontStyle: FontStyle.italic),
                       ),
                     ),
                   ),

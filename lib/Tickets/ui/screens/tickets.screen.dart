@@ -1,14 +1,37 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:grupolias/Tickets/model/ticket.model.dart';
 import 'package:grupolias/Tickets/service/ticket.service.dart';
 import 'package:grupolias/Tickets/ui/widgets/CardListTickets.widget.dart';
 
-class TicketsScreen extends StatelessWidget {
-  const TicketsScreen({Key? key}) : super(key: key);
+import '../../controller/ticket.controller.dart';
 
+class TicketsScreen extends StatelessWidget {
+  TicketsScreen({Key? key}) : super(key: key);
+
+  final controller = Get.put(TicketController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        title: Text(
+          'GRUPO LIAS',
+          style: TextStyle(
+            fontStyle: FontStyle.italic,
+            fontSize: 25.0,
+            letterSpacing: 2.0,
+          ),
+        ),
+        backgroundColor: Color.fromARGB(255, 40, 144, 214),
+        toolbarHeight: 50,
+        actions: [
+          ImageIcon(
+            AssetImage('assets/gpolias.png'),
+            size: 100,
+          )
+        ],
+      ),
       body: Column(
         children: [
           Stack(
@@ -16,7 +39,7 @@ class TicketsScreen extends StatelessWidget {
               Container(
                 height: MediaQuery.of(context).size.height / 4,
                 decoration: const BoxDecoration(
-                  color: Colors.black,
+                  color: Color.fromARGB(255, 40, 144, 214),
                 ),
               ),
               Column(
@@ -24,9 +47,8 @@ class TicketsScreen extends StatelessWidget {
                 children: [
                   Container(
                     alignment: Alignment.topLeft,
-                    padding: const EdgeInsets.only(top: 32, left: 10),
+                    padding: const EdgeInsets.only(top: 52, left: 50),
                     margin: const EdgeInsetsDirectional.only(bottom: 50),
-                    color: Colors.black,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: const [
@@ -52,6 +74,7 @@ class TicketsScreen extends StatelessWidget {
                   FutureBuilder<List<Ticket>>(
                     future: TicketService().getAll(),
                     builder: (context, snapshot) {
+                      print(snapshot.connectionState);
                       if (snapshot.connectionState == ConnectionState.done) {
                         List<Ticket>? listaTickets = snapshot.data;
 
@@ -76,8 +99,7 @@ class TicketsScreen extends StatelessWidget {
                                 ],
                               ),
                               child: CardListWidget(
-                                tituloTicket: element.tituloTicket,
-                                ticketId: element.id,
+                                ticket: element,
                               ),
                             ),
                           );
