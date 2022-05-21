@@ -59,7 +59,10 @@ class Ticketdetalles extends StatelessWidget {
                         style: const TextStyle(fontSize: 20),
                       ),
                       const SizedBox(height: 20),
-                      const Text("Expediente"),
+                      Text("Fecha"),
+                      Text("$data?.fecha}"),
+                      const SizedBox(height: 20),
+                      Text("Expediente"),
                       Text("${data?.numExpediente}"),
                       const SizedBox(height: 10),
                       const Text("Ciudad"),
@@ -70,6 +73,7 @@ class Ticketdetalles extends StatelessWidget {
                       const SizedBox(height: 20),
                       const Text("Calle"),
                       Text("${data?.calle}"),
+                      
                     ],
                   );
                 },
