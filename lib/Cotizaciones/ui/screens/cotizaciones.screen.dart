@@ -1,219 +1,241 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:grupolias/AcuerdosConformidad/ui/screens/acuerdo.screen.dart';
+import 'package:grupolias/Cotizaciones/controller/cotizaciones.controller.dart';
+import 'package:grupolias/Cotizaciones/model/cotizacion.model.dart';
 
 class CotizacionesScreen extends StatelessWidget {
-  const CotizacionesScreen({Key? key}) : super(key: key);
+  CotizacionesScreen({Key? key}) : super(key: key);
 
-  /* DateTime selectedDate = DateTime.now();
-  final firstDate = DateTime(2010, 1);
-  final lastDate = DateTime(2022, 12);
-*/
-  opciones(context) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          contentPadding: const EdgeInsets.all(0),
-          content: SingleChildScrollView(
-              child: Column(
-            children: [
-              InkWell(
-                onTap: () {},
-                child: Container(
-                  padding: const EdgeInsets.all(20),
-                  decoration: const BoxDecoration(
-                      border: Border(
-                          bottom: BorderSide(width: 1, color: Colors.grey))),
-                  child: Row(children: const [
-                    Expanded(
-                      child: Text(
-                        "Tomar una foto",
-                        style: TextStyle(fontSize: 16),
-                      ),
-                    ),
-                    Icon(
-                      Icons.camera_alt,
-                      color: Colors.blue,
-                    )
-                  ]),
-                ),
-              ),
-              InkWell(
-                onTap: () {},
-                child: Container(
-                  padding: const EdgeInsets.all(20),
-                  child: Row(children: const [
-                    Expanded(
-                      child: Text(
-                        "Seleccionar una foto",
-                        style: TextStyle(fontSize: 16),
-                      ),
-                    ),
-                    Icon(
-                      Icons.image,
-                      color: Colors.blue,
-                    )
-                  ]),
-                ),
-              ),
-              InkWell(
-                onTap: () {
-                  Navigator.of(context).pop();
-                },
-                child: Container(
-                  padding: const EdgeInsets.all(20),
-                  decoration: const BoxDecoration(color: Colors.red),
-                  child: Row(children: const [
-                    Expanded(
-                      child: Text("Cancelar",
-                          style: TextStyle(
-                            fontSize: 16,
-                            color: Colors.white,
-                          ),
-                          textAlign: TextAlign.center),
-                    ),
-                    Icon(
-                      Icons.close,
-                      color: Colors.grey,
-                    )
-                  ]),
-                ),
-              ),
-            ],
-          )),
-        );
-      },
-    );
-  }
+  final controller = Get.put(CotizacionesController());
+  var cotizacion = Cotizacion();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          'Crear Cotizacion',
-          style: TextStyle(fontStyle: FontStyle.italic),
-        ),
-        backgroundColor: Color.fromARGB(255, 40, 144, 214),
-        toolbarHeight: 100,
-        shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(50),
-                bottomRight: Radius.circular(50))),
-        actions: <Widget>[
-          ImageIcon(
-            AssetImage('assets/gpolias.png'),
-            size: 150,
-          ),
-        ],
+        title: const Text("Crear cotizacion"),
+        backgroundColor: Colors.black,
       ),
-      body: SingleChildScrollView(
-        child: Container(
-          padding: const EdgeInsets.all(8),
-          decoration: const BoxDecoration(
-            color: Colors.white,
-          ),
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              children: [
-                const SizedBox(
-                  height: 20,
-                ),
-                TextFormField(
-                  maxLines: 8,
-                  decoration: const InputDecoration(
-                      labelText: 'Descripcion del problema',
-                      labelStyle: TextStyle(fontSize: 20),
-                      hintText: 'Descripcion',
-                      border: OutlineInputBorder(),
-                      filled: true,
-                      fillColor: Color.fromARGB(71, 226, 208, 208),
-                      contentPadding: EdgeInsets.all(20.0)),
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-
-                //DatePickerDialog(
-                //firstDate: DateTime.now(),
-                //initialDate: DateTime.now(),
-                //lastDate: DateTime.now(),
-                //),
-                const SizedBox(
-                  height: 20,
-                ),
-                const TextField(
-                  // controller: costoController,
-                  decoration: InputDecoration(
-                    hintText: '0.00',
-                    labelText: 'Costo Mano de obra',
-                    prefixIcon: Icon(Icons.monetization_on_outlined),
-                    //icon: Icon(Icons.monetization_on),
-                    /*  suffixIcon: IconButton(
-                          icon: Icon(Icons.close),
-                          onPressed: () => costoController.clear(),
-                        ),*/
-                    border: OutlineInputBorder(),
-                  ),
-                  keyboardType: TextInputType.number,
-                  textInputAction: TextInputAction.done,
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                const TextField(
-                  //controller: _costoController,
-                  decoration: InputDecoration(
-                    hintText: '0.00',
-                    labelText: 'Costo  Materiales',
-                    prefixIcon: Icon(Icons.monetization_on_outlined),
-                    //icon: Icon(Icons.monetization_on),
-                    /*   suffixIcon: IconButton(
-                          icon: Icon(Icons.close),
-                          onPressed: () => _costoController.clear(),
-                        ),*/
-                    border: OutlineInputBorder(),
-                  ),
-                  keyboardType: TextInputType.number,
-                  textInputAction: TextInputAction.done,
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                const TextField(
-                  // controller: costoController,
-                  decoration: InputDecoration(
-                    hintText: '0.00',
-                    labelText: 'Total',
-                    prefixIcon: Icon(
-                      Icons.monetization_on_sharp,
-                      color: Colors.yellow,
+      floatingActionButton: Tooltip(
+        message: "Enviar Cotización",
+        child: FloatingActionButton(
+          child: const Icon(Icons.send),
+          backgroundColor: Colors.black,
+          onPressed: () {
+            controller.submit(context);
+          },
+        ),
+      ),
+      body: Stack(
+        children: [
+          SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Form(
+                key: controller.cotizacionFormKey,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text(
+                      "Diagnóstico del problema 🦸‍♀️",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
+                      ),
                     ),
-                    //icon: Icon(Icons.monetization_on),
-                    /*  suffixIcon: IconButton(
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    TextFormField(
+                      maxLines: 5,
+                      textAlignVertical: TextAlignVertical.top,
+                      controller: controller.diagnosticoProblema,
+                      autovalidateMode: AutovalidateMode.onUserInteraction,
+                      validator: (value) {
+                        return controller.validadorTextArea(value);
+                      },
+                      decoration: const InputDecoration(
+                        labelText: 'Diagnostico del problema ',
+                        hintText:
+                            'Ej: Se encontró cocodrilo en la alberca del domicilio',
+                        filled: true,
+                        fillColor: Colors.white,
+                        border: OutlineInputBorder(),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    const Text(
+                      "Tomar foto del problema 📷",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    Center(
+                      child: MaterialButton(
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            GetBuilder<CotizacionesController>(builder: (_) {
+                              return Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: controller.foto == null
+                                    ? Image.asset(
+                                        'assets/cocodrile.png',
+                                        height: 200,
+                                        width: 200,
+                                      )
+                                    : Image.file(
+                                        controller.foto!,
+                                        height: 200,
+                                        width: 200,
+                                        fit: BoxFit.cover,
+                                      ),
+                              );
+                            }),
+                            const Text('Tomar Foto'),
+                          ],
+                        ),
+                        onPressed: () => controller.tomarFoto(),
+                        color: Colors.red,
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    const Text(
+                      "Solucion propuesta 💡",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    TextFormField(
+                      maxLines: 5,
+                      textAlignVertical: TextAlignVertical.top,
+                      controller: controller.solucionTecnico,
+                      autovalidateMode: AutovalidateMode.onUserInteraction,
+                      validator: (value) {
+                        return controller.validadorTextArea(value);
+                      },
+                      decoration: const InputDecoration(
+                        labelText: 'Solucion propuesta',
+                        hintText: 'Ej: Se le realizó una limpieza a la alberca',
+                        filled: true,
+                        fillColor: Colors.white,
+                        border: OutlineInputBorder(),
+                      ),
+                      onChanged: (text) {},
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    const Text(
+                      "Costo de mano de obra 👷‍♂️",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    TextFormField(
+                      controller: controller.costoManoObra,
+                      autovalidateMode: AutovalidateMode.onUserInteraction,
+                      validator: (value) {
+                        return controller.validadorCostos(value);
+                      },
+                      onChanged: (value) {
+                        controller.setTotal();
+                      },
+                      decoration: const InputDecoration(
+                        hintText: '0.00',
+                        labelText: 'Costo Mano de obra',
+                        prefixIcon: Icon(Icons.monetization_on_outlined),
+                        border: OutlineInputBorder(),
+                      ),
+                      keyboardType: TextInputType.number,
+                      textInputAction: TextInputAction.done,
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    const Text(
+                      "Costo de materiales 📦",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    TextFormField(
+                      controller: controller.costoMateriales,
+                      autovalidateMode: AutovalidateMode.onUserInteraction,
+                      validator: (value) {
+                        return controller.validadorCostos(value);
+                      },
+                      onChanged: (value) {
+                        controller.setTotal();
+                      },
+                      decoration: const InputDecoration(
+                        hintText: '0.00',
+                        labelText: 'Costo  Materiales',
+                        prefixIcon: Icon(Icons.monetization_on_outlined),
+                        border: OutlineInputBorder(),
+                      ),
+                      keyboardType: TextInputType.number,
+                      textInputAction: TextInputAction.done,
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    const TextField(
+                      // controller: costoController,
+                      decoration: InputDecoration(
+                        hintText: '0.00',
+                        labelText: 'Total',
+                        prefixIcon: Icon(
+                          Icons.monetization_on_sharp,
+                          color: Colors.yellow,
+                        ),
+                        //icon: Icon(Icons.monetization_on),
+                        /*  suffixIcon: IconButton(
                           icon: Icon(Icons.close),
                           onPressed: () => costoController.clear(),
                         ),*/
-                    border: OutlineInputBorder(),
-                  ),
-                  keyboardType: TextInputType.number,
-                  textInputAction: TextInputAction.done,
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                Row(
-                  children: <Widget>[
-                    Container(
-                      alignment: Alignment.center,
-                      child: ElevatedButton(
-                          child: const Text("Enviar"),
-                          onPressed: () {
-                            Get.to(const AcuerdoConformidad());
-                          }),
-                    )
+                        border: OutlineInputBorder(),
+                      ),
+                      keyboardType: TextInputType.number,
+                      textInputAction: TextInputAction.done,
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    Row(
+                      children: <Widget>[
+                        Container(
+                          alignment: Alignment.center,
+                          child: ElevatedButton(
+                              child: const Text("Enviar"),
+                              onPressed: () {
+                                Get.to(const AcuerdoConformidad());
+                              }),
+                        )
+                      ],
+                    ),
                   ],
                 ),
               ],

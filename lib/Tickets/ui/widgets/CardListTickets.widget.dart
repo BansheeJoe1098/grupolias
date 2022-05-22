@@ -1,47 +1,56 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:grupolias/Tickets/controller/ticket.controller.dart';
 
 import '../../model/ticket.model.dart';
 import '../screens/ticketDetalles.screen.dart';
 
-class CardListWidget extends StatelessWidget {
-  CardListWidget({
+class CardListWidget extends StatefulWidget {
+  const CardListWidget({
     Key? key,
     required this.ticket,
   }) : super(key: key);
 
   final Ticket ticket;
 
-  final controller = Get.put(TicketController());
+  @override
+  State<CardListWidget> createState() => _CardListWidgetState();
+}
+
+class _CardListWidgetState extends State<CardListWidget> {
+  late Ticket _t;
+
+  @override
+  void initState() {
+    super.initState();
+    _t = widget.ticket;
+  }
+
   @override
   Widget build(BuildContext context) {
-    controller.setTicket(ticket);
     return Row(
       children: [
         Column(
           children: [
-            Obx(
-              (() => Text(
-                    "${controller.ticket.value.tituloTicket}",
-                    maxLines: 1,
-                    style: const TextStyle(
-                      fontWeight: FontWeight.bold,
-                    ),
-                  )),
+            Text(
+              "${_t.tituloTicket}",
+              maxLines: 1,
+              style: const TextStyle(
+                fontWeight: FontWeight.bold,
+              ),
             )
           ],
         ),
         Expanded(
-          child: ElevatedButton(
+          child: IconButton(
+            icon: const Icon(Icons.arrow_forward_ios),
             onPressed: () {
-              controller.setTicket(ticket);
-              Get.to(Ticketdetalles(
-                titulo: "Ticket ${ticket.numExpediente}",
-                idTicket: ticket.id,
-              ));
+              Get.to(
+                () => Ticketdetalles(
+                  titulo: "Ticket ${widget.ticket.numExpediente}",
+                  idTicket: widget.ticket.id,
+                ),
+              );
             },
-            child: const Text('Ver'),
           ),
         )
       ],

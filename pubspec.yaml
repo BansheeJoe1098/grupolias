@@ -41,14 +41,10 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
 
- 
-  
-
-  image_picker: ^0.8.0
-
-  get: ^4.6.1
-  http: ^0.13.4
-  url_launcher: ^6.1.0
+  get: 4.6.1
+  http: 0.13.4
+  url_launcher: 6.1.0
+  image_picker: 0.8.5+3
 
 dev_dependencies:
   flutter_test:
@@ -82,6 +78,7 @@ flutter:
   assets:
     - assets/gpolias.png
     - assets/profile.png
+    - assets/cocodrile.png
 
 
   # An image assets can refer to one or more resolution-specific "variants", see

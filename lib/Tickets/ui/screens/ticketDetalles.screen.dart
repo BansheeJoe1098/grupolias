@@ -7,20 +7,32 @@ import 'package:grupolias/Tickets/service/ticketDetalles.service.dart';
 
 import 'map.screen.dart';
 
-class Ticketdetalles extends StatelessWidget {
-  Ticketdetalles({Key? key, required this.titulo, required this.idTicket})
+class Ticketdetalles extends StatefulWidget {
+  const Ticketdetalles({Key? key, required this.titulo, required this.idTicket})
       : super(key: key);
 
   final String titulo;
   final int? idTicket;
 
+  @override
+  State<Ticketdetalles> createState() => _TicketdetallesState();
+}
+
+class _TicketdetallesState extends State<Ticketdetalles> {
   final TicketController controller = Get.put(TicketController());
+  late int idTicket;
+
+  @override
+  void initState() {
+    super.initState();
+    idTicket = widget.idTicket!;
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Detalle del ticket $titulo'),
+        title: Text('Detalle del ticket ${widget.titulo}'),
         backgroundColor: Colors.black,
       ),
       body: Padding(
@@ -29,8 +41,14 @@ class Ticketdetalles extends StatelessWidget {
           child: Column(
             children: [
               FutureBuilder<Ticket>(
-                future: TicketService().getTicketById(idTicket!),
+                future: TicketService().getTicketById(idTicket),
                 builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const Center(
+                      child: LinearProgressIndicator(),
+                    );
+                  }
+
                   Ticket? data = snapshot.data;
                   return Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -97,7 +115,7 @@ class Ticketdetalles extends StatelessWidget {
                       return const CircularProgressIndicator();
                     },
                   );
-                  Get.to(MapScreen());
+                  Get.to(() => MapScreen());
                 },
               )
             ],
