@@ -13,7 +13,6 @@ class TicketService {
     final jsonData = json.decode(response.body);
     final lista =
         List<Ticket>.from(jsonData.map((item) => Ticket.fromJson(item)));
-
     return lista;
   }
 

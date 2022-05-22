@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:grupolias/Cotizaciones/controller/cotizaciones.controller.dart';
 import 'package:grupolias/Cotizaciones/model/cotizacion.model.dart';
+import 'package:grupolias/AcuerdosConformidad/ui/screens/acuerdo.screen.dart';
 
 class CotizacionesScreen extends StatelessWidget {
   CotizacionesScreen({Key? key}) : super(key: key);
@@ -238,10 +239,10 @@ class CotizacionesScreen extends StatelessWidget {
                     ),
                   ],
                 ),
-              ],
+              ),
             ),
           ),
-        ),
+        ],
       ),
     );
   }

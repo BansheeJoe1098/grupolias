@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:grupolias/Tickets/model/ticket.model.dart';
@@ -15,7 +17,7 @@ class TicketsScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        title: Text(
+        title: const Text(
           'GRUPO LIAS',
           style: TextStyle(
             fontStyle: FontStyle.italic,
@@ -23,7 +25,7 @@ class TicketsScreen extends StatelessWidget {
             letterSpacing: 2.0,
           ),
         ),
-        backgroundColor: Color.fromARGB(255, 40, 144, 214),
+        backgroundColor: const Color.fromARGB(255, 40, 144, 214),
         toolbarHeight: 50,
         actions: [
           ImageIcon(
@@ -32,14 +34,6 @@ class TicketsScreen extends StatelessWidget {
           )
         ],
       ),
-      body: Column(
-        children: [
-          Stack(
-            children: [
-              Container(
-                height: MediaQuery.of(context).size.height / 4,
-                decoration: const BoxDecoration(
-                  color: Color.fromARGB(255, 40, 144, 214),
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -81,12 +75,11 @@ class TicketsScreen extends StatelessWidget {
                         ],
                       ),
                     ),
-                  ),
-                  FutureBuilder<List<Ticket>>(
-                    future: TicketService().getAll(),
-                    builder: (context, snapshot) {
-                      if (snapshot.connectionState == ConnectionState.done) {
-                        List<Ticket>? listaTickets = snapshot.data;
+                    FutureBuilder<List<Ticket>>(
+                      future: TicketService().getAll(),
+                      builder: (context, snapshot) {
+                        if (snapshot.connectionState == ConnectionState.done) {
+                          List<Ticket>? listaTickets = snapshot.data;
 
                           List<Widget> list = [];
 
