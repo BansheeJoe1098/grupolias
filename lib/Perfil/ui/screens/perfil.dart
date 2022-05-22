@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 
 class Perfil extends StatelessWidget {
@@ -10,7 +8,7 @@ class Perfil extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        title: Text(
+        title: const Text(
           'GRUPO LIAS',
           style: TextStyle(
             fontStyle: FontStyle.italic,
@@ -18,13 +16,13 @@ class Perfil extends StatelessWidget {
             letterSpacing: 2.0,
           ),
         ),
-        backgroundColor: Color.fromARGB(255, 40, 144, 214),
+        backgroundColor: const Color.fromARGB(255, 40, 144, 214),
         toolbarHeight: 100,
-        shape: RoundedRectangleBorder(
+        shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.only(
                 bottomLeft: Radius.circular(50),
                 bottomRight: Radius.circular(50))),
-        actions: <Widget>[
+        actions: const <Widget>[
           ImageIcon(
             AssetImage('assets/gpolias.png'),
             size: 150,

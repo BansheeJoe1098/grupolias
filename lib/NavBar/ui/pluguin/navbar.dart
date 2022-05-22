@@ -32,7 +32,7 @@ class _BasicBottomNavBarState extends State<BasicBottomNavBar> {
       bottomNavigationBar: Container(
         margin: const EdgeInsets.all(8),
         child: BottomNavigationBar(
-          selectedItemColor: Color.fromARGB(255, 40, 144, 214),
+          selectedItemColor: const Color.fromARGB(255, 40, 144, 214),
           unselectedItemColor: Colors.black,
           items: const <BottomNavigationBarItem>[
             BottomNavigationBarItem(

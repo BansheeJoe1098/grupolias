@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:grupolias/Tickets/model/ticket.model.dart';
@@ -27,7 +25,7 @@ class TicketsScreen extends StatelessWidget {
         ),
         backgroundColor: const Color.fromARGB(255, 40, 144, 214),
         toolbarHeight: 50,
-        actions: [
+        actions: const [
           ImageIcon(
             AssetImage('assets/gpolias.png'),
             size: 100,

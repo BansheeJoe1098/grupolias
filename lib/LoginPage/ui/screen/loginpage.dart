@@ -80,7 +80,7 @@ class Loginpage extends StatelessWidget {
                       },
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(30.0)),
-                      color: Color.fromARGB(255, 40, 144, 214),
+                      color: const Color.fromARGB(255, 40, 144, 214),
                       child: const Text(
                         'LOGIN',
                         style: TextStyle(

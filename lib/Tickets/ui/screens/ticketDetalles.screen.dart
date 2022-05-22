@@ -77,10 +77,10 @@ class _TicketdetallesState extends State<Ticketdetalles> {
                         style: const TextStyle(fontSize: 20),
                       ),
                       const SizedBox(height: 20),
-                      Text("Fecha"),
-                      Text("$data?.fecha}"),
+                      const Text("Fecha"),
+                      Text("${data?.fechaLlamada}"),
                       const SizedBox(height: 20),
-                      Text("Expediente"),
+                      const Text("Expediente"),
                       Text("${data?.numExpediente}"),
                       const SizedBox(height: 10),
                       const Text("Ciudad"),
@@ -91,7 +91,6 @@ class _TicketdetallesState extends State<Ticketdetalles> {
                       const SizedBox(height: 20),
                       const Text("Calle"),
                       Text("${data?.calle}"),
-                      
                     ],
                   );
                 },

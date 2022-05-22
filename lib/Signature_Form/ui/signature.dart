@@ -1,7 +1,6 @@
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'dart:io';
 import 'dart:ui' as ui;
 import 'dart:convert';
@@ -11,21 +10,21 @@ import 'package:syncfusion_flutter_signaturepad/signaturepad.dart';
 import 'package:universal_html/html.dart' show AnchorElement;
 import 'package:flutter/foundation.dart' show kIsWeb;
 
-class signatureform extends StatefulWidget {
-  signatureform({Key? key}) : super(key: key);
+class Signature extends StatefulWidget {
+  const Signature({Key? key}) : super(key: key);
 
   @override
-  State<signatureform> createState() => _signatureformState();
+  State<Signature> createState() => _SignatureState();
 }
 
-class _signatureformState extends State<signatureform> {
+class _SignatureState extends State<Signature> {
   GlobalKey<SfSignaturePadState> signaturePadKey = GlobalKey();
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
           body: Center(
-        child: Container(
+        child: SizedBox(
           child: Column(
             children: [
               Container(
@@ -43,11 +42,11 @@ class _signatureformState extends State<signatureform> {
               Row(
                 children: [
                   ElevatedButton(
-                    child: Text("Confirmar"),
+                    child: const Text("Confirmar"),
                     style: ElevatedButton.styleFrom(
-                        primary: Color.fromARGB(255, 40, 144, 214),
+                        primary: const Color.fromARGB(255, 40, 144, 214),
                         onPrimary: Colors.white,
-                        textStyle: TextStyle(
+                        textStyle: const TextStyle(
                             color: Colors.white,
                             fontSize: 15,
                             fontStyle: FontStyle.italic)),
@@ -55,10 +54,10 @@ class _signatureformState extends State<signatureform> {
                       ui.Image data = await signaturePadKey.currentState!
                           .toImage(pixelRatio: 2.0);
 
-                      final ByteData =
+                      final byteDAta =
                           await data.toByteData(format: ui.ImageByteFormat.png);
-                      final Uint8List imageBytes = ByteData!.buffer.asUint8List(
-                          ByteData.offsetInBytes, ByteData.lengthInBytes);
+                      final Uint8List imageBytes = byteDAta!.buffer.asUint8List(
+                          byteDAta.offsetInBytes, byteDAta.lengthInBytes);
 
                       if (kIsWeb) {
                         AnchorElement(
@@ -80,16 +79,16 @@ class _signatureformState extends State<signatureform> {
                   ),
                   ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                          primary: Color.fromARGB(255, 40, 144, 214),
+                          primary: const Color.fromARGB(255, 40, 144, 214),
                           onPrimary: Colors.white,
-                          textStyle: TextStyle(
+                          textStyle: const TextStyle(
                               color: Colors.black,
                               fontSize: 15,
                               fontStyle: FontStyle.italic)),
                       onPressed: () {
                         signaturePadKey.currentState!.clear();
                       },
-                      child: Text('Limpiar'))
+                      child: const Text('Limpiar'))
                 ],
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
               )
