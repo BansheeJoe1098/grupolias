@@ -12,7 +12,7 @@ class Ticketdetalles extends StatefulWidget {
       : super(key: key);
 
   final String titulo;
-  final int? idTicket;
+  final int idTicket;
 
   @override
   State<Ticketdetalles> createState() => _TicketdetallesState();
@@ -25,7 +25,7 @@ class _TicketdetallesState extends State<Ticketdetalles> {
   @override
   void initState() {
     super.initState();
-    idTicket = widget.idTicket!;
+    idTicket = widget.idTicket;
   }
 
   @override
@@ -103,8 +103,7 @@ class _TicketdetallesState extends State<Ticketdetalles> {
 
                   FutureBuilder<Ticket>(
                     future: TicketDetallesService().actualizarEstado(
-                        ticketActualizado.id,
-                        ticketActualizado.estado.toString()),
+                        idTicket, ticketActualizado.estado.toString()),
                     builder: (context, snapshot) {
                       if (snapshot.hasData) {
                         return Text(snapshot.data!.estado.toString());

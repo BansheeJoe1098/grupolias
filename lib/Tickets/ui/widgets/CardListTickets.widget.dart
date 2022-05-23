@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../controller/ticket.controller.dart';
 import '../../model/ticket.model.dart';
 import '../screens/ticketDetalles.screen.dart';
 
@@ -17,12 +18,13 @@ class CardListWidget extends StatefulWidget {
 }
 
 class _CardListWidgetState extends State<CardListWidget> {
-  late Ticket _t;
-
+  final controller = Get.put(TicketController());
+  late int? idTicket;
   @override
   void initState() {
     super.initState();
-    _t = widget.ticket;
+    controller.ticket.value = widget.ticket;
+    idTicket = widget.ticket.id;
   }
 
   @override
@@ -32,7 +34,7 @@ class _CardListWidgetState extends State<CardListWidget> {
         Column(
           children: [
             Text(
-              "${_t.tituloTicket}",
+              "${controller.ticket.value.tituloTicket}",
               maxLines: 1,
               style: const TextStyle(
                 fontWeight: FontWeight.bold,
@@ -47,7 +49,7 @@ class _CardListWidgetState extends State<CardListWidget> {
               Get.to(
                 () => Ticketdetalles(
                   titulo: "Ticket ${widget.ticket.numExpediente}",
-                  idTicket: widget.ticket.id,
+                  idTicket: widget.ticket.id!,
                 ),
               );
             },

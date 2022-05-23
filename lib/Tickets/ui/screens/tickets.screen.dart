@@ -76,7 +76,12 @@ class TicketsScreen extends StatelessWidget {
                     FutureBuilder<List<Ticket>>(
                       future: TicketService().getAll(),
                       builder: (context, snapshot) {
-                        if (snapshot.connectionState == ConnectionState.done) {
+                        if (snapshot.connectionState ==
+                            ConnectionState.waiting) {
+                          return const Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        } else {
                           List<Ticket>? listaTickets = snapshot.data;
 
                           List<Widget> list = [];
@@ -108,10 +113,6 @@ class TicketsScreen extends StatelessWidget {
 
                           return Column(
                             children: list,
-                          );
-                        } else {
-                          return const AlertDialog(
-                            title: Text("Verifique su conexion a internet"),
                           );
                         }
                       },
