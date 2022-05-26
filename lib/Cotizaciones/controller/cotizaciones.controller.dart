@@ -6,7 +6,15 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter/services.dart';
+
 import 'package:image_picker/image_picker.dart';
+
+import 'package:path_provider/path_provider.dart';
+
+import '../model/cotizacion.model.dart';
+import '../service/cotizaciones.service.dart';
+
+import 'package:grupolias/Cotizaciones/model/cotizacion.model.dart';
 
 class CotizacionesController extends GetxController {
   final cotizacionFormKey = GlobalKey<FormState>();
@@ -18,27 +26,66 @@ class CotizacionesController extends GetxController {
   var costoMateriales = TextEditingController();
   var totalCotizacion = TextEditingController();
 
-  final int ticketId = 0;
+  var ticketId = 0.obs;
   var total = 0.0.obs;
   File? foto;
 
-  void submit(BuildContext context) {
-    if (cotizacionFormKey.currentState!.validate()) {
+  Future<Cotizacion?> submit(BuildContext context) async {
+    if (cotizacionFormKey.currentState!.validate() && foto != null) {
       cotizacionFormKey.currentState!.save();
+
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Processing Data')),
+        const SnackBar(content: Text('Enviando')),
       );
+
+      Cotizacion cot = Cotizacion(
+        diagnosticoProblema: diagnosticoProblema.text,
+        solucionTecnico: solucionTecnico.text,
+        fechaContacto: DateTime.now().toUtc(),
+        costoManoObra: double.parse(costoManoObra.text),
+        costoMateriales: double.parse(costoMateriales.text),
+        totalCotizacion: total.value,
+        ticketId: ticketId.value,
+        //TODO: Sacar id del tecnico desde la sesion
+        tecnicoId: 1,
+      );
+
+      // print(fotoPath.value + "\n");
+      // print(cot.toRawJson());
+
+      var service = CotizacionesService();
+      try {
+        var respuesta = await service.create(cot, foto!);
+        return respuesta;
+      } catch (e) {
+        printError(info: e.toString());
+      }
     }
+    return null;
   }
 
   Future<String?> tomarFoto() async {
     try {
-      final image = await ImagePicker().pickImage(source: ImageSource.camera);
+      final XFile? image = await ImagePicker().pickImage(
+        source: ImageSource.camera,
+        imageQuality: 50,
+      );
       if (image == null) {
         return null;
       }
-      final temporalFile = File(image.path);
+      final File temporalFile = File(image.path);
       foto = temporalFile;
+
+      //save image on gallery
+      var directory = await getApplicationDocumentsDirectory();
+
+      var path = directory.path;
+      var arrRuta = foto!.path.split('/');
+      var nombreArchivo = arrRuta[arrRuta.length - 1];
+
+      File savedImage = await temporalFile.copy('$path/$nombreArchivo');
+
+      foto = savedImage;
     } on PlatformException catch (e) {
       return "Error: Se necesita permisos de camara $e";
     }
@@ -48,8 +95,8 @@ class CotizacionesController extends GetxController {
 
   String? validadorTextArea(String? value) {
     var tamano = value?.length;
-    if (tamano! < 70) {
-      return 'Faltan ${70 - tamano} caracteres para tener una buena descripcion';
+    if (tamano! < 20) {
+      return 'Faltan ${20 - tamano} caracteres para tener una buena descripcion';
     }
     if (value!.isEmpty) {
       return 'Este campo es requerido';
