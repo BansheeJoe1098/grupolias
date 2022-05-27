@@ -3,14 +3,27 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:grupolias/Cotizaciones/controller/cotizaciones.controller.dart';
-import 'package:grupolias/Cotizaciones/model/cotizacion.model.dart';
 import 'package:grupolias/AcuerdosConformidad/ui/screens/acuerdo.screen.dart';
 
-class CotizacionesScreen extends StatelessWidget {
-  CotizacionesScreen({Key? key}) : super(key: key);
+import '../../model/cotizacion.model.dart';
 
+class CotizacionesScreen extends StatefulWidget {
+  CotizacionesScreen({Key? key, required this.idTicket}) : super(key: key);
+  final int idTicket;
+
+  @override
+  State<CotizacionesScreen> createState() => _CotizacionesScreenState();
+}
+
+class _CotizacionesScreenState extends State<CotizacionesScreen> {
   final controller = Get.put(CotizacionesController());
-  var cotizacion = Cotizacion();
+  late int idTicket;
+  @override
+  void initState() {
+    super.initState();
+    idTicket = widget.idTicket;
+    controller.ticketId.value = idTicket;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -210,24 +223,14 @@ class CotizacionesScreen extends StatelessWidget {
                     const SizedBox(
                       height: 20,
                     ),
-                    const TextField(
-                      // controller: costoController,
-                      decoration: InputDecoration(
-                        hintText: '0.00',
-                        labelText: 'Total',
-                        prefixIcon: Icon(
-                          Icons.monetization_on_sharp,
-                          color: Colors.yellow,
+                    Obx(
+                      () => Text(
+                        'Total: ${controller.total}',
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
                         ),
-                        //icon: Icon(Icons.monetization_on),
-                        /*  suffixIcon: IconButton(
-                          icon: Icon(Icons.close),
-                          onPressed: () => costoController.clear(),
-                        ),*/
-                        border: OutlineInputBorder(),
                       ),
-                      keyboardType: TextInputType.number,
-                      textInputAction: TextInputAction.done,
                     ),
                     const SizedBox(
                       height: 20,
@@ -237,8 +240,6 @@ class CotizacionesScreen extends StatelessWidget {
                         Container(
                           alignment: Alignment.center,
                           child: ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                  primary: Colors.black),
                               child: const Text("Enviar"),
                               onPressed: () {
                                 Get.to(const AcuerdoConformidad());

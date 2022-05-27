@@ -2,12 +2,41 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:grupolias/Cotizaciones/model/cotizacion.model.dart';
 import 'package:grupolias/Signature_Form/ui/signature.dart';
+import 'package:grupolias/Tickets/model/ticket.model.dart';
+import 'package:grupolias/Tickets/service/ticket.service.dart';
 import 'package:grupolias/Date_Time_Picker/Screen/date_picker.dart';
 import 'package:grupolias/Date_Time_Picker/Screen/time_picker.dart';
 
-class AcuerdoConformidad extends StatelessWidget {
-  const AcuerdoConformidad({Key? key}) : super(key: key);
+class AcuerdoConformidadScreen extends StatefulWidget {
+  final Cotizacion cotizacion;
+  const AcuerdoConformidadScreen({Key? key, required this.cotizacion})
+      : super(key: key);
+
+  @override
+  State<AcuerdoConformidadScreen> createState() =>
+      _AcuerdoConformidadScreenState();
+}
+
+class _AcuerdoConformidadScreenState extends State<AcuerdoConformidadScreen> {
+  late Cotizacion cotizacion;
+  late Ticket ticketDeCotizacion;
+
+  ticketDeCotizacionById() async {
+    var service = new TicketService();
+    var ticket = await service.getTicketById(cotizacion.ticketId!);
+    setState(() {
+      ticketDeCotizacion = ticket;
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    cotizacion = widget.cotizacion;
+    ticketDeCotizacionById();
+  }
 
   @override
   Widget build(BuildContext context) {

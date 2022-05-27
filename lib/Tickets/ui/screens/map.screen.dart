@@ -5,10 +5,23 @@ import 'package:grupolias/Tickets/service/map.service.dart';
 
 import '../../controller/ticket.controller.dart';
 
-class MapScreen extends StatelessWidget {
-  MapScreen({Key? key}) : super(key: key);
+class MapScreen extends StatefulWidget {
+  const MapScreen({Key? key, required this.idTicket}) : super(key: key);
 
+  final int idTicket;
+  @override
+  State<MapScreen> createState() => _MapScreenState();
+}
+
+class _MapScreenState extends State<MapScreen> {
   final TicketController controller = Get.put(TicketController());
+  late int idTicket;
+
+  @override
+  void initState() {
+    super.initState();
+    idTicket = widget.idTicket;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +50,7 @@ class MapScreen extends StatelessWidget {
                       style: ElevatedButton.styleFrom(primary: Colors.black),
                       child: const Text("Crear Cotizacion"),
                       onPressed: () {
-                        Get.to(() => CotizacionesScreen());
+                        Get.to(() => CotizacionesScreen(idTicket: idTicket));
                       },
                     ),
                   ),

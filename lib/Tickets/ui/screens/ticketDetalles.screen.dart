@@ -168,7 +168,7 @@ class _TicketdetallesState extends State<Ticketdetalles> {
                       return const CircularProgressIndicator();
                     },
                   );
-                  Get.to(() => MapScreen());
+                  Get.to(() => MapScreen(idTicket: idTicket));
                 },
               )
             ],
