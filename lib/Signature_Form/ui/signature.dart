@@ -21,6 +21,7 @@ class _SignatureState extends State<Signature> {
   GlobalKey<SfSignaturePadState> signaturePadKey = GlobalKey();
   @override
   Widget build(BuildContext context) {
+    Orientation deviceOrientation = MediaQuery.of(context).orientation;
     return SafeArea(
       child: Scaffold(
           body: Center(
@@ -94,8 +95,8 @@ class _SignatureState extends State<Signature> {
               )
             ],
           ),
-          height: MediaQuery.of(context).size.height,
-          width: MediaQuery.of(context).size.width,
+          //height: MediaQuery.of(context).size.height,
+          //width: MediaQuery.of(context).size.width,
         ),
       )),
     );

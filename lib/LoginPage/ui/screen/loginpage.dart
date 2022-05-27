@@ -36,12 +36,12 @@ class Loginpage extends StatelessWidget {
                   title: TextField(
                 style: TextStyle(color: Colors.black),
                 decoration: InputDecoration(
-                    hintText: "Email address:",
+                    hintText: "Correo Electronico:",
                     hintStyle: TextStyle(color: Colors.black),
                     border: InputBorder.none,
                     icon: Icon(
                       Icons.email,
-                      color: Color.fromARGB(255, 40, 144, 214),
+                      color: Colors.black,
                     )),
               )),
               const Divider(
@@ -52,12 +52,12 @@ class Loginpage extends StatelessWidget {
                 obscureText: true,
                 style: TextStyle(color: Colors.black),
                 decoration: InputDecoration(
-                    hintText: "Password:",
+                    hintText: "Contraseña:",
                     hintStyle: TextStyle(color: Colors.black),
                     border: InputBorder.none,
                     icon: Icon(
                       Icons.lock,
-                      color: Color.fromARGB(255, 40, 144, 214),
+                      color: Colors.black,
                     )),
               )),
               const Divider(
@@ -80,9 +80,9 @@ class Loginpage extends StatelessWidget {
                       },
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(30.0)),
-                      color: const Color.fromARGB(255, 40, 144, 214),
+                      color: Colors.black,
                       child: const Text(
-                        'LOGIN',
+                        'Iniciar Sesion',
                         style: TextStyle(
                             color: Colors.white,
                             fontSize: 16.0,

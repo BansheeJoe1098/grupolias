@@ -23,7 +23,7 @@ class TicketsScreen extends StatelessWidget {
             letterSpacing: 2.0,
           ),
         ),
-        backgroundColor: const Color.fromARGB(255, 40, 144, 214),
+        backgroundColor: Colors.black,
         toolbarHeight: 50,
         actions: const [
           ImageIcon(

@@ -32,8 +32,18 @@ class _TicketdetallesState extends State<Ticketdetalles> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Detalle del ticket ${widget.titulo}'),
+        title: Text(
+          'Detalle del ${widget.titulo}',
+          style: TextStyle(fontStyle: FontStyle.italic),
+        ),
         backgroundColor: Colors.black,
+        toolbarHeight: 80,
+        actions: [
+          ImageIcon(
+            AssetImage('assets/gpolias.png'),
+            size: 80,
+          )
+        ],
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -54,7 +64,7 @@ class _TicketdetallesState extends State<Ticketdetalles> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const Text(
-                        "Titulo Ticket",
+                        "Ocupacion",
                         style: TextStyle(
                           fontSize: 30,
                           fontWeight: FontWeight.w900,
@@ -62,7 +72,10 @@ class _TicketdetallesState extends State<Ticketdetalles> {
                       ),
                       Text(
                         "${data?.tituloTicket}",
-                        style: const TextStyle(fontSize: 20),
+                        style: const TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w300,
+                        ),
                       ),
                       const SizedBox(height: 20),
                       const Text(
@@ -74,28 +87,70 @@ class _TicketdetallesState extends State<Ticketdetalles> {
                       ),
                       Text(
                         "${data?.problematica}",
-                        style: const TextStyle(fontSize: 20),
+                        style: const TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w300,
+                        ),
                       ),
                       const SizedBox(height: 20),
-                      const Text("Fecha"),
-                      Text("${data?.fechaLlamada}"),
+                      const Text(
+                        "Fecha y Día 🕰",
+                        style: TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.bold),
+                      ),
+                      Text("${data?.fechaLlamada}",
+                          style: TextStyle(
+                            fontSize: 15,
+                          )),
                       const SizedBox(height: 20),
-                      const Text("Expediente"),
-                      Text("${data?.numExpediente}"),
+                      const Text(
+                        "Expediente 📃",
+                        style: TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.bold),
+                      ),
+                      Text("${data?.numExpediente}",
+                          style: TextStyle(
+                            fontSize: 15,
+                          )),
                       const SizedBox(height: 10),
-                      const Text("Ciudad"),
-                      Text("${data?.ciudad}"),
+                      const Text(
+                        "Ciudad 🌁",
+                        style: TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.bold),
+                      ),
+                      Text("${data?.ciudad}",
+                          style: TextStyle(
+                            fontSize: 15,
+                          )),
                       const SizedBox(height: 20),
-                      const Text("Colonia"),
-                      Text("${data?.colonia}"),
+                      const Text(
+                        "Colonia 🏡",
+                        style: TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.bold),
+                      ),
+                      Text("${data?.colonia}",
+                          style: TextStyle(
+                            fontSize: 15,
+                          )),
                       const SizedBox(height: 20),
-                      const Text("Calle"),
-                      Text("${data?.calle}"),
+                      const Text(
+                        "Calle 🚗",
+                        style: TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.bold),
+                      ),
+                      Text("${data?.calle}",
+                          style: TextStyle(
+                            fontSize: 15,
+                          )),
+                      SizedBox(
+                        height: 25,
+                      )
                     ],
                   );
                 },
               ),
               ElevatedButton(
+                style: ElevatedButton.styleFrom(primary: Colors.black),
                 child: const Text("Tomar Ticket"),
                 onPressed: () {
                   var ticketActualizado = controller.ticket.value;

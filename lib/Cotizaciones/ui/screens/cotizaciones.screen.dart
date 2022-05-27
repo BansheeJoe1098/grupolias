@@ -16,14 +16,21 @@ class CotizacionesScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Crear cotizacion"),
+        title: const Text("Cotizacion"),
         backgroundColor: Colors.black,
+        toolbarHeight: 80,
+        actions: [
+          ImageIcon(
+            AssetImage('assets/gpolias.png'),
+            size: 150,
+          ),
+        ],
       ),
       floatingActionButton: Tooltip(
         message: "Enviar Cotización",
         child: FloatingActionButton(
           child: const Icon(Icons.send),
-          backgroundColor: Colors.black,
+          backgroundColor: const Color.fromARGB(255, 40, 144, 214),
           onPressed: () {
             controller.submit(context);
           },
@@ -230,6 +237,8 @@ class CotizacionesScreen extends StatelessWidget {
                         Container(
                           alignment: Alignment.center,
                           child: ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                  primary: Colors.black),
                               child: const Text("Enviar"),
                               onPressed: () {
                                 Get.to(const AcuerdoConformidad());

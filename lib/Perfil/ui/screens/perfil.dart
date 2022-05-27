@@ -16,12 +16,12 @@ class Perfil extends StatelessWidget {
             letterSpacing: 2.0,
           ),
         ),
-        backgroundColor: const Color.fromARGB(255, 40, 144, 214),
+        backgroundColor: Colors.black,
         toolbarHeight: 100,
         shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(50),
-                bottomRight: Radius.circular(50))),
+                bottomLeft: Radius.circular(30),
+                bottomRight: Radius.circular(30))),
         actions: const <Widget>[
           ImageIcon(
             AssetImage('assets/gpolias.png'),
@@ -38,6 +38,7 @@ class Perfil extends StatelessWidget {
             const Center(
               child: CircleAvatar(
                 backgroundImage: AssetImage('assets/profile.png'),
+                backgroundColor: Colors.black,
                 radius: 60.0,
               ),
             ),

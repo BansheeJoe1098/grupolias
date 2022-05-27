@@ -34,6 +34,7 @@ class MapScreen extends StatelessWidget {
                   ),
                   Center(
                     child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(primary: Colors.black),
                       child: const Text("Crear Cotizacion"),
                       onPressed: () {
                         Get.to(() => CotizacionesScreen());

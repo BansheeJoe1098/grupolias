@@ -1,8 +1,10 @@
-// ignore_for_file: prefer_const_constructors
+import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:grupolias/Signature_Form/ui/signature.dart';
+import 'package:grupolias/Date_Time_Picker/Screen/date_picker.dart';
+import 'package:grupolias/Date_Time_Picker/Screen/time_picker.dart';
 
 class AcuerdoConformidad extends StatelessWidget {
   const AcuerdoConformidad({Key? key}) : super(key: key);
@@ -11,121 +13,176 @@ class AcuerdoConformidad extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          "Llenado de \n acuerdo  de \n conformidad",
-          style: TextStyle(fontStyle: FontStyle.italic),
-        ),
-        backgroundColor: const Color.fromARGB(255, 40, 144, 214),
-        toolbarHeight: 100,
-        shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(40),
-                bottomRight: Radius.circular(40))),
-        actions: const <Widget>[
+        title: const Text("Acuerdo Conformidad"),
+        toolbarHeight: 80,
+        actions: [
           ImageIcon(
             AssetImage('assets/gpolias.png'),
-            size: 150,
+            size: 80,
           ),
         ],
+        backgroundColor: Colors.black,
       ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(8),
-        child: Column(
-          children: [
-            const SizedBox(
-              height: 50,
-            ),
-            TextField(
-              decoration: InputDecoration(
-                labelText: "Expediente",
+      body: Stack(
+        children: [
+          SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: Form(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text(
+                      "Descripcion del Problema 👀 ",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    TextFormField(
+                      maxLines: 5,
+                      textAlignVertical: TextAlignVertical.top,
+                      autovalidateMode: AutovalidateMode.onUserInteraction,
+                      decoration: const InputDecoration(
+                        labelText: 'Descripcion del problema  ',
+                        hintText: 'Ej: Fuga de agua en el baño',
+                        filled: true,
+                        fillColor: Colors.white,
+                        border: OutlineInputBorder(),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    const Text(
+                      "Actividades Realizadas 📃",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    TextFormField(
+                      maxLines: 5,
+                      textAlignVertical: TextAlignVertical.top,
+                      autovalidateMode: AutovalidateMode.onUserInteraction,
+                      decoration: const InputDecoration(
+                        labelText: 'Actividades Realizadas',
+                        hintText: 'Ej: Se cambio el tubo del agua',
+                        filled: true,
+                        fillColor: Colors.white,
+                        border: OutlineInputBorder(),
+                      ),
+                      onChanged: (text) {},
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    const Text(
+                      "Direccion ❔",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    TextFormField(
+                      maxLines: 2,
+                      textAlignVertical: TextAlignVertical.top,
+                      autovalidateMode: AutovalidateMode.onUserInteraction,
+                      decoration: const InputDecoration(
+                        labelText: 'Direccion',
+                        hintText: 'Ej: Calle Oropeza,Colonia Industrial,N°5',
+                        filled: true,
+                        fillColor: Colors.white,
+                        border: OutlineInputBorder(),
+                      ),
+                      onChanged: (text) {},
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    const Text(
+                      "Observaciones 👁",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    TextFormField(
+                      maxLines: 5,
+                      textAlignVertical: TextAlignVertical.top,
+                      autovalidateMode: AutovalidateMode.onUserInteraction,
+                      decoration: const InputDecoration(
+                        labelText: 'Observaciones',
+                        hintText: 'Ej:Se hizo correctamente el trabajo',
+                        filled: true,
+                        fillColor: Colors.white,
+                        border: OutlineInputBorder(),
+                      ),
+                      onChanged: (text) {},
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    const Text(
+                      "Fecha  y Hora de Acuerdo 🕰",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
+                      ),
+                    ),
+                    Row(
+                      children: [
+                        Container(
+                          width: 120,
+                          height: 60,
+                          padding: EdgeInsets.all(2),
+                          margin: EdgeInsets.all(2),
+                          child: DatePicker(),
+                        ),
+                        Container(
+                          width: 120,
+                          height: 60,
+                          padding: EdgeInsets.all(2),
+                          margin: EdgeInsets.all(2),
+                          child: TimePicker(),
+                        ),
+                      ],
+                    ),
+                    Center(
+                      child: Container(
+                        child: ElevatedButton(
+                            style: ButtonStyle(
+                                backgroundColor: MaterialStateProperty.all(
+                                  Colors.black,
+                                ),
+                                padding: MaterialStateProperty.all(
+                                    const EdgeInsets.all(20)),
+                                textStyle: MaterialStateProperty.all(
+                                    const TextStyle(fontSize: 20))),
+                            child: const Text("Firmar"),
+                            onPressed: () {
+                              Get.to(const Signature());
+                            }),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
-            const SizedBox(
-              height: 50,
-            ),
-            TextField(
-              decoration: InputDecoration(
-                labelText: "Fecha Acuerdo",
-              ),
-            ),
-            TextFormField(
-              minLines: 4,
-              keyboardType: TextInputType.multiline,
-              maxLines: null,
-              decoration: const InputDecoration(
-                labelText: "Descripción del Problema",
-              ),
-            ),
-            const SizedBox(
-              height: 50,
-            ),
-            TextField(
-              decoration: InputDecoration(
-                labelText: "Direccion",
-              ),
-            ),
-            const SizedBox(
-              height: 50,
-            ),
-            TextFormField(
-              decoration: const InputDecoration(
-                labelText: "Observaciones",
-              ),
-            ),
-            const SizedBox(
-              height: 50,
-            ),
-            TextFormField(
-              minLines: 4,
-              keyboardType: TextInputType.multiline,
-              maxLines: null,
-              decoration: const InputDecoration(
-                labelText: "Actividades realizadas",
-              ),
-            ),
-            const SizedBox(
-              height: 50,
-            ),
-            TextField(
-              decoration: InputDecoration(
-                labelText: "Hora recepcion del Servicio",
-              ),
-            ),
-            const SizedBox(
-              height: 50,
-            ),
-            TextField(
-              decoration: InputDecoration(
-                labelText: "Hora de Llegada de Servicio",
-              ),
-            ),
-            const SizedBox(
-              height: 50,
-            ),
-            TextField(
-              decoration: InputDecoration(
-                labelText: "Acuerdo Firmado",
-              ),
-            ),
-            const SizedBox(
-              height: 50,
-            ),
-            TextField(
-              decoration: InputDecoration(
-                labelText: "Usuario Final",
-              ),
-            ),
-            const SizedBox(
-              height: 50,
-            ),
-            ElevatedButton(
-              onPressed: () {
-                Get.to(Signature());
-              },
-              child: const Text("Firmar"),
-            )
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
