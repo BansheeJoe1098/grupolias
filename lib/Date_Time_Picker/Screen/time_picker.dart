@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class TimePicker extends StatefulWidget {
-  TimePicker({Key? key}) : super(key: key);
+  const TimePicker({Key? key}) : super(key: key);
 
   @override
   State<TimePicker> createState() => _TimePickerState();
@@ -36,7 +36,7 @@ class _TimePickerState extends State<TimePicker> {
               onPressed: displayTimeDialog,
               child: Text(
                 selectedtime != null ? '$selectedtime' : '00:00',
-                style: TextStyle(
+                style: const TextStyle(
                     fontSize: 20,
                     fontStyle: FontStyle.italic,
                     color: Colors.black54,

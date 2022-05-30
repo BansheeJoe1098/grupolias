@@ -34,11 +34,11 @@ class _TicketdetallesState extends State<Ticketdetalles> {
       appBar: AppBar(
         title: Text(
           'Detalle del ${widget.titulo}',
-          style: TextStyle(fontStyle: FontStyle.italic),
+          style: const TextStyle(fontStyle: FontStyle.italic),
         ),
         backgroundColor: Colors.black,
         toolbarHeight: 80,
-        actions: [
+        actions: const [
           ImageIcon(
             AssetImage('assets/gpolias.png'),
             size: 80,
@@ -99,7 +99,7 @@ class _TicketdetallesState extends State<Ticketdetalles> {
                             fontSize: 20, fontWeight: FontWeight.bold),
                       ),
                       Text("${data?.fechaLlamada}",
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 15,
                           )),
                       const SizedBox(height: 20),
@@ -109,7 +109,7 @@ class _TicketdetallesState extends State<Ticketdetalles> {
                             fontSize: 20, fontWeight: FontWeight.bold),
                       ),
                       Text("${data?.numExpediente}",
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 15,
                           )),
                       const SizedBox(height: 10),
@@ -119,7 +119,7 @@ class _TicketdetallesState extends State<Ticketdetalles> {
                             fontSize: 20, fontWeight: FontWeight.bold),
                       ),
                       Text("${data?.ciudad}",
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 15,
                           )),
                       const SizedBox(height: 20),
@@ -129,7 +129,7 @@ class _TicketdetallesState extends State<Ticketdetalles> {
                             fontSize: 20, fontWeight: FontWeight.bold),
                       ),
                       Text("${data?.colonia}",
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 15,
                           )),
                       const SizedBox(height: 20),
@@ -139,10 +139,10 @@ class _TicketdetallesState extends State<Ticketdetalles> {
                             fontSize: 20, fontWeight: FontWeight.bold),
                       ),
                       Text("${data?.calle}",
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 15,
                           )),
-                      SizedBox(
+                      const SizedBox(
                         height: 25,
                       )
                     ],

@@ -1,10 +1,7 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 
 class DatePicker extends StatefulWidget {
-  DatePicker({Key? key}) : super(key: key);
+  const DatePicker({Key? key}) : super(key: key);
 
   @override
   State<DatePicker> createState() => _DatePickerState();
@@ -26,10 +23,11 @@ class _DatePickerState extends State<DatePicker> {
         fieldLabelText: 'Escriba Fecha',
         fieldHintText: 'Mes/Dia/Año',
         errorFormatText: 'Escriba una fecha');
-    if (picked != null && picked != selectedDate)
+    if (picked != null && picked != selectedDate) {
       setState(() {
         selectedDate = picked;
       });
+    }
   }
 
   @override
@@ -44,7 +42,7 @@ class _DatePickerState extends State<DatePicker> {
               child: Text(
                   "${selectedDate.month}/${selectedDate.day}/${selectedDate.year}"
                       .split(' ')[0],
-                  style: TextStyle(
+                  style: const TextStyle(
                       fontSize: 20,
                       fontStyle: FontStyle.italic,
                       color: Colors.black54,

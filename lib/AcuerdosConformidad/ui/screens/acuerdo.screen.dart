@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:grupolias/Cotizaciones/model/cotizacion.model.dart';
@@ -24,7 +22,7 @@ class _AcuerdoConformidadScreenState extends State<AcuerdoConformidadScreen> {
   late Ticket ticketDeCotizacion;
 
   ticketDeCotizacionById() async {
-    var service = new TicketService();
+    var service = TicketService();
     var ticket = await service.getTicketById(cotizacion.ticketId!);
     setState(() {
       ticketDeCotizacion = ticket;
@@ -44,7 +42,7 @@ class _AcuerdoConformidadScreenState extends State<AcuerdoConformidadScreen> {
       appBar: AppBar(
         title: const Text("Acuerdo Conformidad"),
         toolbarHeight: 80,
-        actions: [
+        actions: const [
           ImageIcon(
             AssetImage('assets/gpolias.png'),
             size: 80,
@@ -176,35 +174,33 @@ class _AcuerdoConformidadScreenState extends State<AcuerdoConformidadScreen> {
                         Container(
                           width: 120,
                           height: 60,
-                          padding: EdgeInsets.all(2),
-                          margin: EdgeInsets.all(2),
-                          child: DatePicker(),
+                          padding: const EdgeInsets.all(2),
+                          margin: const EdgeInsets.all(2),
+                          child: const DatePicker(),
                         ),
                         Container(
                           width: 120,
                           height: 60,
-                          padding: EdgeInsets.all(2),
-                          margin: EdgeInsets.all(2),
-                          child: TimePicker(),
+                          padding: const EdgeInsets.all(2),
+                          margin: const EdgeInsets.all(2),
+                          child: const TimePicker(),
                         ),
                       ],
                     ),
                     Center(
-                      child: Container(
-                        child: ElevatedButton(
-                            style: ButtonStyle(
-                                backgroundColor: MaterialStateProperty.all(
-                                  Colors.black,
-                                ),
-                                padding: MaterialStateProperty.all(
-                                    const EdgeInsets.all(20)),
-                                textStyle: MaterialStateProperty.all(
-                                    const TextStyle(fontSize: 20))),
-                            child: const Text("Firmar"),
-                            onPressed: () {
-                              Get.to(const Signature());
-                            }),
-                      ),
+                      child: ElevatedButton(
+                          style: ButtonStyle(
+                              backgroundColor: MaterialStateProperty.all(
+                                Colors.black,
+                              ),
+                              padding: MaterialStateProperty.all(
+                                  const EdgeInsets.all(20)),
+                              textStyle: MaterialStateProperty.all(
+                                  const TextStyle(fontSize: 20))),
+                          child: const Text("Firmar"),
+                          onPressed: () {
+                            Get.to(const Signature());
+                          }),
                     ),
                   ],
                 ),
