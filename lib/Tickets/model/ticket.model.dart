@@ -12,14 +12,14 @@ class Ticket {
     this.numExpediente,
     this.asistenciaVial,
     this.fechaLlamada,
-    this.nombreAsesorAseguradora,
     this.nombreAsesorGpoLias,
+    this.asesorId,
     this.nombreUsuarioFinal,
     this.tituloTicket,
     this.asistenciaId,
     this.aseguradoraId,
     this.problematica,
-    this.ciudad,
+    this.ciudadId,
     this.colonia,
     this.calle,
     this.numeroDomicilio,
@@ -52,14 +52,14 @@ class Ticket {
   String? numExpediente;
   bool? asistenciaVial;
   DateTime? fechaLlamada;
-  String? nombreAsesorAseguradora;
   String? nombreAsesorGpoLias;
+  int? asesorId;
   String? nombreUsuarioFinal;
   String? tituloTicket;
   int? asistenciaId;
   int? aseguradoraId;
   String? problematica;
-  String? ciudad;
+  int? ciudadId;
   String? colonia;
   String? calle;
   String? numeroDomicilio;
@@ -100,12 +100,10 @@ class Ticket {
         fechaLlamada: json["fecha_llamada"] == null
             ? null
             : DateTime.parse(json["fecha_llamada"]),
-        nombreAsesorAseguradora: json["nombre_asesor_aseguradora"] == null
-            ? null
-            : json["nombre_asesor_aseguradora"],
         nombreAsesorGpoLias: json["nombre_asesor_gpo_lias"] == null
             ? null
             : json["nombre_asesor_gpo_lias"],
+        asesorId: json["asesorId"] == null ? null : json["asesorId"],
         nombreUsuarioFinal: json["nombre_usuario_final"] == null
             ? null
             : json["nombre_usuario_final"],
@@ -117,7 +115,7 @@ class Ticket {
             json["aseguradoraId"] == null ? null : json["aseguradoraId"],
         problematica:
             json["problematica"] == null ? null : json["problematica"],
-        ciudad: json["ciudad"] == null ? null : json["ciudad"],
+        ciudadId: json["ciudadId"] == null ? null : json["ciudadId"],
         colonia: json["colonia"] == null ? null : json["colonia"],
         calle: json["calle"] == null ? null : json["calle"],
         numeroDomicilio:
@@ -137,9 +135,7 @@ class Ticket {
             json["costo_por_caseta"] == null ? null : json["costo_por_caseta"],
         total: json["total"] == null ? null : json["total"],
         anticipo: json["anticipo"] == null ? null : json["anticipo"],
-        horaCierre: json["hora_cierre"] == null
-            ? null
-            : DateTime.parse(json["hora_cierre"]),
+        horaCierre: json["hora_cierre"],
         casetas: json["casetas"] == null ? null : json["casetas"],
         costoGpoLias:
             json["costo_gpo_lias"] == null ? null : json["costo_gpo_lias"],
@@ -169,17 +165,16 @@ class Ticket {
         "asistencia_vial": asistenciaVial == null ? null : asistenciaVial,
         "fecha_llamada":
             fechaLlamada == null ? null : fechaLlamada?.toIso8601String(),
-        "nombre_asesor_aseguradora":
-            nombreAsesorAseguradora == null ? null : nombreAsesorAseguradora,
         "nombre_asesor_gpo_lias":
             nombreAsesorGpoLias == null ? null : nombreAsesorGpoLias,
+        "asesorId": asesorId == null ? null : asesorId,
         "nombre_usuario_final":
             nombreUsuarioFinal == null ? null : nombreUsuarioFinal,
         "titulo_ticket": tituloTicket == null ? null : tituloTicket,
         "asistenciaId": asistenciaId == null ? null : asistenciaId,
         "aseguradoraId": aseguradoraId == null ? null : aseguradoraId,
         "problematica": problematica == null ? null : problematica,
-        "ciudad": ciudad == null ? null : ciudad,
+        "ciudadId": ciudadId == null ? null : ciudadId,
         "colonia": colonia == null ? null : colonia,
         "calle": calle == null ? null : calle,
         "numero_domicilio": numeroDomicilio == null ? null : numeroDomicilio,

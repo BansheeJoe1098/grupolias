@@ -60,6 +60,7 @@ class _TicketdetallesState extends State<Ticketdetalles> {
                   }
 
                   Ticket? data = snapshot.data;
+                  controller.getCiudadByTicket(data!.ciudadId);
                   return Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -71,7 +72,7 @@ class _TicketdetallesState extends State<Ticketdetalles> {
                         ),
                       ),
                       Text(
-                        "${data?.tituloTicket}",
+                        "${data.tituloTicket}",
                         style: const TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.w300,
@@ -86,7 +87,7 @@ class _TicketdetallesState extends State<Ticketdetalles> {
                         ),
                       ),
                       Text(
-                        "${data?.problematica}",
+                        "${data.problematica}",
                         style: const TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.w300,
@@ -98,7 +99,7 @@ class _TicketdetallesState extends State<Ticketdetalles> {
                         style: TextStyle(
                             fontSize: 20, fontWeight: FontWeight.bold),
                       ),
-                      Text("${data?.fechaLlamada}",
+                      Text("${data.fechaLlamada}",
                           style: const TextStyle(
                             fontSize: 15,
                           )),
@@ -108,7 +109,7 @@ class _TicketdetallesState extends State<Ticketdetalles> {
                         style: TextStyle(
                             fontSize: 20, fontWeight: FontWeight.bold),
                       ),
-                      Text("${data?.numExpediente}",
+                      Text("${data.numExpediente}",
                           style: const TextStyle(
                             fontSize: 15,
                           )),
@@ -118,7 +119,7 @@ class _TicketdetallesState extends State<Ticketdetalles> {
                         style: TextStyle(
                             fontSize: 20, fontWeight: FontWeight.bold),
                       ),
-                      Text("${data?.ciudad}",
+                      Text("${controller.ciudad.value.nombre}",
                           style: const TextStyle(
                             fontSize: 15,
                           )),
@@ -128,7 +129,7 @@ class _TicketdetallesState extends State<Ticketdetalles> {
                         style: TextStyle(
                             fontSize: 20, fontWeight: FontWeight.bold),
                       ),
-                      Text("${data?.colonia}",
+                      Text("${data.colonia}",
                           style: const TextStyle(
                             fontSize: 15,
                           )),
@@ -138,7 +139,7 @@ class _TicketdetallesState extends State<Ticketdetalles> {
                         style: TextStyle(
                             fontSize: 20, fontWeight: FontWeight.bold),
                       ),
-                      Text("${data?.calle}",
+                      Text("${data.calle}",
                           style: const TextStyle(
                             fontSize: 15,
                           )),

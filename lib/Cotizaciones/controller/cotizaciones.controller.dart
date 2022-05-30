@@ -6,11 +6,13 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter/services.dart';
+import 'package:grupolias/Tickets/service/ticket.service.dart';
 
 import 'package:image_picker/image_picker.dart';
 
 import 'package:path_provider/path_provider.dart';
 
+import '../../AcuerdosConformidad/ui/screens/acuerdo.screen.dart';
 import '../model/cotizacion.model.dart';
 import '../service/cotizaciones.service.dart';
 
@@ -29,6 +31,7 @@ class CotizacionesController extends GetxController {
   var ticketId = 0.obs;
   var total = 0.0.obs;
   File? foto;
+  Rx<Cotizacion?> cotizacion = null.obs;
 
   Future<Cotizacion?> submit(BuildContext context) async {
     if (cotizacionFormKey.currentState!.validate() && foto != null) {
@@ -50,13 +53,22 @@ class CotizacionesController extends GetxController {
         tecnicoId: 1,
       );
 
-      // print(fotoPath.value + "\n");
-      // print(cot.toRawJson());
-
-      var service = CotizacionesService();
+      var cotizacionService = CotizacionesService();
+      var ticketService = TicketService();
       try {
-        var respuesta = await service.create(cot, foto!);
-        return respuesta;
+        var respuesta = await cotizacionService.create(cot, foto!);
+        if (respuesta != null) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('Cotización enviada'),
+            ),
+          );
+          await ticketService.setCotizado(ticketId.value);
+          Get.to(AcuerdoConformidadScreen(
+            cotizacion: respuesta,
+          ));
+          return respuesta;
+        }
       } catch (e) {
         printError(info: e.toString());
       }

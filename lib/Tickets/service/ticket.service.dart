@@ -21,4 +21,14 @@ class TicketService {
 
     return Ticket.fromRawJson(response.body);
   }
+
+  Future<Ticket> setCotizado(int idTicket) async {
+    final response = await http.patch(Uri.parse('$url/$idTicket'),
+        headers: {'Content-Type': 'application/json'},
+        body: json.encode({'estado': 'COTIZADO'}));
+
+    print(response.body);
+
+    return Ticket.fromRawJson(response.body);
+  }
 }
