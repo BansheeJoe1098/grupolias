@@ -6,7 +6,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter/services.dart';
-import 'package:grupolias/Tickets/service/ticket.service.dart';
+import 'package:GrupoLias/Tickets/service/ticket.service.dart';
 
 import 'package:image_picker/image_picker.dart';
 
@@ -16,7 +16,7 @@ import '../../AcuerdosConformidad/ui/screens/acuerdo.screen.dart';
 import '../model/cotizacion.model.dart';
 import '../service/cotizaciones.service.dart';
 
-import 'package:grupolias/Cotizaciones/model/cotizacion.model.dart';
+import 'package:GrupoLias/Cotizaciones/model/cotizacion.model.dart';
 
 class CotizacionesController extends GetxController {
   final cotizacionFormKey = GlobalKey<FormState>();

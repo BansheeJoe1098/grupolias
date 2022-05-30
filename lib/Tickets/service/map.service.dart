@@ -1,4 +1,4 @@
-import 'package:grupolias/Tickets/model/ticket.model.dart';
+import 'package:GrupoLias/Tickets/model/ticket.model.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class Mapita {

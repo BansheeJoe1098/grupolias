@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:grupolias/Tickets/service/ciudad.service.dart';
+import 'package:GrupoLias/Tickets/service/ciudad.service.dart';
 
 import '../model/ciudad.model.dart';
 import '../model/ticket.model.dart';

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:grupolias/Tickets/ui/screens/tickets.screen.dart';
-import 'package:grupolias/Perfil/ui/screens/perfil.dart';
+import 'package:GrupoLias/Tickets/ui/screens/tickets.screen.dart';
+import 'package:GrupoLias/Perfil/ui/screens/perfil.dart';
 
 class BasicBottomNavBar extends StatefulWidget {
   const BasicBottomNavBar({Key? key}) : super(key: key);

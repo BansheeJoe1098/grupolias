@@ -2,8 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:grupolias/AcuerdosConformidad/ui/screens/acuerdo.screen.dart';
-import 'package:grupolias/Cotizaciones/controller/cotizaciones.controller.dart';
+import 'package:GrupoLias/Cotizaciones/controller/cotizaciones.controller.dart';
+import 'package:GrupoLias/AcuerdosConformidad/ui/screens/acuerdo.screen.dart';
 
 class CotizacionesScreen extends StatefulWidget {
   const CotizacionesScreen({Key? key, required this.idTicket})
@@ -31,7 +31,7 @@ class _CotizacionesScreenState extends State<CotizacionesScreen> {
         title: const Text("Cotizacion"),
         backgroundColor: Colors.black,
         toolbarHeight: 80,
-        actions: const [
+        actions: [
           ImageIcon(
             AssetImage('assets/gpolias.png'),
             size: 150,
@@ -233,6 +233,18 @@ class _CotizacionesScreenState extends State<CotizacionesScreen> {
                     ),
                     const SizedBox(
                       height: 20,
+                    ),
+                    Row(
+                      children: <Widget>[
+                        Container(
+                          alignment: Alignment.center,
+                          child: ElevatedButton(
+                              child: const Text("Enviar"),
+                              onPressed: () {
+                                Get.to(const AcuerdoConformidad());
+                              }),
+                        )
+                      ],
                     ),
                   ],
                 ),

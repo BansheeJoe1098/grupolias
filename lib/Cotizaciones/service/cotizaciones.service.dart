@@ -1,7 +1,8 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
-import 'package:grupolias/Cotizaciones/model/cotizacion.model.dart';
+import 'package:GrupoLias/Cotizaciones/model/cotizacion.model.dart';
+import 'package:GrupoLias/GlobalModels/image.model.dart';
 import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:http_parser/http_parser.dart';

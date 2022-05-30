@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:grupolias/constants.dart';
+import 'package:GrupoLias/constants.dart';
 import 'package:http/http.dart' as http;
 
 import '../model/ticket.model.dart';

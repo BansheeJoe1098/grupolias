@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:grupolias/Cotizaciones/ui/screens/cotizaciones.screen.dart';
-import 'package:grupolias/Tickets/service/map.service.dart';
+import 'package:GrupoLias/Cotizaciones/ui/screens/cotizaciones.screen.dart';
+import 'package:GrupoLias/Tickets/service/map.service.dart';
 
 import '../../controller/ticket.controller.dart';
 
