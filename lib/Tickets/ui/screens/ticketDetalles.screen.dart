@@ -119,10 +119,14 @@ class _TicketdetallesState extends State<Ticketdetalles> {
                         style: TextStyle(
                             fontSize: 20, fontWeight: FontWeight.bold),
                       ),
-                      Text("${controller.ciudad.value.nombre}",
+                      Obx(
+                        () => Text(
+                          "${controller.ciudad.value.nombre}",
                           style: const TextStyle(
                             fontSize: 15,
-                          )),
+                          ),
+                        ),
+                      ),
                       const SizedBox(height: 20),
                       const Text(
                         "Colonia 🏡",

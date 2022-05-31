@@ -14,6 +14,7 @@ class CotizacionesService {
   String imagenesurl = '${Constants.API_URL}/imagenes';
 
   Future<Cotizacion?> create(Cotizacion cotizacion, File foto) async {
+    print(cotizacionurl);
     //Se sube la imagen con DIO
     var dio = Dio();
     dio.options.connectTimeout = 10000;

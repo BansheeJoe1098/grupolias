@@ -143,6 +143,7 @@ class CotizacionesController extends GetxController {
         var costMat = double.parse(costoMateriales);
         var costMano = double.parse(costoManoObra);
         total.value = (costMat + costMano);
+        total.value = total.value.toPrecision(2);
       } catch (e) {
         total.value = 0;
       }
