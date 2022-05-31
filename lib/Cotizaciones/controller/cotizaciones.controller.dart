@@ -12,7 +12,7 @@ import 'package:image_picker/image_picker.dart';
 
 import 'package:path_provider/path_provider.dart';
 
-import '../../AcuerdosConformidad/ui/screens/acuerdo.screen.dart';
+import '../../AcuerdosConformidad/ui/screens/acuerdo-conformidad.screen.dart';
 import '../model/cotizacion.model.dart';
 import '../service/cotizaciones.service.dart';
 
