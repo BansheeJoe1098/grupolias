@@ -1,8 +1,8 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
-import 'package:GrupoLias/Cotizaciones/model/cotizacion.model.dart';
-import 'package:GrupoLias/GlobalModels/image.model.dart';
+import 'package:grupoLias/Cotizaciones/model/cotizacion.model.dart';
+
 import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:http_parser/http_parser.dart';
@@ -14,7 +14,6 @@ class CotizacionesService {
   String imagenesurl = '${Constants.API_URL}/imagenes';
 
   Future<Cotizacion?> create(Cotizacion cotizacion, File foto) async {
-    print(cotizacionurl);
     //Se sube la imagen con DIO
     var dio = Dio();
     dio.options.connectTimeout = 10000;

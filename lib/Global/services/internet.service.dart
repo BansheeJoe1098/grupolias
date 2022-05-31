@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:grupolias/constants.dart';
+import 'package:grupoLias/constants.dart';
 
 class InternetService {
   Future<bool> checkConectionToServer() async {

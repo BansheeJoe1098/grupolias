@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:GrupoLias/Cotizaciones/model/cotizacion.model.dart';
-import 'package:GrupoLias/Signature_Form/ui/signature.dart';
-import 'package:GrupoLias/Tickets/model/ticket.model.dart';
-import 'package:GrupoLias/Tickets/service/ticket.service.dart';
-import 'package:GrupoLias/Date_Time_Picker/Screen/date_picker.dart';
-import 'package:GrupoLias/Date_Time_Picker/Screen/time_picker.dart';
+import 'package:grupoLias/Cotizaciones/model/cotizacion.model.dart';
+import 'package:grupoLias/Date_Time_Picker/Screen/date_picker.dart';
+import 'package:grupoLias/Date_Time_Picker/Screen/time_picker.dart';
+import 'package:grupoLias/Signature_Form/ui/signature.dart';
+import 'package:grupoLias/Tickets/model/ticket.model.dart';
+import 'package:grupoLias/Tickets/service/ticket.service.dart';
 
 class AcuerdoConformidadScreen extends StatefulWidget {
   final Cotizacion cotizacion;

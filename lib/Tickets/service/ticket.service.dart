@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:GrupoLias/constants.dart';
+import 'package:grupoLias/constants.dart';
 import 'package:http/http.dart' as http;
 
 import '../model/ticket.model.dart';
@@ -26,8 +26,6 @@ class TicketService {
     final response = await http.patch(Uri.parse('$url/$idTicket'),
         headers: {'Content-Type': 'application/json'},
         body: json.encode({'estado': 'COTIZADO'}));
-
-    print(response.body);
 
     return Ticket.fromRawJson(response.body);
   }

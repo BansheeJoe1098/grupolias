@@ -1,4 +1,4 @@
-import 'package:GrupoLias/constants.dart';
+import 'package:grupoLias/constants.dart';
 import 'package:http/http.dart' as http;
 
 import '../model/ciudad.model.dart';
