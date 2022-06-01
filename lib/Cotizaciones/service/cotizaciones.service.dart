@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:grupoLias/Cotizaciones/model/cotizacion.model.dart';
+import 'package:grupoLias/Cotizaciones/model/create-cotizacion.dto.dart';
 
 import 'dart:io';
 import 'package:http/http.dart' as http;
@@ -13,7 +14,7 @@ class CotizacionesService {
   String cotizacionurl = '${Constants.API_URL}/cotizaciones-tecnico';
   String imagenesurl = '${Constants.API_URL}/imagenes';
 
-  Future<Cotizacion?> create(Cotizacion cotizacion, File foto) async {
+  Future<Cotizacion?> create(CreateCotizacionDto cotizacion, File foto) async {
     //Se sube la imagen con DIO
     var dio = Dio();
     dio.options.connectTimeout = 10000;
@@ -34,7 +35,7 @@ class CotizacionesService {
 
     if (res.statusCode == 201) {
       cotizacion.preSolucionId = res.data!["id"];
-
+      print(cotizacion.toRawJson());
       var resCotizacion = await http.post(
         Uri.parse(cotizacionurl),
         body: cotizacion.toRawJson(),
@@ -42,6 +43,7 @@ class CotizacionesService {
           HttpHeaders.contentTypeHeader: 'application/json',
         },
       );
+
       if (resCotizacion.statusCode == 201) {
         return Cotizacion.fromJson(jsonDecode(resCotizacion.body));
       } else {
@@ -49,6 +51,25 @@ class CotizacionesService {
       }
     } else {
       throw Exception("Error al subir la imagen");
+    }
+  }
+
+  Future<List<Cotizacion>> cotizacionesByTecnico() async {
+    //TODO: Obtener el id del tecnico a partir de la sesion
+    var res = await http.get(
+      Uri.parse("$cotizacionurl/tecnico/${1}"),
+      headers: {
+        HttpHeaders.contentTypeHeader: 'application/json',
+      },
+    );
+
+    if (res.statusCode == 200) {
+      var cotizaciones = jsonDecode(res.body) as List<dynamic>;
+      return cotizaciones
+          .map((cotizacion) => Cotizacion.fromJson(cotizacion))
+          .toList();
+    } else {
+      throw Exception("Error al obtener las cotizaciones");
     }
   }
 }

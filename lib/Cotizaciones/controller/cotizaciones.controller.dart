@@ -6,13 +6,13 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter/services.dart';
+import 'package:grupoLias/Cotizaciones/model/create-cotizacion.dto.dart';
+import 'package:grupoLias/Cotizaciones/ui/screens/aprobacion-cotizacion.screen.dart';
 import 'package:grupoLias/Tickets/service/ticket.service.dart';
 
 import 'package:image_picker/image_picker.dart';
 
 import 'package:path_provider/path_provider.dart';
-
-import '../../AcuerdosConformidad/ui/screens/acuerdo-conformidad.screen.dart';
 import '../model/cotizacion.model.dart';
 import '../service/cotizaciones.service.dart';
 
@@ -39,7 +39,7 @@ class CotizacionesController extends GetxController {
         const SnackBar(content: Text('Enviando')),
       );
 
-      Cotizacion cot = Cotizacion(
+      CreateCotizacionDto cot = CreateCotizacionDto(
         diagnosticoProblema: diagnosticoProblema.text,
         solucionTecnico: solucionTecnico.text,
         fechaContacto: DateTime.now().toUtc(),
@@ -55,6 +55,7 @@ class CotizacionesController extends GetxController {
       var ticketService = TicketService();
       try {
         var respuesta = await cotizacionService.create(cot, foto!);
+
         if (respuesta != null) {
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
@@ -62,7 +63,7 @@ class CotizacionesController extends GetxController {
             ),
           );
           await ticketService.setCotizado(ticketId.value);
-          Get.to(AcuerdoConformidadScreen(
+          Get.to(AprobacionCotizacion(
             cotizacion: respuesta,
           ));
           return respuesta;

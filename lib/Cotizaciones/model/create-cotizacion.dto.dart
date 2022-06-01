@@ -6,9 +6,8 @@
 
 import 'dart:convert';
 
-class Cotizacion {
-  Cotizacion({
-    this.id,
+class CreateCotizacionDto {
+  CreateCotizacionDto({
     this.diagnosticoProblema,
     this.solucionTecnico,
     this.fechaContacto,
@@ -18,11 +17,8 @@ class Cotizacion {
     this.ticketId,
     this.tecnicoId,
     this.preSolucionId,
-    this.createdAt,
-    this.updatedAt,
   });
 
-  int? id;
   String? diagnosticoProblema;
   String? solucionTecnico;
   DateTime? fechaContacto;
@@ -32,16 +28,14 @@ class Cotizacion {
   int? ticketId;
   int? tecnicoId;
   int? preSolucionId;
-  DateTime? createdAt;
-  DateTime? updatedAt;
 
-  factory Cotizacion.fromRawJson(String str) =>
-      Cotizacion.fromJson(json.decode(str));
+  factory CreateCotizacionDto.fromRawJson(String str) =>
+      CreateCotizacionDto.fromJson(json.decode(str));
 
   String toRawJson() => json.encode(toJson());
 
-  factory Cotizacion.fromJson(Map<String, dynamic> json) => Cotizacion(
-        id: json["id"] == null ? null : json["id"],
+  factory CreateCotizacionDto.fromJson(Map<String, dynamic> json) =>
+      CreateCotizacionDto(
         diagnosticoProblema: json["diagnostico_problema"] == null
             ? null
             : json["diagnostico_problema"],
@@ -60,31 +54,19 @@ class Cotizacion {
         tecnicoId: json["tecnicoId"] == null ? null : json["tecnicoId"],
         preSolucionId:
             json["preSolucionId"] == null ? null : json["preSolucionId"],
-        createdAt: json["createdAt"] == null
-            ? null
-            : DateTime.parse(json["createdAt"]),
-        updatedAt: json["updatedAt"] == null
-            ? null
-            : DateTime.parse(json["updatedAt"]),
       );
 
   Map<String, dynamic> toJson() => {
-        "id": id == null ? null : id,
         "diagnostico_problema":
             diagnosticoProblema == null ? null : diagnosticoProblema,
         "solucion_tecnico": solucionTecnico == null ? null : solucionTecnico,
         "fecha_contacto":
             fechaContacto == null ? null : fechaContacto?.toIso8601String(),
-        "costo_mano_obra":
-            costoManoObra == null ? null : costoManoObra?.toDouble(),
-        "costo_materiales":
-            costoMateriales == null ? null : costoMateriales?.toDouble(),
-        "total_cotizacion":
-            totalCotizacion == null ? null : totalCotizacion?.toDouble(),
+        "costo_mano_obra": costoManoObra == null ? null : costoManoObra,
+        "costo_materiales": costoMateriales == null ? null : costoMateriales,
+        "total_cotizacion": totalCotizacion == null ? null : totalCotizacion,
         "ticketId": ticketId == null ? null : ticketId,
         "tecnicoId": tecnicoId == null ? null : tecnicoId,
         "preSolucionId": preSolucionId == null ? null : preSolucionId,
-        "createdAt": createdAt == null ? null : createdAt?.toIso8601String(),
-        "updatedAt": updatedAt == null ? null : updatedAt?.toIso8601String(),
       };
 }

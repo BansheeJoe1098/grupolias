@@ -16,6 +16,14 @@ class TicketService {
     return lista;
   }
 
+  Future<List<Ticket>> getByEstado(String estado) async {
+    final response = await http.get(Uri.parse("$url/estado/$estado"));
+    final jsonData = json.decode(response.body);
+    final lista =
+        List<Ticket>.from(jsonData.map((item) => Ticket.fromJson(item)));
+    return lista;
+  }
+
   Future<Ticket> getTicketById(int id) async {
     final response = await http.get(Uri.parse('$url/$id'));
 

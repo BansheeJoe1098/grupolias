@@ -74,7 +74,7 @@ class TicketsScreen extends StatelessWidget {
                       ),
                     ),
                     FutureBuilder<List<Ticket>>(
-                      future: TicketService().getAll(),
+                      future: TicketService().getByEstado("NUEVO"),
                       builder: (context, snapshot) {
                         if (snapshot.connectionState ==
                             ConnectionState.waiting) {

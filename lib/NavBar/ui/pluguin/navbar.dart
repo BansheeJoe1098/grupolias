@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:grupoLias/Perfil/ui/screens/perfil.dart';
+import 'package:grupoLias/Cotizaciones/ui/screens/tus-tickets.screen.dart';
 import 'package:grupoLias/Tickets/ui/screens/tickets.screen.dart';
 
 class BasicBottomNavBar extends StatefulWidget {
@@ -14,6 +15,7 @@ class _BasicBottomNavBarState extends State<BasicBottomNavBar> {
 
   static final List<Widget> _pages = <Widget>[
     TicketsScreen(),
+    const TusTicketsScreen(),
     const Perfil(),
   ];
 
@@ -32,12 +34,16 @@ class _BasicBottomNavBarState extends State<BasicBottomNavBar> {
       bottomNavigationBar: Container(
         margin: const EdgeInsets.all(8),
         child: BottomNavigationBar(
-          selectedItemColor: const Color.fromARGB(255, 40, 144, 214),
-          unselectedItemColor: Colors.black,
+          selectedItemColor: Colors.black,
+          unselectedItemColor: Colors.grey,
           items: const <BottomNavigationBarItem>[
             BottomNavigationBarItem(
-              icon: Icon(Icons.archive_outlined),
+              icon: Icon(Icons.search),
               label: 'Tickets Disponibles',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.confirmation_num_sharp),
+              label: 'Tus tickets',
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.person),

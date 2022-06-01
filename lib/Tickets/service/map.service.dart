@@ -18,10 +18,10 @@ class Mapita {
     Uri googleUrl = Uri.parse('google.navigation:q=$direccion&avoid=tf');
 
     if (await canLaunchUrl(googleUrl)) {
-      // await launchUrl(
-      //   googleUrl,
-      //   mode: LaunchMode.externalApplication,
-      // );
+      await launchUrl(
+        googleUrl,
+        mode: LaunchMode.externalApplication,
+      );
     } else {
       throw 'Could not open the map.';
     }

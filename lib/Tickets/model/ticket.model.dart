@@ -2,7 +2,7 @@
 //
 //     final ticket = ticketFromJson(jsonString);
 
-// ignore_for_file: prefer_if_null_operators, prefer_null_aware_operators
+// ignore_for_file: prefer_null_aware_operators, prefer_if_null_operators
 
 import 'dart:convert';
 
@@ -63,19 +63,19 @@ class Ticket {
   String? colonia;
   String? calle;
   String? numeroDomicilio;
-  int? banderazo;
-  int? totalSalida;
-  int? cobertura;
+  double? banderazo;
+  double? totalSalida;
+  double? cobertura;
   String? cotizacionGpoLias;
-  int? deducible;
+  double? deducible;
   int? kilometraje;
-  int? costoDeKilometraje;
-  int? costoPorCaseta;
-  int? total;
-  int? anticipo;
+  double? costoDeKilometraje;
+  double? costoPorCaseta;
+  double? total;
+  double? anticipo;
   DateTime? horaCierre;
   int? casetas;
-  int? costoGpoLias;
+  double? costoGpoLias;
   String? estado;
   String? numInterior;
   String? modeloCarro;
@@ -120,25 +120,34 @@ class Ticket {
         calle: json["calle"] == null ? null : json["calle"],
         numeroDomicilio:
             json["numero_domicilio"] == null ? null : json["numero_domicilio"],
-        banderazo: json["banderazo"] == null ? null : json["banderazo"],
-        totalSalida: json["total_salida"] == null ? null : json["total_salida"],
-        cobertura: json["cobertura"] == null ? null : json["cobertura"],
+        banderazo:
+            json["banderazo"] == null ? null : json["banderazo"].toDouble(),
+        totalSalida: json["total_salida"] == null
+            ? null
+            : json["total_salida"].toDouble(),
+        cobertura:
+            json["cobertura"] == null ? null : json["cobertura"].toDouble(),
         cotizacionGpoLias: json["cotizacion_gpo_lias"] == null
             ? null
             : json["cotizacion_gpo_lias"],
-        deducible: json["deducible"] == null ? null : json["deducible"],
+        deducible:
+            json["deducible"] == null ? null : json["deducible"].toDouble(),
         kilometraje: json["kilometraje"] == null ? null : json["kilometraje"],
         costoDeKilometraje: json["costo_de_kilometraje"] == null
             ? null
-            : json["costo_de_kilometraje"],
-        costoPorCaseta:
-            json["costo_por_caseta"] == null ? null : json["costo_por_caseta"],
-        total: json["total"] == null ? null : json["total"],
-        anticipo: json["anticipo"] == null ? null : json["anticipo"],
-        horaCierre: json["hora_cierre"],
+            : json["costo_de_kilometraje"].toDouble(),
+        costoPorCaseta: json["costo_por_caseta"] == null
+            ? null
+            : json["costo_por_caseta"].toDouble(),
+        total: json["total"] == null ? null : json["total"].toDouble(),
+        anticipo: json["anticipo"] == null ? null : json["anticipo"].toDouble(),
+        horaCierre: json["hora_cierre"] == null
+            ? null
+            : DateTime.parse(json["hora_cierre"]),
         casetas: json["casetas"] == null ? null : json["casetas"],
-        costoGpoLias:
-            json["costo_gpo_lias"] == null ? null : json["costo_gpo_lias"],
+        costoGpoLias: json["costo_gpo_lias"] == null
+            ? null
+            : json["costo_gpo_lias"].toDouble(),
         estado: json["estado"] == null ? null : json["estado"],
         numInterior: json["num_interior"] == null ? null : json["num_interior"],
         modeloCarro: json["modelo_carro"] == null ? null : json["modelo_carro"],
