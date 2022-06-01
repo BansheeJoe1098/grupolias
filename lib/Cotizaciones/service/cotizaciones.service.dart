@@ -35,7 +35,6 @@ class CotizacionesService {
 
     if (res.statusCode == 201) {
       cotizacion.preSolucionId = res.data!["id"];
-      print(cotizacion.toRawJson());
       var resCotizacion = await http.post(
         Uri.parse(cotizacionurl),
         body: cotizacion.toRawJson(),

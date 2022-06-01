@@ -235,20 +235,6 @@ class _CotizacionesScreenState extends State<CotizacionesScreen> {
                     const SizedBox(
                       height: 20,
                     ),
-                    Row(
-                      children: <Widget>[
-                        Container(
-                          alignment: Alignment.center,
-                          child: ElevatedButton(
-                              child: const Text("Enviar"),
-                              onPressed: () {
-                                Get.to(AprobacionCotizacion(
-                                  cotizacion: controller.cotizacion.value!,
-                                ));
-                              }),
-                        )
-                      ],
-                    ),
                   ],
                 ),
               ),

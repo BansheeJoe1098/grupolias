@@ -3,6 +3,8 @@ import 'package:get/get.dart';
 import 'package:grupoLias/Cotizaciones/controller/aprobacion-cotizacion.controller.dart';
 import 'package:grupoLias/Cotizaciones/model/cotizacion.model.dart';
 
+import '../../../AcuerdosConformidad/ui/screens/acuerdo-conformidad.screen.dart';
+
 class AprobacionCotizacion extends StatefulWidget {
   final Cotizacion cotizacion;
   const AprobacionCotizacion({Key? key, required this.cotizacion})
@@ -138,7 +140,15 @@ class _AprobacionCotizacionState extends State<AprobacionCotizacion> {
                   ],
                 ),
                 onPressed: null,
-              )
+              ),
+
+              ElevatedButton(
+                  onPressed: () {
+                    Get.to(AcuerdoConformidadScreen(
+                      cotizacion: controller.cotizacion.value,
+                    ));
+                  },
+                  child: Text("Conformidad"))
             ],
           ),
         ),
