@@ -18,6 +18,8 @@ class Cotizacion {
     this.ticketId,
     this.tecnicoId,
     this.preSolucionId,
+    this.isAprobado,
+    this.aprobadoPorUsuarioId,
     this.createdAt,
     this.updatedAt,
   });
@@ -32,6 +34,8 @@ class Cotizacion {
   int? ticketId;
   int? tecnicoId;
   int? preSolucionId;
+  bool? isAprobado;
+  int? aprobadoPorUsuarioId;
   DateTime? createdAt;
   DateTime? updatedAt;
 
@@ -50,16 +54,23 @@ class Cotizacion {
         fechaContacto: json["fecha_contacto"] == null
             ? null
             : DateTime.parse(json["fecha_contacto"]),
-        costoManoObra:
-            json["costo_mano_obra"] == null ? null : json["costo_mano_obra"],
-        costoMateriales:
-            json["costo_materiales"] == null ? null : json["costo_materiales"],
-        totalCotizacion:
-            json["total_cotizacion"] == null ? null : json["total_cotizacion"],
+        costoManoObra: json["costo_mano_obra"] == null
+            ? null
+            : json["costo_mano_obra"].toDouble(),
+        costoMateriales: json["costo_materiales"] == null
+            ? null
+            : json["costo_materiales"].toDouble(),
+        totalCotizacion: json["total_cotizacion"] == null
+            ? null
+            : json["total_cotizacion"].toDouble(),
         ticketId: json["ticketId"] == null ? null : json["ticketId"],
         tecnicoId: json["tecnicoId"] == null ? null : json["tecnicoId"],
         preSolucionId:
             json["preSolucionId"] == null ? null : json["preSolucionId"],
+        isAprobado: json["is_aprobado"] == null ? null : json["is_aprobado"],
+        aprobadoPorUsuarioId: json["aprobado_por_usuarioId"] == null
+            ? null
+            : json["aprobado_por_usuarioId"],
         createdAt: json["createdAt"] == null
             ? null
             : DateTime.parse(json["createdAt"]),
@@ -75,15 +86,15 @@ class Cotizacion {
         "solucion_tecnico": solucionTecnico == null ? null : solucionTecnico,
         "fecha_contacto":
             fechaContacto == null ? null : fechaContacto?.toIso8601String(),
-        "costo_mano_obra":
-            costoManoObra == null ? null : costoManoObra?.toDouble(),
-        "costo_materiales":
-            costoMateriales == null ? null : costoMateriales?.toDouble(),
-        "total_cotizacion":
-            totalCotizacion == null ? null : totalCotizacion?.toDouble(),
+        "costo_mano_obra": costoManoObra == null ? null : costoManoObra,
+        "costo_materiales": costoMateriales == null ? null : costoMateriales,
+        "total_cotizacion": totalCotizacion == null ? null : totalCotizacion,
         "ticketId": ticketId == null ? null : ticketId,
         "tecnicoId": tecnicoId == null ? null : tecnicoId,
         "preSolucionId": preSolucionId == null ? null : preSolucionId,
+        "is_aprobado": isAprobado == null ? null : isAprobado,
+        "aprobado_por_usuarioId":
+            aprobadoPorUsuarioId == null ? null : aprobadoPorUsuarioId,
         "createdAt": createdAt == null ? null : createdAt?.toIso8601String(),
         "updatedAt": updatedAt == null ? null : updatedAt?.toIso8601String(),
       };

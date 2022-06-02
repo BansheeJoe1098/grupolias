@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:grupoLias/AcuerdosConformidad/model/acuerdo-conformidad.model.dart';
 import 'package:grupoLias/Cotizaciones/controller/aprobacion-cotizacion.controller.dart';
 import 'package:grupoLias/Cotizaciones/model/cotizacion.model.dart';
+import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
 
 import '../../../AcuerdosConformidad/ui/screens/acuerdo-conformidad.screen.dart';
 
@@ -33,123 +35,118 @@ class _AprobacionCotizacionState extends State<AprobacionCotizacion> {
         backgroundColor: Colors.black,
         automaticallyImplyLeading: false,
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Center(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Icon(Icons.timer, size: 100),
-              const Text(
-                "Diagnóstico",
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Center(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Icon(Icons.timer, size: 100),
+                const Text(
+                  "Diagnóstico",
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
-              ),
-              const SizedBox(height: 10),
-              Text(
-                "Cotización ${cotizacion?.diagnosticoProblema}",
-                style: const TextStyle(fontSize: 20),
-              ),
-              const SizedBox(height: 10),
-              const Text(
-                "Solucion",
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
+                const SizedBox(height: 10),
+                Text(
+                  "Cotización ${cotizacion?.diagnosticoProblema}",
+                  style: const TextStyle(fontSize: 20),
                 ),
-              ),
-              Text(
-                "Solucion ${cotizacion?.solucionTecnico}",
-                style: const TextStyle(fontSize: 20),
-              ),
-              const SizedBox(height: 10),
-              const Text(
-                "Mano de obra",
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
+                const SizedBox(height: 10),
+                const Text(
+                  "Solucion",
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
-              ),
-              Text(
-                "${cotizacion?.costoManoObra}",
-                style: const TextStyle(fontSize: 20),
-              ),
-              const SizedBox(height: 10),
-              const Text(
-                "Materiales",
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
+                Text(
+                  "Solucion ${cotizacion?.solucionTecnico}",
+                  style: const TextStyle(fontSize: 20),
                 ),
-              ),
-              Text(
-                "${cotizacion?.costoMateriales}",
-                style: const TextStyle(fontSize: 20),
-              ),
-              const SizedBox(height: 10),
-              const Text(
-                "Total",
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
+                const SizedBox(height: 10),
+                const Text(
+                  "Mano de obra",
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
-              ),
-              Text(
-                "${cotizacion?.totalCotizacion}",
-                style: const TextStyle(fontSize: 20),
-              ),
-              const SizedBox(height: 30),
-              const Text(
-                "Tiempo transcurrido desde que se envio: ",
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
+                Text(
+                  "${cotizacion?.costoManoObra}",
+                  style: const TextStyle(fontSize: 20),
                 ),
-              ),
-              //Calculo de tiempo transcurrido
+                const SizedBox(height: 10),
+                const Text(
+                  "Materiales",
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Text(
+                  "${cotizacion?.costoMateriales}",
+                  style: const TextStyle(fontSize: 20),
+                ),
+                const SizedBox(height: 10),
+                const Text(
+                  "Total",
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Text(
+                  "${cotizacion?.totalCotizacion}",
+                  style: const TextStyle(fontSize: 20),
+                ),
+                const SizedBox(height: 30),
+                const Text(
+                  "Tiempo transcurrido desde que se envio: ",
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                //Calculo de tiempo transcurrido
 
-              Obx(
-                () => controller.minutos >= 10
-                    ? Text(
-                        "${controller.minutos} minutos",
-                        style: const TextStyle(fontSize: 20),
-                      )
-                    : Text(
-                        "${controller.tiempoTranscurridoMsg}",
-                        style: const TextStyle(fontSize: 20),
+                Obx(
+                  () => controller.minutos <= 10
+                      ? Text(
+                          "${controller.minutos} minutos",
+                          style: const TextStyle(
+                            fontSize: 20,
+                            color: Colors.green,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        )
+                      : Text(
+                          "${controller.tiempoTranscurridoMsg}",
+                          style: const TextStyle(
+                            fontSize: 20,
+                            color: Colors.red,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                ),
+                const SizedBox(height: 10),
+                // ignore: prefer_const_constructors
+                controller.cotizacion.value.isAprobado == false
+                    ? const Text("Esperando aprobación")
+                    : ElevatedButton(
+                        child: const Text("Realizar servicio"),
+                        onPressed: () {
+                          Get.to(
+                            AcuerdoConformidadScreen(
+                                cotizacion: controller.cotizacion.value),
+                          );
+                        },
                       ),
-              ),
-              const SizedBox(height: 10),
-              // ignore: prefer_const_constructors
-              MaterialButton(
-                minWidth: double.maxFinite,
-                height: 50,
-                color: Colors.black,
-                textColor: Colors.white,
-                disabledColor: Colors.grey,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: const [
-                    Icon(Icons.lock_clock),
-                    Text(
-                      "Esperando aprobacion",
-                      style: TextStyle(fontSize: 18),
-                    ),
-                  ],
-                ),
-                onPressed: null,
-              ),
-
-              ElevatedButton(
-                  onPressed: () {
-                    Get.to(AcuerdoConformidadScreen(
-                      cotizacion: controller.cotizacion.value,
-                    ));
-                  },
-                  child: Text("Conformidad"))
-            ],
+              ],
+            ),
           ),
         ),
       ),

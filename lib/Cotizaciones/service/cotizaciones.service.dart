@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
@@ -32,6 +34,7 @@ class CotizacionesService {
     });
 
     var res = await dio.post("$imagenesurl/upload", data: resFoto);
+    print(res.data);
 
     if (res.statusCode == 201) {
       cotizacion.preSolucionId = res.data!["id"];
@@ -42,6 +45,7 @@ class CotizacionesService {
           HttpHeaders.contentTypeHeader: 'application/json',
         },
       );
+      print(resCotizacion.body);
 
       if (resCotizacion.statusCode == 201) {
         return Cotizacion.fromJson(jsonDecode(resCotizacion.body));
@@ -67,6 +71,22 @@ class CotizacionesService {
       return cotizaciones
           .map((cotizacion) => Cotizacion.fromJson(cotizacion))
           .toList();
+    } else {
+      throw Exception("Error al obtener las cotizaciones");
+    }
+  }
+
+  Future<Cotizacion?> statusCotizacion(int idCotizacion) async {
+    var url = '$cotizacionurl/$idCotizacion/status';
+    var res = await http.get(
+      Uri.parse(url),
+      headers: {
+        HttpHeaders.contentTypeHeader: 'application/json',
+      },
+    );
+
+    if (res.statusCode == 200) {
+      return Cotizacion.fromJson(jsonDecode(res.body));
     } else {
       throw Exception("Error al obtener las cotizaciones");
     }
