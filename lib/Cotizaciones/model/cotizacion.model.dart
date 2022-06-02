@@ -2,7 +2,7 @@
 //
 //     final cotizacion = cotizacionFromJson(jsonString);
 
-// ignore_for_file: prefer_null_aware_operators, prefer_if_null_operators
+// ignore_for_file: prefer_if_null_operators, prefer_null_aware_operators
 
 import 'dart:convert';
 
@@ -67,7 +67,7 @@ class Cotizacion {
         tecnicoId: json["tecnicoId"] == null ? null : json["tecnicoId"],
         preSolucionId:
             json["preSolucionId"] == null ? null : json["preSolucionId"],
-        isAprobado: json["is_aprobado"] == null ? null : json["is_aprobado"],
+        isAprobado: json["isAprobado"] == null ? null : json["isAprobado"],
         aprobadoPorUsuarioId: json["aprobado_por_usuarioId"] == null
             ? null
             : json["aprobado_por_usuarioId"],
@@ -92,7 +92,7 @@ class Cotizacion {
         "ticketId": ticketId == null ? null : ticketId,
         "tecnicoId": tecnicoId == null ? null : tecnicoId,
         "preSolucionId": preSolucionId == null ? null : preSolucionId,
-        "is_aprobado": isAprobado == null ? null : isAprobado,
+        "isAprobado": isAprobado == null ? null : isAprobado,
         "aprobado_por_usuarioId":
             aprobadoPorUsuarioId == null ? null : aprobadoPorUsuarioId,
         "createdAt": createdAt == null ? null : createdAt?.toIso8601String(),

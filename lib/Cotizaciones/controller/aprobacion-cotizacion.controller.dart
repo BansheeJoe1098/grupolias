@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:get/get.dart';
-import 'package:grupoLias/AcuerdosConformidad/model/acuerdo-conformidad.model.dart';
 import 'package:grupoLias/Cotizaciones/model/cotizacion.model.dart';
 import 'package:grupoLias/Cotizaciones/service/cotizaciones.service.dart';
 
@@ -12,9 +11,11 @@ class AprobacionCotizacionController extends GetxController {
   Rx<int> minutos = 0.obs;
 
   void calculoTiempoTranscurrido() async {
+    int mins =
+        (DateTime.now().difference(cotizacion.value.createdAt!).inMinutes);
+    tiempoTranscurridoMsg.value = "$mins minutos";
     Timer.periodic(const Duration(seconds: 30), (timer) {
       checkEstadoCotizacion();
-      print(cotizacion.value.isAprobado);
       int mins =
           (DateTime.now().difference(cotizacion.value.createdAt!).inMinutes);
       if (mins > 1) {
@@ -30,13 +31,8 @@ class AprobacionCotizacionController extends GetxController {
     try {
       var resCotizacion = await CotizacionesService().statusCotizacion(idCot);
       cotizacion.value = resCotizacion!;
-      ;
     } catch (e) {
       print(e);
-    }
-
-    if (cotizacion.value.isAprobado == true) {
-      Get.off(AcuerdoConformidad(), arguments: cotizacion.value);
     }
   }
 }
