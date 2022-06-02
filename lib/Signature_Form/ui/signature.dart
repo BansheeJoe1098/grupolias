@@ -44,7 +44,7 @@ class _SignatureState extends State<Signature> {
                   ElevatedButton(
                     child: const Text("Confirmar"),
                     style: ElevatedButton.styleFrom(
-                        primary: const Color.fromARGB(255, 40, 144, 214),
+                        primary: Colors.black,
                         onPrimary: Colors.white,
                         textStyle: const TextStyle(
                             color: Colors.white,
@@ -69,8 +69,8 @@ class _SignatureState extends State<Signature> {
                         final String path =
                             (await getApplicationSupportDirectory()).path;
                         final String fileName = Platform.isWindows
-                            ? '$path\\Output.png'
-                            : '$path/Output.png';
+                            ? '$path\\Firma.png'
+                            : '$path/Firma.png';
                         final File file = File(fileName);
                         await file.writeAsBytes(imageBytes, flush: true);
                         OpenFile.open(fileName);
@@ -79,7 +79,7 @@ class _SignatureState extends State<Signature> {
                   ),
                   ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                          primary: const Color.fromARGB(255, 40, 144, 214),
+                          primary: Colors.black,
                           onPrimary: Colors.white,
                           textStyle: const TextStyle(
                               color: Colors.black,

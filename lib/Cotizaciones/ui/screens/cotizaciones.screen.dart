@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:grupoLias/AcuerdosConformidad/ui/screens/acuerdo-conformidad.screen.dart';
+import 'package:grupoLias/AcuerdosConformidad/ui/screens/acuerdo.screen.dart';
 import 'package:grupoLias/Cotizaciones/controller/cotizaciones.controller.dart';
 import 'package:grupoLias/Cotizaciones/ui/screens/aprobacion-cotizacion.screen.dart';
 
@@ -43,7 +43,7 @@ class _CotizacionesScreenState extends State<CotizacionesScreen> {
         message: "Enviar Cotización",
         child: FloatingActionButton(
           child: const Icon(Icons.send),
-          backgroundColor: const Color.fromARGB(255, 40, 144, 214),
+          backgroundColor: Colors.black,
           onPressed: () {
             controller.submit(context);
           },
