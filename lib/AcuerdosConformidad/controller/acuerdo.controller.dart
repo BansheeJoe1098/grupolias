@@ -17,8 +17,6 @@ class AcuerdosController extends GetxController {
   final acuerdoFormKey = GlobalKey<FormState>();
 
   var observaciones = TextEditingController();
-  var fechaacuerdo = TextEditingController();
-  var horareepcion = TextEditingController();
 
   File? foto;
   Rx<AcuerdoConformidad?> cotizacion = null.obs;

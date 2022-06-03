@@ -22,15 +22,13 @@ class AcuerdoConformidadScreen extends StatefulWidget {
 class _AcuerdoConformidadScreenState extends State<AcuerdoConformidadScreen> {
   late Cotizacion? cotizacion;
   final acuerdoFormKey = GlobalKey<FormState>();
-  final controller = Get.put(AprobacionCotizacionController());
-  final controllerA = Get.put(AcuerdosController());
+
+  final controller = Get.put(AcuerdosController());
   late int idTicket;
   @override
   void initState() {
     super.initState();
     cotizacion = widget.cotizacion;
-    controller.cotizacion.value = cotizacion!;
-    controller.calculoTiempoTranscurrido();
   }
 
   @override
@@ -54,7 +52,8 @@ class _AcuerdoConformidadScreenState extends State<AcuerdoConformidadScreen> {
           child: const Icon(Icons.send),
           backgroundColor: Colors.black,
           onPressed: () {
-            Get.to(Signature());
+            Get.to(const Signature());
+            //controller.submit(context);
           },
         ),
       ),
@@ -123,10 +122,16 @@ class _AcuerdoConformidadScreenState extends State<AcuerdoConformidadScreen> {
                     ),
                   ),
                   TextFormField(
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return 'Por favor ingrese una observacion';
+                      }
+                      return null;
+                    },
                     maxLines: 5,
                     textAlignVertical: TextAlignVertical.top,
                     autovalidateMode: AutovalidateMode.onUserInteraction,
-                    controller: controllerA.observaciones,
+                    controller: controller.observaciones,
                     decoration: const InputDecoration(
                       labelText: 'Diagnostico del problema ',
                       hintText:

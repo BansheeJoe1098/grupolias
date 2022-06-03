@@ -33,7 +33,7 @@ class _SignatureState extends State<Signature> {
                     borderRadius: const BorderRadius.all(Radius.circular(8))),
                 child: SfSignaturePad(
                   key: signaturePadKey,
-                  backgroundColor: Colors.transparent,
+                  backgroundColor: Color.fromARGB(255, 255, 255, 255),
                   strokeColor: Colors.black,
                   minimumStrokeWidth: 2.0,
                   maximumStrokeWidth: 4.0,
