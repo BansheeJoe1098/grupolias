@@ -37,4 +37,12 @@ class TicketService {
 
     return Ticket.fromRawJson(response.body);
   }
+
+  Future<Ticket> setACerrar(int idTicket) async {
+    final response = await http.patch(Uri.parse('$url/$idTicket'),
+        headers: {'Content-Type': 'application/json'},
+        body: json.encode({'estado': 'A CERRAR'}));
+
+    return Ticket.fromRawJson(response.body);
+  }
 }

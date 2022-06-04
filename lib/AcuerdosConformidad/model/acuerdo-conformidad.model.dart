@@ -6,6 +6,10 @@
 
 import 'dart:convert';
 
+// To parse this JSON data, do
+//
+//     final cotizacion = cotizacionFromJson(jsonString);
+
 class AcuerdoConformidad {
   AcuerdoConformidad({
     this.id,
@@ -21,6 +25,7 @@ class AcuerdoConformidad {
     this.horaFinalizacionServicio,
     this.acuerdoFirmado,
     this.usuarioFinalId,
+    this.ticketId,
     this.createdAt,
     this.updatedAt,
   });
@@ -38,6 +43,7 @@ class AcuerdoConformidad {
   DateTime? horaFinalizacionServicio;
   String? acuerdoFirmado;
   int? usuarioFinalId;
+  int? ticketId;
   DateTime? createdAt;
   DateTime? updatedAt;
 
@@ -76,6 +82,7 @@ class AcuerdoConformidad {
             json["acuerdo_firmado"] == null ? null : json["acuerdo_firmado"],
         usuarioFinalId:
             json["usuarioFinalId"] == null ? null : json["usuarioFinalId"],
+        ticketId: json["ticketId"] == null ? null : json["ticketId"],
         createdAt: json["createdAt"] == null
             ? null
             : DateTime.parse(json["createdAt"]),
@@ -107,6 +114,7 @@ class AcuerdoConformidad {
             : horaFinalizacionServicio?.toIso8601String(),
         "acuerdo_firmado": acuerdoFirmado == null ? null : acuerdoFirmado,
         "usuarioFinalId": usuarioFinalId == null ? null : usuarioFinalId,
+        "ticketId": ticketId == null ? null : ticketId,
         "createdAt": createdAt == null ? null : createdAt?.toIso8601String(),
         "updatedAt": updatedAt == null ? null : updatedAt?.toIso8601String(),
       };

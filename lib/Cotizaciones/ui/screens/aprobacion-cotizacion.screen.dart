@@ -4,7 +4,7 @@ import 'package:grupoLias/AcuerdosConformidad/model/acuerdo-conformidad.model.da
 import 'package:grupoLias/Cotizaciones/controller/aprobacion-cotizacion.controller.dart';
 import 'package:grupoLias/Cotizaciones/model/cotizacion.model.dart';
 
-import 'package:grupoLias/AcuerdosConformidad/ui/screens/acuerdo.screen.dart';
+import 'package:grupoLias/AcuerdosConformidad/ui/screens/acuerdo-conformidad.screen.dart';
 
 class AprobacionCotizacion extends StatefulWidget {
   final Cotizacion cotizacion;

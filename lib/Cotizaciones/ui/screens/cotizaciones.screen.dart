@@ -2,9 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:grupoLias/AcuerdosConformidad/ui/screens/acuerdo.screen.dart';
+
 import 'package:grupoLias/Cotizaciones/controller/cotizaciones.controller.dart';
-import 'package:grupoLias/Cotizaciones/ui/screens/aprobacion-cotizacion.screen.dart';
 
 class CotizacionesScreen extends StatefulWidget {
   const CotizacionesScreen({Key? key, required this.idTicket})

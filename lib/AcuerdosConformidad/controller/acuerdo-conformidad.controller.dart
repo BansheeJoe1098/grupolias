@@ -5,60 +5,92 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:grupoLias/AcuerdosConformidad/model/acuerdo-conformidad.dto.dart';
 import 'package:grupoLias/AcuerdosConformidad/model/acuerdo-conformidad.model.dart';
-import 'package:grupoLias/AcuerdosConformidad/service/acuerdo-conformidad.service.dart';
+import 'package:grupoLias/Signature_Form/ui/signature.dart';
 import 'package:grupoLias/Tickets/service/ticket.service.dart';
 
-class AcuerdosController extends GetxController {
+import '../../Cotizaciones/model/cotizacion.model.dart';
+import '../../Tickets/model/ticket.model.dart';
+import '../service/acuerdo-conformidad.service.dart';
+
+class AcuerdoConformidadController extends GetxController {
+  late Cotizacion cotizacion;
+  late Ticket ticket;
   final acuerdoFormKey = GlobalKey<FormState>();
 
   var observaciones = TextEditingController();
-  var fechaAcuerdo = TextEditingController();
-  var horaRecepcion = TextEditingController();
 
   File? foto;
-  Rx<AcuerdoConformidad?> cotizacion = null.obs;
+  Rx<AcuerdoConformidad?> acuerdo = null.obs;
 
   Future<AcuerdoConformidad?> submit(BuildContext context) async {
-    if (acuerdoFormKey.currentState!.validate() && foto != null) {
+    if (acuerdoFormKey.currentState!.validate()) {
       acuerdoFormKey.currentState!.save();
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Enviado')),
       );
-      CreateAcuerdoConformidadDto cot = CreateAcuerdoConformidadDto(
+      AcuerdoDto acuerdoDTO = AcuerdoDto(
+        descripcionProblema: cotizacion.diagnosticoProblema,
+        actividadesRealizadas: cotizacion.solucionTecnico,
+        horaFinalizacionServicio: DateTime.now().toUtc(),
         observaciones: observaciones.text,
+        horaRecepcionServicio: ticket.createdAt,
+        horaLlegadaServicio: cotizacion.createdAt,
         fechaAcuerdo: DateTime.now().toUtc(),
-        usuarioFinalId: 1,
+        acuerdoFirmado:
+            "FALTA FIRMA DESDE FLUTTER", //TODO: Acomodar la vaina de la firma
+        ticketId: ticket.id,
+        usuarioFinalId: 1, //TODO: Cambiar por el usuario final
+        direccion: ticket.calle!.toString() +
+            ' ' +
+            ticket.numeroDomicilio!.toString() +
+            ' ' +
+            ticket.colonia!.toString(),
       );
-      var acuerdoService = AcuerdoService();
-      var ticketService = TicketService();
+      var service = AcuerdoService();
+      var acuerdo = await service.create(acuerdoDTO);
 
-      try {
-        var respuesta = await acuerdoService.create(cot, foto!);
+      print(acuerdo!.toRawJson());
 
-        if (respuesta != null) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text('Acuerdo enviada'),
-            ),
-          );
+      // Get.to(() => Signature(
+      //       acuerdoDto: acuerdoDTO,
+      //     ));
+      // var acuerdoService = AcuerdoService();
+      // var ticketService = TicketService();
 
-          Get.to(AcuerdoConformidad());
+      // try {
+      //   var respuesta = await acuerdoService.create(cot, foto!);
 
-          return respuesta;
-        }
-      } catch (e) {
-        printError(info: e.toString());
-      }
-      String? validadorTextArea(String? value) {
-        var tamano = value?.length;
-        if (tamano! < 20) {
-          return 'Faltan ${20 - tamano} caracteres para tener una buena descripcion';
-        }
-        if (value!.isEmpty) {
-          return 'Este campo es requerido';
-        }
-        return null;
-      }
+      //   if (respuesta != null) {
+      //     ScaffoldMessenger.of(context).showSnackBar(
+      //       const SnackBar(
+      //         content: Text('Acuerdo enviada'),
+      //       ),
+      //     );
+
+      //     Get.to(AcuerdoConformidad());
+
+      //     return respuesta;
+      //   }
+      // } catch (e) {
+      //   printError(info: e.toString());
+      // }
     }
+  }
+
+  String? validadorTextArea(String? value) {
+    var tamano = value?.length;
+    if (tamano! < 20) {
+      return 'Faltan ${20 - tamano} caracteres para tener una buena descripcion';
+    }
+    if (value!.isEmpty) {
+      return 'Este campo es requerido';
+    }
+    return null;
+  }
+
+  void getTicketAcuerdo() async {
+    TicketService service = TicketService();
+    var ticket = await service.getTicketById(cotizacion.ticketId!);
+    this.ticket = ticket;
   }
 }

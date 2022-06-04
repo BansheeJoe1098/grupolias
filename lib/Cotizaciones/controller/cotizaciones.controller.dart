@@ -6,7 +6,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter/services.dart';
-import 'package:grupoLias/AcuerdosConformidad/ui/screens/acuerdo.screen.dart';
+import 'package:grupoLias/AcuerdosConformidad/ui/screens/acuerdo-conformidad.screen.dart';
 import 'package:grupoLias/Cotizaciones/model/create-cotizacion.dto.dart';
 import 'package:grupoLias/Cotizaciones/ui/screens/aprobacion-cotizacion.screen.dart';
 import 'package:grupoLias/Tickets/service/ticket.service.dart';

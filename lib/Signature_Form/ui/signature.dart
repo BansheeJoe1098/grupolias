@@ -1,6 +1,7 @@
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
+import 'package:grupoLias/AcuerdosConformidad/model/acuerdo-conformidad.model.dart';
 import 'dart:io';
 import 'dart:ui' as ui;
 import 'dart:convert';
@@ -11,7 +12,8 @@ import 'package:universal_html/html.dart' show AnchorElement;
 import 'package:flutter/foundation.dart' show kIsWeb;
 
 class Signature extends StatefulWidget {
-  const Signature({Key? key}) : super(key: key);
+  final AcuerdoConformidad acuerdoDto;
+  const Signature({Key? key, required this.acuerdoDto}) : super(key: key);
 
   @override
   State<Signature> createState() => _SignatureState();
@@ -19,6 +21,14 @@ class Signature extends StatefulWidget {
 
 class _SignatureState extends State<Signature> {
   GlobalKey<SfSignaturePadState> signaturePadKey = GlobalKey();
+  late AcuerdoConformidad acuerdoDto;
+
+  @override
+  void initState() {
+    super.initState();
+    acuerdoDto = widget.acuerdoDto;
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
