@@ -26,7 +26,7 @@ class AcuerdoConformidadController extends GetxController {
     if (acuerdoFormKey.currentState!.validate()) {
       acuerdoFormKey.currentState!.save();
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Enviado')),
+        const SnackBar(content: Text('Enviando')),
       );
       AcuerdoDto acuerdoDTO = AcuerdoDto(
         descripcionProblema: cotizacion.diagnosticoProblema,
@@ -51,29 +51,39 @@ class AcuerdoConformidadController extends GetxController {
 
       print(acuerdo!.toRawJson());
 
-      // Get.to(() => Signature(
-      //       acuerdoDto: acuerdoDTO,
-      //     ));
-      // var acuerdoService = AcuerdoService();
-      // var ticketService = TicketService();
+      var respuesta = await service.create(acuerdoDTO);
 
-      // try {
-      //   var respuesta = await acuerdoService.create(cot, foto!);
+      if (respuesta != null) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Acuerdo enviada'),
+          ),
+        );
 
-      //   if (respuesta != null) {
-      //     ScaffoldMessenger.of(context).showSnackBar(
-      //       const SnackBar(
-      //         content: Text('Acuerdo enviada'),
-      //       ),
-      //     );
+        // Get.to(() => Signature(
+        //      acuerdoDto: acuerdoDTO
+        // ));
+        // var acuerdoService = AcuerdoService();
+        // var ticketService = TicketService();
 
-      //     Get.to(AcuerdoConformidad());
+        // try {
+        //   var respuesta = await acuerdoService.create(cot, foto!);
 
-      //     return respuesta;
-      //   }
-      // } catch (e) {
-      //   printError(info: e.toString());
-      // }
+        //   if (respuesta != null) {
+        //     ScaffoldMessenger.of(context).showSnackBar(
+        //       const SnackBar(
+        //         content: Text('Acuerdo enviada'),
+        //       ),
+        //     );
+
+        //     Get.to(AcuerdoConformidad());
+
+        //     return respuesta;
+        //   }
+        // } catch (e) {
+        //   printError(info: e.toString());
+        // }
+      }
     }
   }
 

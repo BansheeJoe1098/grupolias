@@ -19,6 +19,12 @@ class _TusTicketsScreenState extends State<TusTicketsScreen> {
         title: const Text('Tus Tickets'),
         backgroundColor: Colors.black,
         automaticallyImplyLeading: false,
+        actions: const [
+          ImageIcon(
+            AssetImage('assets/gpolias.png'),
+            size: 80,
+          ),
+        ],
       ),
       body: FutureBuilder<List<Cotizacion>>(
         future: CotizacionesService().cotizacionesByTecnico(),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:grupoLias/Cotizaciones/model/cotizacion.model.dart';
+
 import '../../controller/acuerdo-conformidad.controller.dart';
 
 class AcuerdoConformidadScreen extends StatefulWidget {

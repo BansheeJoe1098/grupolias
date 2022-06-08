@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:grupoLias/Signature_Form/ui/signature.dart';
 
 class Perfil extends StatelessWidget {
   const Perfil({Key? key}) : super(key: key);
@@ -17,15 +19,11 @@ class Perfil extends StatelessWidget {
           ),
         ),
         backgroundColor: Colors.black,
-        toolbarHeight: 100,
-        shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(30),
-                bottomRight: Radius.circular(30))),
+        toolbarHeight: 80,
         actions: const <Widget>[
           ImageIcon(
             AssetImage('assets/gpolias.png'),
-            size: 150,
+            size: 100,
           ),
         ],
       ),
@@ -107,6 +105,14 @@ class Perfil extends StatelessWidget {
                 ),
               ],
             ),
+            const SizedBox(
+              height: 10.0,
+            ),
+            ElevatedButton(
+                onPressed: () async {
+                  Get.to(Signature());
+                },
+                child: const Text('Firma'))
           ],
         ),
       ),

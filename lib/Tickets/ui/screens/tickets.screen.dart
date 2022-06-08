@@ -15,14 +15,6 @@ class TicketsScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        title: const Text(
-          'GRUPO LIAS',
-          style: TextStyle(
-            fontStyle: FontStyle.italic,
-            fontSize: 25.0,
-            letterSpacing: 2.0,
-          ),
-        ),
         backgroundColor: Colors.black,
         toolbarHeight: 50,
         actions: const [

@@ -34,7 +34,7 @@ class _CotizacionesScreenState extends State<CotizacionesScreen> {
         actions: const [
           ImageIcon(
             AssetImage('assets/gpolias.png'),
-            size: 150,
+            size: 100,
           ),
         ],
       ),

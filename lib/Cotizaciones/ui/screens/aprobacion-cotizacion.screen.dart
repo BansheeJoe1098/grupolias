@@ -33,6 +33,12 @@ class _AprobacionCotizacionState extends State<AprobacionCotizacion> {
         title: const Text("A espera de aprobación"),
         backgroundColor: Colors.black,
         automaticallyImplyLeading: false,
+        actions: const [
+          ImageIcon(
+            AssetImage('assets/gpolias.png'),
+            size: 80,
+          ),
+        ],
       ),
       body: SingleChildScrollView(
         child: Padding(

@@ -4,7 +4,7 @@ class Constants {
   // NGROK AZURE
   //static const String API_URL = 'https://1c4d-40-83-169-185.ngrok.io';
   // IP Azure
-  //static const String API_URL = 'http://40.83.169.185:4000';
+  static const String API_URL = 'http://40.83.169.185:4000';
   //LOCAL
-  static const String API_URL = 'http://10.27.62.38:4000';
+  //static const String API_URL = 'http://10.27.62.38:4000';
 }
