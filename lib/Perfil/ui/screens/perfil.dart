@@ -105,12 +105,6 @@ class Perfil extends StatelessWidget {
                 ),
               ],
             ),
-<<<<<<< HEAD
-            const SizedBox(
-              height: 10.0,
-            ),
-=======
->>>>>>> main
           ],
         ),
       ),

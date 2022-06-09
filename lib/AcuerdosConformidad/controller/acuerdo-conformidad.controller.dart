@@ -20,7 +20,7 @@ class AcuerdoConformidadController extends GetxController {
   var observaciones = TextEditingController();
 
   File? fotofirma;
-  Rx<AcuerdoConformidad?> acuerdo = null.obs;
+  late Rx<AcuerdoConformidad?> acuerdo;
 
   Future<AcuerdoConformidad?> submit(BuildContext context) async {
     if (acuerdoFormKey.currentState!.validate()) {
@@ -46,12 +46,18 @@ class AcuerdoConformidadController extends GetxController {
             ' ' +
             ticket.colonia!.toString(),
       );
+
       var service = AcuerdoService();
-      var acuerdo = await service.create(acuerdoDTO, fotofirma!);
-
-      print(acuerdo!.toRawJson());
-
       var respuesta = await service.create(acuerdoDTO);
+
+      if (respuesta != null) {
+        Get.to(() => Signature(acuerdoDto: respuesta));
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Error al enviar')),
+        );
+        return null;
+      }
 
       if (respuesta != null) {
         ScaffoldMessenger.of(context).showSnackBar(
@@ -60,7 +66,6 @@ class AcuerdoConformidadController extends GetxController {
           ),
         );
 
-        Get.to(() => Signature(acuerdoDto: acuerdo));
         // var acuerdoService = AcuerdoService();
         // var ticketService = TicketService();
 

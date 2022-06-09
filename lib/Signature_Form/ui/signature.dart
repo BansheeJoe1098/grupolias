@@ -1,22 +1,13 @@
-import 'dart:typed_data';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/state_manager.dart';
-import 'package:grupoLias/AcuerdosConformidad/controller/aprobacion-acuerdo.controller.dart';
+
 import 'package:grupoLias/AcuerdosConformidad/model/acuerdo-conformidad.model.dart';
-import 'dart:io';
-import 'dart:ui' as ui;
-import 'dart:convert';
-import 'package:open_file/open_file.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:syncfusion_flutter_signaturepad/signaturepad.dart';
-import 'package:universal_html/html.dart' show AnchorElement;
-import 'package:flutter/foundation.dart' show kIsWeb;
-import 'package:grupoLias/AcuerdosConformidad/controller/acuerdo-conformidad.controller.dart';
+
+import '../controller/signature-panel.controller.dart';
 
 class Signature extends StatefulWidget {
-  final AcuerdoConformidad acuerdoDto;
+  final AcuerdoConformidad? acuerdoDto;
   const Signature({Key? key, required this.acuerdoDto}) : super(key: key);
 
   @override
@@ -25,13 +16,12 @@ class Signature extends StatefulWidget {
 
 class _SignatureState extends State<Signature> {
   GlobalKey<SfSignaturePadState> signaturePadKey = GlobalKey();
-  late AcuerdoConformidad acuerdoDto;
-  final controller = Get.put(AcuerdoConformidadController());
+  final controller = Get.put(SignatureControllerPanel());
 
   @override
   void initState() {
     super.initState();
-    acuerdoDto = widget.acuerdoDto;
+    controller.acuerdoConformidad = widget.acuerdoDto!;
   }
 
   @override
@@ -59,15 +49,15 @@ class _SignatureState extends State<Signature> {
                   ElevatedButton(
                     child: const Text("Confirmar"),
                     style: ElevatedButton.styleFrom(
-                        primary: Colors.black,
-                        onPrimary: Colors.white,
-                        textStyle: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 15,
-                            fontStyle: FontStyle.italic)),
+                      primary: Colors.black,
+                      onPrimary: Colors.white,
+                      textStyle: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 15,
+                          fontStyle: FontStyle.italic),
+                    ),
                     onPressed: () async {
-                      guardarSignature();
-                      Image.file(controller.fotofirma!);
+                      controller.guardarSignature(signaturePadKey);
                     },
                   ),
                   ElevatedButton(
@@ -87,24 +77,8 @@ class _SignatureState extends State<Signature> {
               )
             ],
           ),
-          //height: MediaQuery.of(context).size.height,
-          //width: MediaQuery.of(context).size.width,
         ),
       )),
     );
-  }
-
-  void guardarSignature() async {
-    ui.Image image = await signaturePadKey.currentState!.toImage();
-    final byteData = await image.toByteData(format: ui.ImageByteFormat.png);
-    final Uint8List imageBytes = byteData!.buffer
-        .asUint8List(byteData.offsetInBytes, byteData.lengthInBytes);
-
-    final String path = (await getApplicationSupportDirectory()).path;
-    final String FileName = '$path/Firma.png';
-    final File file = File(FileName);
-
-    await file.writeAsBytes(imageBytes, flush: true);
-    OpenFile.open(FileName);
   }
 }
