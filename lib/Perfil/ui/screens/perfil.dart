@@ -105,14 +105,6 @@ class Perfil extends StatelessWidget {
                 ),
               ],
             ),
-            const SizedBox(
-              height: 10.0,
-            ),
-            ElevatedButton(
-                onPressed: () async {
-                  Get.to(Signature());
-                },
-                child: const Text('Firma'))
           ],
         ),
       ),

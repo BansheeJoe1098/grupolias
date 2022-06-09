@@ -21,12 +21,12 @@ class AcuerdoService {
       body: acuerdoConformidad.toRawJson(),
       headers: {HttpHeaders.contentTypeHeader: 'application/json'},
     );
+    print(res.body.toString());
 
     if (res.statusCode == 201) {
       var service = TicketService();
       var resTicket = await service.setACerrar(acuerdoConformidad.ticketId!);
 
-      print(resTicket.toRawJson());
       return AcuerdoConformidad.fromJson(jsonDecode(res.body));
     } else {
       throw ("Error al crear el acuerdo de conformidad");

@@ -12,11 +12,8 @@ import 'package:universal_html/html.dart' show AnchorElement;
 import 'package:flutter/foundation.dart' show kIsWeb;
 
 class Signature extends StatefulWidget {
-  // final AcuerdoConformidad acuerdoDto;
-  const Signature({
-    Key? key,
-    /*required this.acuerdoDto */
-  }) : super(key: key);
+  final AcuerdoConformidad acuerdoDto;
+  const Signature({Key? key, required this.acuerdoDto}) : super(key: key);
 
   @override
   State<Signature> createState() => _SignatureState();
@@ -27,10 +24,10 @@ class _SignatureState extends State<Signature> {
   late AcuerdoConformidad acuerdoDto;
 
   @override
-  /*void initState() {
+  void initState() {
     super.initState();
     acuerdoDto = widget.acuerdoDto;
-  } */
+  }
 
   @override
   Widget build(BuildContext context) {

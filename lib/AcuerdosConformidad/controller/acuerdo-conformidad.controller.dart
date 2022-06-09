@@ -60,9 +60,7 @@ class AcuerdoConformidadController extends GetxController {
           ),
         );
 
-        // Get.to(() => Signature(
-        //      acuerdoDto: acuerdoDTO
-        // ));
+        Get.to(() => Signature(acuerdoDto: acuerdo));
         // var acuerdoService = AcuerdoService();
         // var ticketService = TicketService();
 
