@@ -15,7 +15,6 @@ class Signature extends StatefulWidget {
 }
 
 class _SignatureState extends State<Signature> {
-  GlobalKey<SfSignaturePadState> signaturePadKey = GlobalKey();
   final controller = Get.put(SignatureControllerPanel());
 
   @override
@@ -37,7 +36,7 @@ class _SignatureState extends State<Signature> {
                     border: Border.all(width: 10, color: Colors.black),
                     borderRadius: const BorderRadius.all(Radius.circular(8))),
                 child: SfSignaturePad(
-                  key: signaturePadKey,
+                  key: controller.signaturePadKey,
                   backgroundColor: Color.fromARGB(255, 255, 255, 255),
                   strokeColor: Colors.black,
                   minimumStrokeWidth: 2.0,
@@ -57,7 +56,7 @@ class _SignatureState extends State<Signature> {
                           fontStyle: FontStyle.italic),
                     ),
                     onPressed: () async {
-                      controller.guardarSignature(signaturePadKey);
+                      controller.guardarSignature();
                     },
                   ),
                   ElevatedButton(
@@ -69,7 +68,7 @@ class _SignatureState extends State<Signature> {
                               fontSize: 15,
                               fontStyle: FontStyle.italic)),
                       onPressed: () {
-                        signaturePadKey.currentState!.clear();
+                        controller.signaturePadKey.currentState!.clear();
                       },
                       child: const Text('Limpiar'))
                 ],

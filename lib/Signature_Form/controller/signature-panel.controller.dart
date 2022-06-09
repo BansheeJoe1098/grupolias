@@ -13,10 +13,11 @@ import 'package:path_provider/path_provider.dart';
 import 'package:syncfusion_flutter_signaturepad/signaturepad.dart';
 
 class SignatureControllerPanel extends GetxController {
+  GlobalKey<SfSignaturePadState> signaturePadKey = GlobalKey();
   File? file;
   late AcuerdoConformidad acuerdoConformidad;
 
-  guardarSignature(GlobalKey<SfSignaturePadState> signaturePadKey) async {
+  guardarSignature() async {
     ui.Image image = await signaturePadKey.currentState!.toImage();
     final byteData = await image.toByteData(format: ui.ImageByteFormat.png);
     final Uint8List imageBytes = byteData!.buffer
@@ -26,6 +27,7 @@ class SignatureControllerPanel extends GetxController {
     final String fileName = '$path/Firma.png';
     final File firmaComoPng = File(fileName);
 
+    await firmaComoPng.writeAsBytes(imageBytes);
     SignatureService signatureService = SignatureService();
     await signatureService.create(acuerdoConformidad.id!, firmaComoPng);
 

@@ -28,6 +28,5 @@ class SignatureService {
     });
 
     var res = await dio.post("$url/$idAcuerdo/acuerdo-firmado", data: resfile);
-    print(res);
   }
 }
