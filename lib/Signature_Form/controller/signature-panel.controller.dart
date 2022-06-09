@@ -2,7 +2,6 @@ import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/state_manager.dart';
 import 'package:grupoLias/AcuerdosConformidad/model/acuerdo-conformidad.model.dart';
 import 'package:grupoLias/Signature_Form/service/signature.service.dart';
 
@@ -12,9 +11,10 @@ import 'dart:ui' as ui;
 import 'package:path_provider/path_provider.dart';
 import 'package:syncfusion_flutter_signaturepad/signaturepad.dart';
 
+import '../../AcuerdosConformidad/ui/screens/ver-acuerdo-firmado.screen.dart';
+
 class SignatureControllerPanel extends GetxController {
   GlobalKey<SfSignaturePadState> signaturePadKey = GlobalKey();
-  File? file;
   late AcuerdoConformidad acuerdoConformidad;
 
   guardarSignature() async {
@@ -28,10 +28,20 @@ class SignatureControllerPanel extends GetxController {
     final File firmaComoPng = File(fileName);
 
     await firmaComoPng.writeAsBytes(imageBytes);
-    SignatureService signatureService = SignatureService();
-    await signatureService.create(acuerdoConformidad.id!, firmaComoPng);
 
-    //await firmaComoPng.writeAsBytes(imageBytes, flush: true);
-    //OpenFile.open(fileName);
+    SignatureService signatureService = SignatureService();
+    var res =
+        await signatureService.create(acuerdoConformidad.id!, firmaComoPng);
+
+    if (res != null) {
+      Get.to(() => VerAcuerdoFirmadoScreen(
+          acuerdoConformidad: acuerdoConformidad, firma: firmaComoPng));
+    } else {
+      Get.snackbar(
+        'Error',
+        'Error al guardar la firma',
+        duration: Duration(seconds: 2),
+      );
+    }
   }
 }

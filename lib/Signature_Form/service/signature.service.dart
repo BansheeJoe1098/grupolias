@@ -10,7 +10,7 @@ import '../../constants.dart';
 class SignatureService {
   String url = '${Constants.API_URL}/acuerdos-conformidad';
 
-  Future<Signature?> create(int idAcuerdo, File file) async {
+  Future<String?> create(int idAcuerdo, File file) async {
     var dio = Dio();
     dio.options.connectTimeout = 10000;
     dio.options.receiveTimeout = 10000;
@@ -28,5 +28,11 @@ class SignatureService {
     });
 
     var res = await dio.post("$url/$idAcuerdo/acuerdo-firmado", data: resfile);
+
+    if (res.statusCode == 201) {
+      return res.data.toString();
+    } else {
+      return null;
+    }
   }
 }
