@@ -19,7 +19,7 @@ class AcuerdoConformidadController extends GetxController {
 
   var observaciones = TextEditingController();
 
-  File? foto;
+  File? fotofirma;
   Rx<AcuerdoConformidad?> acuerdo = null.obs;
 
   Future<AcuerdoConformidad?> submit(BuildContext context) async {
@@ -47,44 +47,27 @@ class AcuerdoConformidadController extends GetxController {
             ticket.colonia!.toString(),
       );
       var service = AcuerdoService();
-      var acuerdo = await service.create(acuerdoDTO);
+      var acuerdo = await service.create(acuerdoDTO, fotofirma!);
 
       print(acuerdo!.toRawJson());
-
-      var respuesta = await service.create(acuerdoDTO);
-
-      if (respuesta != null) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Acuerdo enviada'),
-          ),
-        );
-
-        // Get.to(() => Signature(
-        //      acuerdoDto: acuerdoDTO
-        // ));
-        // var acuerdoService = AcuerdoService();
-        // var ticketService = TicketService();
-
-        // try {
-        //   var respuesta = await acuerdoService.create(cot, foto!);
-
-        //   if (respuesta != null) {
-        //     ScaffoldMessenger.of(context).showSnackBar(
-        //       const SnackBar(
-        //         content: Text('Acuerdo enviada'),
-        //       ),
-        //     );
-
-        //     Get.to(AcuerdoConformidad());
-
-        //     return respuesta;
-        //   }
-        // } catch (e) {
-        //   printError(info: e.toString());
-        // }
+      try {
+        var respuesta = await service.create(acuerdoDTO, fotofirma!);
+        if (respuesta != null) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('Acuerdo enviada'),
+            ),
+          );
+          Get.to(Signature(
+            acuerdoDto: respuesta,
+          ));
+          return respuesta;
+        }
+      } catch (e) {
+        printError(info: e.toString());
       }
     }
+    return null;
   }
 
   String? validadorTextArea(String? value) {

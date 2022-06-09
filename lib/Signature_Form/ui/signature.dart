@@ -1,6 +1,9 @@
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/state_manager.dart';
+import 'package:grupoLias/AcuerdosConformidad/controller/aprobacion-acuerdo.controller.dart';
 import 'package:grupoLias/AcuerdosConformidad/model/acuerdo-conformidad.model.dart';
 import 'dart:io';
 import 'dart:ui' as ui;
@@ -10,13 +13,11 @@ import 'package:path_provider/path_provider.dart';
 import 'package:syncfusion_flutter_signaturepad/signaturepad.dart';
 import 'package:universal_html/html.dart' show AnchorElement;
 import 'package:flutter/foundation.dart' show kIsWeb;
+import 'package:grupoLias/AcuerdosConformidad/controller/acuerdo-conformidad.controller.dart';
 
 class Signature extends StatefulWidget {
-  // final AcuerdoConformidad acuerdoDto;
-  const Signature({
-    Key? key,
-    /*required this.acuerdoDto */
-  }) : super(key: key);
+  final AcuerdoConformidad acuerdoDto;
+  const Signature({Key? key, required this.acuerdoDto}) : super(key: key);
 
   @override
   State<Signature> createState() => _SignatureState();
@@ -25,12 +26,13 @@ class Signature extends StatefulWidget {
 class _SignatureState extends State<Signature> {
   GlobalKey<SfSignaturePadState> signaturePadKey = GlobalKey();
   late AcuerdoConformidad acuerdoDto;
+  final controller = Get.put(AcuerdoConformidadController());
 
   @override
-  /*void initState() {
+  void initState() {
     super.initState();
     acuerdoDto = widget.acuerdoDto;
-  } */
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -64,19 +66,8 @@ class _SignatureState extends State<Signature> {
                             fontSize: 15,
                             fontStyle: FontStyle.italic)),
                     onPressed: () async {
-                      ui.Image image =
-                          await signaturePadKey.currentState!.toImage();
-                      final byteData = await image.toByteData(
-                          format: ui.ImageByteFormat.png);
-                      final Uint8List imageBytes = byteData!.buffer.asUint8List(
-                          byteData.offsetInBytes, byteData.lengthInBytes);
-
-                      final String path =
-                          (await getApplicationSupportDirectory()).path;
-                      final String FileName = '$path/Firma.png';
-                      final File file = File(FileName);
-                      await file.writeAsBytes(imageBytes, flush: true);
-                      OpenFile.open(FileName);
+                      guardarSignature();
+                      Image.file(controller.fotofirma!);
                     },
                   ),
                   ElevatedButton(
@@ -101,5 +92,19 @@ class _SignatureState extends State<Signature> {
         ),
       )),
     );
+  }
+
+  void guardarSignature() async {
+    ui.Image image = await signaturePadKey.currentState!.toImage();
+    final byteData = await image.toByteData(format: ui.ImageByteFormat.png);
+    final Uint8List imageBytes = byteData!.buffer
+        .asUint8List(byteData.offsetInBytes, byteData.lengthInBytes);
+
+    final String path = (await getApplicationSupportDirectory()).path;
+    final String FileName = '$path/Firma.png';
+    final File file = File(FileName);
+
+    await file.writeAsBytes(imageBytes, flush: true);
+    OpenFile.open(FileName);
   }
 }

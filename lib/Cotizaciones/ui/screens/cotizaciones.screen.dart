@@ -108,7 +108,7 @@ class _CotizacionesScreenState extends State<CotizacionesScreen> {
                                 padding: const EdgeInsets.all(8.0),
                                 child: controller.foto == null
                                     ? Image.asset(
-                                        'assets/cocodrile.png',
+                                        'assets/gpolias.png',
                                         height: 200,
                                         width: 200,
                                       )
