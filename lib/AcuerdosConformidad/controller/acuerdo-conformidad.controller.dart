@@ -50,21 +50,37 @@ class AcuerdoConformidadController extends GetxController {
       var acuerdo = await service.create(acuerdoDTO, fotofirma!);
 
       print(acuerdo!.toRawJson());
-      try {
-        var respuesta = await service.create(acuerdoDTO, fotofirma!);
-        if (respuesta != null) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text('Acuerdo enviada'),
-            ),
-          );
-          Get.to(Signature(
-            acuerdoDto: respuesta,
-          ));
-          return respuesta;
-        }
-      } catch (e) {
-        printError(info: e.toString());
+
+      var respuesta = await service.create(acuerdoDTO);
+
+      if (respuesta != null) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Acuerdo enviada'),
+          ),
+        );
+
+        Get.to(() => Signature(acuerdoDto: acuerdo));
+        // var acuerdoService = AcuerdoService();
+        // var ticketService = TicketService();
+
+        // try {
+        //   var respuesta = await acuerdoService.create(cot, foto!);
+
+        //   if (respuesta != null) {
+        //     ScaffoldMessenger.of(context).showSnackBar(
+        //       const SnackBar(
+        //         content: Text('Acuerdo enviada'),
+        //       ),
+        //     );
+
+        //     Get.to(AcuerdoConformidad());
+
+        //     return respuesta;
+        //   }
+        // } catch (e) {
+        //   printError(info: e.toString());
+        // }
       }
     }
     return null;
