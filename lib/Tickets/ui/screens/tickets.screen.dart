@@ -16,11 +16,11 @@ class TicketsScreen extends StatelessWidget {
       appBar: AppBar(
         automaticallyImplyLeading: false,
         backgroundColor: Colors.black,
-        toolbarHeight: 50,
+        toolbarHeight: 75,
         actions: const [
           ImageIcon(
             AssetImage('assets/gpolias.png'),
-            size: 100,
+            size: 65,
           )
         ],
       ),

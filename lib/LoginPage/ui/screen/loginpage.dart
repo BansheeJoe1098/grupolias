@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import '../../../NavBar/ui/pluguin/navbar.dart';
 import '../../controllers/login.controller.dart';
+import 'package:get/get.dart';
+import 'package:grupoLias/Global/controllers/global.controller.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -12,7 +14,7 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   final loginController = Get.put(LoginController());
   final globalController = Get.put(GlobalController());
-
+  bool _isObscure = true;
   ver() async {
     await globalController.isAutenticado();
   }
@@ -78,10 +80,20 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                     TextFormField(
                       controller: loginController.password,
-                      obscureText: true,
+                      obscureText: _isObscure,
                       style: const TextStyle(color: Colors.black),
-                      decoration: const InputDecoration(
+                      decoration: InputDecoration(
                         hintText: "Contraseña:",
+                        suffixIcon: IconButton(
+                          icon: Icon(_isObscure
+                              ? Icons.visibility
+                              : Icons.visibility_off),
+                          onPressed: () {
+                            setState(() {
+                              _isObscure = !_isObscure;
+                            });
+                          },
+                        ),
                         hintStyle: TextStyle(color: Colors.black),
                         border: InputBorder.none,
                         icon: Icon(
@@ -89,6 +101,9 @@ class _LoginPageState extends State<LoginPage> {
                           color: Colors.black,
                         ),
                       ),
+                    ),
+                    const Divider(
+                      color: Colors.black,
                     ),
                     const SizedBox(
                       height: 10,
@@ -115,12 +130,24 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                       ],
                     ),
+                    const SizedBox(
+                      height: 190,
+                    ),
+                    Text('Made with ❤'),
+                    Text(
+                      '💻 BY THE CORE DEV 💻',
+                      style: TextStyle(
+                        fontStyle: FontStyle.italic,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 17.0,
+                      ),
+                    ),
                   ],
                 ),
               ),
-            ],
-          ),
-        ],
+            ),
+          ],
+        ),
       ),
     );
   }
