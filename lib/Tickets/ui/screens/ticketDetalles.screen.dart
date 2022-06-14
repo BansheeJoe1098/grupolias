@@ -4,7 +4,7 @@ import 'package:grupoLias/Tickets/controller/ticket.controller.dart';
 import 'package:grupoLias/Tickets/model/ticket.model.dart';
 import 'package:grupoLias/Tickets/service/ticket.service.dart';
 import 'package:grupoLias/Tickets/service/ticketDetalles.service.dart';
-
+import 'package:grupoLias/NavBar/ui/pluguin/navbar.dart';
 import 'map.screen.dart';
 
 class Ticketdetalles extends StatefulWidget {
@@ -38,11 +38,16 @@ class _TicketdetallesState extends State<Ticketdetalles> {
         ),
         backgroundColor: Colors.black,
         toolbarHeight: 80,
-        actions: const [
+        actions: [
+          IconButton(
+              onPressed: () {
+                Get.to(BasicBottomNavBar());
+              },
+              icon: Icon(Icons.home)),
           ImageIcon(
             AssetImage('assets/gpolias.png'),
             size: 80,
-          )
+          ),
         ],
       ),
       body: Padding(

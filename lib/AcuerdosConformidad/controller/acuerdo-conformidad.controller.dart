@@ -48,13 +48,17 @@ class AcuerdoConformidadController extends GetxController {
       );
 
       var service = AcuerdoService();
+      var acuerdo = await service.create(acuerdoDTO);
+
+      print(acuerdo!.toRawJson());
+
       var respuesta = await service.create(acuerdoDTO);
 
       if (respuesta != null) {
         Get.to(() => Signature(acuerdoDto: respuesta));
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Error al enviar')),
+          const SnackBar(content: Text('Error al enviar el acuerdo')),
         );
         return null;
       }

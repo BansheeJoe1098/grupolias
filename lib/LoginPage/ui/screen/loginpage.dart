@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:get/get.dart';
-import 'package:grupoLias/Global/controllers/global.controller.dart';
 import '../../../NavBar/ui/pluguin/navbar.dart';
 import '../../controllers/login.controller.dart';
 
@@ -121,9 +118,9 @@ class _LoginPageState extends State<LoginPage> {
                   ],
                 ),
               ),
-            ),
-          ],
-        ),
+            ],
+          ),
+        ],
       ),
     );
   }

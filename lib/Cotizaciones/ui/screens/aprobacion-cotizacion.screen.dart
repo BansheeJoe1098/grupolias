@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:grupoLias/AcuerdosConformidad/model/acuerdo-conformidad.model.dart';
 import 'package:grupoLias/Cotizaciones/controller/aprobacion-cotizacion.controller.dart';
 import 'package:grupoLias/Cotizaciones/model/cotizacion.model.dart';
-
+import 'package:grupoLias/NavBar/ui/pluguin/navbar.dart';
 import 'package:grupoLias/AcuerdosConformidad/ui/screens/acuerdo-conformidad.screen.dart';
 
 class AprobacionCotizacion extends StatefulWidget {
@@ -32,8 +32,14 @@ class _AprobacionCotizacionState extends State<AprobacionCotizacion> {
       appBar: AppBar(
         title: const Text("A espera de aprobación"),
         backgroundColor: Colors.black,
+        toolbarHeight: 80,
         automaticallyImplyLeading: false,
-        actions: const [
+        actions: [
+          IconButton(
+              onPressed: () {
+                Get.to(BasicBottomNavBar());
+              },
+              icon: Icon(Icons.home)),
           ImageIcon(
             AssetImage('assets/gpolias.png'),
             size: 80,
@@ -72,7 +78,7 @@ class _AprobacionCotizacionState extends State<AprobacionCotizacion> {
                   ),
                 ),
                 Text(
-                  "Solucion ${cotizacion?.solucionTecnico}",
+                  " ${cotizacion?.solucionTecnico}",
                   style: const TextStyle(fontSize: 20),
                 ),
                 const SizedBox(height: 10),

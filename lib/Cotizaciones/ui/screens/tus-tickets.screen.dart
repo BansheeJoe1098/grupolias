@@ -18,6 +18,7 @@ class _TusTicketsScreenState extends State<TusTicketsScreen> {
       appBar: AppBar(
         title: const Text('Tus Tickets'),
         backgroundColor: Colors.black,
+        toolbarHeight: 80,
         automaticallyImplyLeading: false,
         actions: const [
           ImageIcon(

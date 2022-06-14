@@ -32,10 +32,11 @@ class _MySplashPageState extends State<MySplashPage> {
   @override
   Widget build(BuildContext context) {
     return Container(
-        color: Colors.white,
-        child: Image.asset(
-          'assets/gpolias.png',
-        ));
+      color: Colors.white,
+      child: Image.asset(
+        'assets/gpolias.png',
+      ),
+    );
   }
 }
 

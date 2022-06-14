@@ -100,32 +100,31 @@ class _CotizacionesScreenState extends State<CotizacionesScreen> {
                     ),
                     Center(
                       child: MaterialButton(
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            GetBuilder<CotizacionesController>(builder: (_) {
-                              return Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: controller.foto == null
-                                    ? Image.asset(
-                                        'assets/gpolias.png',
-                                        height: 200,
-                                        width: 200,
-                                      )
-                                    : Image.file(
-                                        controller.foto!,
-                                        height: 200,
-                                        width: 200,
-                                        fit: BoxFit.cover,
-                                      ),
-                              );
-                            }),
-                            const Text('Tomar Foto'),
-                          ],
-                        ),
-                        onPressed: () => controller.tomarFoto(),
-                        color: Colors.red,
-                      ),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              GetBuilder<CotizacionesController>(builder: (_) {
+                                return Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: controller.foto == null
+                                      ? Image.asset(
+                                          'assets/gpolias.png',
+                                          height: 200,
+                                          width: 200,
+                                        )
+                                      : Image.file(
+                                          controller.foto!,
+                                          height: 200,
+                                          width: 200,
+                                          fit: BoxFit.cover,
+                                        ),
+                                );
+                              }),
+                              const Text('Tomar Foto'),
+                            ],
+                          ),
+                          onPressed: () => controller.tomarFoto(),
+                          color: Colors.white),
                     ),
                     const SizedBox(
                       height: 20,

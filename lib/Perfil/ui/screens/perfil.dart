@@ -14,7 +14,7 @@ class Perfil extends StatelessWidget {
           'GRUPO LIAS',
           style: TextStyle(
             fontStyle: FontStyle.italic,
-            fontSize: 25.0,
+            fontSize: 20.0,
             letterSpacing: 2.0,
           ),
         ),
@@ -23,7 +23,7 @@ class Perfil extends StatelessWidget {
         actions: const <Widget>[
           ImageIcon(
             AssetImage('assets/gpolias.png'),
-            size: 100,
+            size: 80,
           ),
         ],
       ),
@@ -68,7 +68,7 @@ class Perfil extends StatelessWidget {
               height: 10.0,
             ),
             const Text(
-              'Plomero \n Electricista',
+              'Plomero\nElectricista',
               style: TextStyle(
                 color: Color.fromARGB(255, 102, 100, 100),
                 letterSpacing: 2.0,
@@ -104,6 +104,9 @@ class Perfil extends StatelessWidget {
                       letterSpacing: 1.0, color: Colors.black, fontSize: 18.0),
                 ),
               ],
+            ),
+            SizedBox(
+              width: 10.0,
             ),
           ],
         ),
