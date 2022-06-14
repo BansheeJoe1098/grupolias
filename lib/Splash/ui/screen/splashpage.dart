@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:grupoLias/Global/controllers/global.controller.dart';
 import 'dart:async';
 
 import '../../../LoginPage/ui/screen/loginpage.dart';
 
 class MySplashPage extends StatefulWidget {
-  const MySplashPage({Key? key}) : super(key: key);
+  const MySplashPage({
+    Key? key,
+  }) : super(key: key);
 
   @override
   _MySplashPageState createState() => _MySplashPageState();
@@ -14,10 +17,16 @@ class _MySplashPageState extends State<MySplashPage> {
   @override
   void initState() {
     super.initState();
+
     Timer(
-        const Duration(seconds: 1),
-        () => Navigator.pushReplacement(context,
-            MaterialPageRoute(builder: (context) => const SecondScreen())));
+      const Duration(seconds: 1),
+      () => Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => SecondScreen(),
+        ),
+      ),
+    );
   }
 
   @override
@@ -35,6 +44,6 @@ class SecondScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(body: Loginpage());
+    return Scaffold(body: LoginPage());
   }
 }
