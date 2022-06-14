@@ -28,7 +28,7 @@ class _CotizacionesScreenState extends State<CotizacionesScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Cotizacion"),
+        title: const Text("Cotización"),
         backgroundColor: Colors.black,
         toolbarHeight: 80,
         actions: const [
@@ -77,7 +77,7 @@ class _CotizacionesScreenState extends State<CotizacionesScreen> {
                         return controller.validadorTextArea(value);
                       },
                       decoration: const InputDecoration(
-                        labelText: 'Diagnostico del problema ',
+                        labelText: 'Diagnóstico del problema ',
                         hintText:
                             'Ej: Se encontró cocodrilo en la alberca del domicilio',
                         filled: true,
@@ -130,7 +130,7 @@ class _CotizacionesScreenState extends State<CotizacionesScreen> {
                       height: 20,
                     ),
                     const Text(
-                      "Solucion propuesta 💡",
+                      "Solución propuesta 💡",
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 20,
@@ -148,7 +148,7 @@ class _CotizacionesScreenState extends State<CotizacionesScreen> {
                         return controller.validadorTextArea(value);
                       },
                       decoration: const InputDecoration(
-                        labelText: 'Solucion propuesta',
+                        labelText: 'Solución propuesta',
                         hintText: 'Ej: Se le realizó una limpieza a la alberca',
                         filled: true,
                         fillColor: Colors.white,

@@ -64,7 +64,7 @@ class _AcuerdoConformidadScreenState extends State<AcuerdoConformidadScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const Text(
-                        "Descripcion del Problema 👀 ",
+                        "Descripción del Problema 👀 ",
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 20,
@@ -112,7 +112,7 @@ class _AcuerdoConformidadScreenState extends State<AcuerdoConformidadScreen> {
                         height: 20,
                       ),
                       const Text(
-                        "Observaciones ",
+                        "Observaciónes ",
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 20,
@@ -121,7 +121,7 @@ class _AcuerdoConformidadScreenState extends State<AcuerdoConformidadScreen> {
                       TextFormField(
                         validator: (value) {
                           if (value!.isEmpty) {
-                            return 'Por favor ingrese una observacion';
+                            return 'Por favor ingrese una observación';
                           }
                           return null;
                         },
@@ -130,7 +130,7 @@ class _AcuerdoConformidadScreenState extends State<AcuerdoConformidadScreen> {
                         autovalidateMode: AutovalidateMode.onUserInteraction,
                         controller: controller.observaciones,
                         decoration: const InputDecoration(
-                          labelText: 'Diagnostico del problema ',
+                          labelText: 'Diagnóstico del problema ',
                           hintText:
                               'Ej: Se encontró cocodrilo en la alberca del domicilio',
                           filled: true,

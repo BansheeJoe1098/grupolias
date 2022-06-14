@@ -42,7 +42,7 @@ class _AprobacionCotizacionState extends State<AprobacionCotizacion> {
               icon: Icon(Icons.home)),
           ImageIcon(
             AssetImage('assets/gpolias.png'),
-            size: 80,
+            size: 50,
           ),
         ],
       ),
@@ -71,7 +71,7 @@ class _AprobacionCotizacionState extends State<AprobacionCotizacion> {
                 ),
                 const SizedBox(height: 10),
                 const Text(
-                  "Solucion",
+                  "Solución",
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
