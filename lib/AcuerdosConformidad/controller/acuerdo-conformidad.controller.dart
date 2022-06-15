@@ -48,9 +48,6 @@ class AcuerdoConformidadController extends GetxController {
       );
 
       var service = AcuerdoService();
-      var acuerdo = await service.create(acuerdoDTO);
-
-      print(acuerdo!.toRawJson());
 
       var respuesta = await service.create(acuerdoDTO);
 
