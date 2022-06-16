@@ -13,28 +13,20 @@ class Mapita {
     ciudad = ciudad?.replaceAll(" ", "+");
     numero = numero?.replaceAll(" ", "+");
 
-    var direccion = "$calle+$colonia+$numero+$ciudad";
+    var direccion = "$calle+$colonia+$numero+morelia";
 
     bool? isAsistenciaVial = ticket?.asistenciaVial;
 
-    if (isAsistenciaVial!) {
-      Uri url = Uri.parse('google.navigation:q=$calle&avoid=tf');
-      if (await canLaunchUrl(url)) {
-        // await launchUrl(url);
-      } else {
-        throw 'No se pudo abrir el mapa';
-      }
-    } else {
-      Uri googleUrl = Uri.parse('google.navigation:q=$direccion&avoid=tf');
+    Uri googleUrl = Uri.parse('google.navigation:q=$direccion&avoid=tf');
 
-      if (await canLaunchUrl(googleUrl)) {
-        // await launchUrl(
-        //   googleUrl,
-        //   mode: LaunchMode.externalApplication,
-        // );
-      } else {
-        throw 'Could not open the map.';
-      }
+    print(await canLaunchUrl(googleUrl));
+    if (await canLaunchUrl(googleUrl)) {
+      await launchUrl(
+        googleUrl,
+        mode: LaunchMode.externalApplication,
+      );
+    } else {
+      throw 'Could not open the map.';
     }
   }
 }

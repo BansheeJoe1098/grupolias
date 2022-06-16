@@ -66,6 +66,7 @@ class _TicketdetallesState extends State<Ticketdetalles> {
 
                   Ticket? data = snapshot.data;
                   controller.getCiudadByTicket(data!.ciudadId);
+                  controller.ticket.value = data;
                   return Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -168,9 +169,11 @@ class _TicketdetallesState extends State<Ticketdetalles> {
 
                   FutureBuilder<Ticket>(
                     future: TicketDetallesService().actualizarEstado(
-                        idTicket, ticketActualizado.estado.toString()),
+                        ticketActualizado.id,
+                        ticketActualizado.estado.toString()),
                     builder: (context, snapshot) {
                       if (snapshot.hasData) {
+                        controller.ticket.value = snapshot.data!;
                         return Text(snapshot.data!.estado.toString());
                       } else if (snapshot.hasError) {
                         return Text('${snapshot.error}');
@@ -178,7 +181,8 @@ class _TicketdetallesState extends State<Ticketdetalles> {
                       return const CircularProgressIndicator();
                     },
                   );
-                  Get.to(() => MapScreen(idTicket: idTicket));
+                  Get.to(
+                      () => MapScreen(idTicket: controller.ticket.value.id!));
                 },
               )
             ],
