@@ -20,7 +20,7 @@ class Mapita {
     if (isAsistenciaVial!) {
       Uri url = Uri.parse('google.navigation:q=$calle&avoid=tf');
       if (await canLaunchUrl(url)) {
-        await launchUrl(url);
+        // await launchUrl(url);
       } else {
         throw 'No se pudo abrir el mapa';
       }
@@ -28,10 +28,10 @@ class Mapita {
       Uri googleUrl = Uri.parse('google.navigation:q=$direccion&avoid=tf');
 
       if (await canLaunchUrl(googleUrl)) {
-        await launchUrl(
-          googleUrl,
-          mode: LaunchMode.externalApplication,
-        );
+        // await launchUrl(
+        //   googleUrl,
+        //   mode: LaunchMode.externalApplication,
+        // );
       } else {
         throw 'Could not open the map.';
       }

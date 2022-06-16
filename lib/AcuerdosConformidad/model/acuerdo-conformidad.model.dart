@@ -6,16 +6,10 @@
 
 import 'dart:convert';
 
-// To parse this JSON data, do
-//
-//     final cotizacion = cotizacionFromJson(jsonString);
-
 class AcuerdoConformidad {
   AcuerdoConformidad({
     this.id,
-    this.expediente,
     this.fechaAcuerdo,
-    this.problema,
     this.descripcionProblema,
     this.direccion,
     this.observaciones,
@@ -24,16 +18,15 @@ class AcuerdoConformidad {
     this.horaLlegadaServicio,
     this.horaFinalizacionServicio,
     this.acuerdoFirmado,
-    this.usuarioFinalId,
+    this.isAprobado,
     this.ticketId,
+    this.usuarioFinalId,
     this.createdAt,
     this.updatedAt,
   });
 
   int? id;
-  String? expediente;
   DateTime? fechaAcuerdo;
-  String? problema;
   String? descripcionProblema;
   String? direccion;
   String? observaciones;
@@ -42,8 +35,9 @@ class AcuerdoConformidad {
   DateTime? horaLlegadaServicio;
   DateTime? horaFinalizacionServicio;
   String? acuerdoFirmado;
-  int? usuarioFinalId;
+  bool? isAprobado;
   int? ticketId;
+  int? usuarioFinalId;
   DateTime? createdAt;
   DateTime? updatedAt;
 
@@ -55,11 +49,9 @@ class AcuerdoConformidad {
   factory AcuerdoConformidad.fromJson(Map<String, dynamic> json) =>
       AcuerdoConformidad(
         id: json["id"] == null ? null : json["id"],
-        expediente: json["expediente"] == null ? null : json["expediente"],
         fechaAcuerdo: json["fecha_acuerdo"] == null
             ? null
             : DateTime.parse(json["fecha_acuerdo"]),
-        problema: json["problema"] == null ? null : json["problema"],
         descripcionProblema: json["descripcion_problema"] == null
             ? null
             : json["descripcion_problema"],
@@ -80,9 +72,10 @@ class AcuerdoConformidad {
             : DateTime.parse(json["hora_finalizacion_servicio"]),
         acuerdoFirmado:
             json["acuerdo_firmado"] == null ? null : json["acuerdo_firmado"],
+        isAprobado: json["is_aprobado"] == null ? null : json["is_aprobado"],
+        ticketId: json["ticketId"] == null ? null : json["ticketId"],
         usuarioFinalId:
             json["usuarioFinalId"] == null ? null : json["usuarioFinalId"],
-        ticketId: json["ticketId"] == null ? null : json["ticketId"],
         createdAt: json["createdAt"] == null
             ? null
             : DateTime.parse(json["createdAt"]),
@@ -93,10 +86,8 @@ class AcuerdoConformidad {
 
   Map<String, dynamic> toJson() => {
         "id": id == null ? null : id,
-        "expediente": expediente == null ? null : expediente,
         "fecha_acuerdo":
             fechaAcuerdo == null ? null : fechaAcuerdo?.toIso8601String(),
-        "problema": problema == null ? null : problema,
         "descripcion_problema":
             descripcionProblema == null ? null : descripcionProblema,
         "direccion": direccion == null ? null : direccion,
@@ -113,8 +104,9 @@ class AcuerdoConformidad {
             ? null
             : horaFinalizacionServicio?.toIso8601String(),
         "acuerdo_firmado": acuerdoFirmado == null ? null : acuerdoFirmado,
-        "usuarioFinalId": usuarioFinalId == null ? null : usuarioFinalId,
+        "is_aprobado": isAprobado == null ? null : isAprobado,
         "ticketId": ticketId == null ? null : ticketId,
+        "usuarioFinalId": usuarioFinalId == null ? null : usuarioFinalId,
         "createdAt": createdAt == null ? null : createdAt?.toIso8601String(),
         "updatedAt": updatedAt == null ? null : updatedAt?.toIso8601String(),
       };

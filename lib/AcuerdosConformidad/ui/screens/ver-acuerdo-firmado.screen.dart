@@ -1,14 +1,15 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:grupoLias/AcuerdosConformidad/controller/ver-acuerdo-conformidad.controller.dart';
+import 'package:grupoLias/NavBar/ui/pluguin/navbar.dart';
 
 import '../../model/acuerdo-conformidad.model.dart';
+import 'package:easy_pdf_viewer/easy_pdf_viewer.dart';
 
 class VerAcuerdoFirmadoScreen extends StatefulWidget {
   final AcuerdoConformidad acuerdoConformidad;
-  final File firma;
-  const VerAcuerdoFirmadoScreen(
-      {Key? key, required this.acuerdoConformidad, required this.firma})
+
+  const VerAcuerdoFirmadoScreen({Key? key, required this.acuerdoConformidad})
       : super(key: key);
 
   @override
@@ -17,29 +18,46 @@ class VerAcuerdoFirmadoScreen extends StatefulWidget {
 }
 
 class _VerAcuerdoFirmadoScreenState extends State<VerAcuerdoFirmadoScreen> {
+  var controller = Get.put(VerAcuerdoConformidadController());
   late AcuerdoConformidad acuerdoConformidad;
-  late File firma;
 
   @override
-  void initState() {
+  initState() {
     super.initState();
     acuerdoConformidad = widget.acuerdoConformidad;
-    firma = widget.firma;
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Acuerdo firmado'),
-        backgroundColor: Colors.black,
-      ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: SafeArea(child: Text(acuerdoConformidad.id!.toString())),
+      floatingActionButtonLocation: FloatingActionButtonLocation.startTop,
+      floatingActionButton: FloatingActionButton(
+        tooltip: "Regresar pantalla principal",
+        backgroundColor: Colors.white,
+        child: const Icon(
+          Icons.arrow_back,
+          color: Colors.black,
         ),
+        onPressed: () {
+          Get.offAll(
+            () => const BasicBottomNavBar(),
+          );
+        },
       ),
+      body: FutureBuilder(
+          future: controller.loadDocument(),
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              return Text("Hola");
+              // return PDFViewer(
+              //   document: document,
+              // );
+            } else {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+          }),
     );
   }
 }

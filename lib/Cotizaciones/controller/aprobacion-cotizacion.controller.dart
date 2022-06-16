@@ -16,8 +16,9 @@ class AprobacionCotizacionController extends GetxController {
     tiempoTranscurridoMsg.value = "$mins minutos";
     Timer.periodic(const Duration(seconds: 30), (timer) {
       checkEstadoCotizacion();
-      int mins =
-          (DateTime.now().difference(cotizacion.value.createdAt!).inMinutes);
+
+      var creacionDelTicket = cotizacion.value.createdAt!;
+      int mins = (DateTime.now().difference(creacionDelTicket).inMinutes);
       if (mins > 1) {
         tiempoTranscurridoMsg.value = "$mins minutos";
       }
@@ -26,12 +27,12 @@ class AprobacionCotizacionController extends GetxController {
   }
 
   void checkEstadoCotizacion() async {
-    int idCot = cotizacion.value.id!;
-
     try {
+      int idCot = cotizacion.value.id!;
       var resCotizacion = await CotizacionesService().statusCotizacion(idCot);
       cotizacion.value = resCotizacion!;
     } catch (e) {
+      // ignore: avoid_print
       print(e);
     }
   }

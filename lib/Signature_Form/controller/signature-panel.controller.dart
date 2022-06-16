@@ -12,6 +12,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:syncfusion_flutter_signaturepad/signaturepad.dart';
 
 import '../../AcuerdosConformidad/ui/screens/ver-acuerdo-firmado.screen.dart';
+import '../../Tickets/service/ticket.service.dart';
 
 class SignatureControllerPanel extends GetxController {
   GlobalKey<SfSignaturePadState> signaturePadKey = GlobalKey();
@@ -29,18 +30,28 @@ class SignatureControllerPanel extends GetxController {
 
     await firmaComoPng.writeAsBytes(imageBytes);
 
+    //Se sube la firma para el acuerdo
     SignatureService signatureService = SignatureService();
-    var res =
-        await signatureService.create(acuerdoConformidad.id!, firmaComoPng);
+    var res = await signatureService.create(
+      acuerdoConformidad.id!,
+      firmaComoPng,
+    );
 
     if (res != null) {
-      Get.to(() => VerAcuerdoFirmadoScreen(
-          acuerdoConformidad: acuerdoConformidad, firma: firmaComoPng));
+      //Se configura el ticket como "A cerrar"
+      var ticketService = TicketService();
+      await ticketService.setACerrar(acuerdoConformidad.ticketId!);
+      Get.to(
+        () => VerAcuerdoFirmadoScreen(
+          acuerdoConformidad: acuerdoConformidad,
+        ),
+      );
     } else {
       Get.snackbar(
         'Error',
-        'Error al guardar la firma',
-        duration: Duration(seconds: 2),
+        'Error al subir la firma',
+        backgroundColor: Colors.red,
+        colorText: Colors.white,
       );
     }
   }

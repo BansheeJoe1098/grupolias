@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import '../../../NavBar/ui/pluguin/navbar.dart';
 import '../../controllers/login.controller.dart';
@@ -16,7 +18,22 @@ class _LoginPageState extends State<LoginPage> {
   final globalController = Get.put(GlobalController());
   bool _isObscure = true;
   ver() async {
-    await globalController.isAutenticado();
+    try {
+      await globalController.isAutenticado();
+    } catch (e) {
+      if (e is SocketException) {
+        Get.snackbar(
+          'Error',
+          'No se pudo conectar con el servidor, revise su conexion a internet',
+          backgroundColor: Colors.red,
+          colorText: Colors.white,
+          icon: Icon(
+            Icons.error,
+            color: Colors.white,
+          ),
+        );
+      }
+    }
   }
 
   @override

@@ -114,6 +114,7 @@ class _AprobacionCotizacionState extends State<AprobacionCotizacion> {
                 ),
                 const SizedBox(height: 10),
                 Obx(() {
+                  print(controller.cotizacion.value.isAprobado);
                   return controller.cotizacion.value.isAprobado == false
                       ? const Text(
                           "Esperando aprobación",

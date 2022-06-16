@@ -28,6 +28,8 @@ class AcuerdoConformidadController extends GetxController {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Enviando')),
       );
+
+      //---------------Se envia registro de acuerdo -----------------//
       AcuerdoDto acuerdoDTO = AcuerdoDto(
         descripcionProblema: cotizacion.diagnosticoProblema,
         actividadesRealizadas: cotizacion.solucionTecnico,
@@ -48,9 +50,9 @@ class AcuerdoConformidadController extends GetxController {
       );
 
       var service = AcuerdoService();
-
       var respuesta = await service.create(acuerdoDTO);
 
+      //---------------Se firma el acuerdo -----------------//
       if (respuesta != null) {
         Get.to(() => Signature(acuerdoDto: respuesta));
       } else {
@@ -67,26 +69,8 @@ class AcuerdoConformidadController extends GetxController {
           ),
         );
 
-        // var acuerdoService = AcuerdoService();
-        // var ticketService = TicketService();
-
-        // try {
-        //   var respuesta = await acuerdoService.create(cot, foto!);
-
-        //   if (respuesta != null) {
-        //     ScaffoldMessenger.of(context).showSnackBar(
-        //       const SnackBar(
-        //         content: Text('Acuerdo enviada'),
-        //       ),
-        //     );
-
-        //     Get.to(AcuerdoConformidad());
-
-        //     return respuesta;
-        //   }
-        // } catch (e) {
-        //   printError(info: e.toString());
-        // }
+        var ticketService = TicketService();
+        var ticketRespuesta = await ticketService.setACerrar(ticket.id!);
       }
     }
     return null;
