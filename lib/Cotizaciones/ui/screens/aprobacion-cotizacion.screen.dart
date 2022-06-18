@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:grupoLias/AcuerdosConformidad/model/acuerdo-conformidad.model.dart';
 import 'package:grupoLias/Cotizaciones/controller/aprobacion-cotizacion.controller.dart';
 import 'package:grupoLias/Cotizaciones/model/cotizacion.model.dart';
+import 'package:grupoLias/Cotizaciones/service/gps.service.dart';
 import 'package:grupoLias/NavBar/ui/pluguin/navbar.dart';
 import 'package:grupoLias/AcuerdosConformidad/ui/screens/acuerdo-conformidad.screen.dart';
+import 'package:location/location.dart';
+
+import 'package:map_launcher/map_launcher.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class AprobacionCotizacion extends StatefulWidget {
   final Cotizacion cotizacion;
@@ -114,7 +118,6 @@ class _AprobacionCotizacionState extends State<AprobacionCotizacion> {
                 ),
                 const SizedBox(height: 10),
                 Obx(() {
-                  print(controller.cotizacion.value.isAprobado);
                   return controller.cotizacion.value.isAprobado == false
                       ? const Text(
                           "Esperando aprobación",
@@ -148,6 +151,42 @@ class _AprobacionCotizacionState extends State<AprobacionCotizacion> {
                           ],
                         );
                 }),
+                ElevatedButton(
+                  onPressed: () async {
+                    await MapLauncher.showDirections(
+                      mapType: MapType.google,
+                      destination: Coords(19.723446, -101.185014),
+                      directionsMode: DirectionsMode.driving,
+                    );
+                  },
+                  child: const Text("COORDENADAS"),
+                ),
+                ElevatedButton(
+                  onPressed: () async {
+                    // Uri googleUrl =
+                    //     Uri.parse('google.navigation:q=Tec+de+morelia&avoid=t');
+
+                    GPS.setPermisoGPS();
+                    var ubicacion = await GPS.getUbicacionActual();
+
+                    print(ubicacion.longitude);
+                    print(ubicacion.latitude);
+
+                    Uri googleUrl = Uri.parse(
+                        'https://www.google.com/maps/dir/${ubicacion.latitude},${ubicacion.longitude}/Instituto+Tecnologico+de+Morelia');
+
+                    print(await canLaunchUrl(googleUrl));
+                    if (await canLaunchUrl(googleUrl)) {
+                      await launchUrl(
+                        googleUrl,
+                        mode: LaunchMode.externalApplication,
+                      );
+                    } else {
+                      throw 'Could not open the map.';
+                    }
+                  },
+                  child: const Text("URL LAUNCHER"),
+                ),
               ],
             ),
           ),

@@ -17,7 +17,7 @@ class Mapita {
 
     bool? isAsistenciaVial = ticket?.asistenciaVial;
 
-    Uri googleUrl = Uri.parse('google.navigation:q=$direccion&avoid=tf');
+    Uri googleUrl = Uri.parse('google.navigation:q=$direccion');
 
     print(await canLaunchUrl(googleUrl));
     if (await canLaunchUrl(googleUrl)) {
