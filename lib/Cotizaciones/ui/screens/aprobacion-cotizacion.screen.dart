@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:grupolias/Cotizaciones/controller/aprobacion-cotizacion.controller.dart';
 import 'package:grupolias/Cotizaciones/model/cotizacion.model.dart';
@@ -161,31 +162,42 @@ class _AprobacionCotizacionState extends State<AprobacionCotizacion> {
                   child: const Text("COORDENADAS"),
                 ),
                 ElevatedButton(
-                  onPressed: () async {
-                    // Uri googleUrl =
-                    //     Uri.parse('google.navigation:q=Tec+de+morelia&avoid=t');
-
-                    GPS.setPermisoGPS();
-                    var ubicacion = await GPS.getUbicacionActual();
-
-                    print(ubicacion.longitude);
-                    print(ubicacion.latitude);
-
-                    Uri googleUrl = Uri.parse(
-                        'https://www.google.com/maps/dir/${ubicacion.latitude},${ubicacion.longitude}/Instituto+Tecnologico+de+Morelia');
-
-                    print(await canLaunchUrl(googleUrl));
-                    if (await canLaunchUrl(googleUrl)) {
-                      await launchUrl(
-                        googleUrl,
-                        mode: LaunchMode.externalApplication,
-                      );
-                    } else {
-                      throw 'Could not open the map.';
-                    }
-                  },
+                  onPressed: () => controller.lanzarMapa(),
                   child: const Text("URL LAUNCHER"),
                 ),
+                //Si no se puede abrir el mapa, se despliega el botón con la URL
+                //del mapa origen y destino
+                Obx(
+                  (() => controller.sePuedeAbrirMapa.value
+                      ? const Text("Se lanzo mapa")
+                      : Column(
+                          children: [
+                            const SelectableText(
+                                "No se pudo lanzar mapa copia la dirección y pegala en google maps"),
+                            IconButton(
+                              onPressed: () {
+                                Clipboard.setData(
+                                  ClipboardData(
+                                    text: controller.urlMapa.value,
+                                  ),
+                                ).then((value) async {
+                                  ClipboardData? d = await Clipboard.getData(
+                                      Clipboard.kTextPlain);
+                                  print(d?.text);
+
+                                  Get.snackbar(
+                                    "Direccion copiada",
+                                    "Use la app de google maps para abrirla",
+                                    snackPosition: SnackPosition.BOTTOM,
+                                    duration: const Duration(seconds: 5),
+                                  );
+                                });
+                              },
+                              icon: const Icon(Icons.copy),
+                            )
+                          ],
+                        )),
+                )
               ],
             ),
           ),
