@@ -169,7 +169,7 @@ class _AprobacionCotizacionState extends State<AprobacionCotizacion> {
                 //del mapa origen y destino
                 Obx(
                   (() => controller.sePuedeAbrirMapa.value
-                      ? const Text("Se lanzo mapa")
+                      ? const Text("")
                       : Column(
                           children: [
                             const SelectableText(
