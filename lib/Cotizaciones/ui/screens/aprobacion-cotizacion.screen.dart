@@ -3,12 +3,8 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:grupolias/Cotizaciones/controller/aprobacion-cotizacion.controller.dart';
 import 'package:grupolias/Cotizaciones/model/cotizacion.model.dart';
-import 'package:grupolias/Cotizaciones/service/gps.service.dart';
 import 'package:grupolias/NavBar/ui/pluguin/navbar.dart';
 import 'package:grupolias/AcuerdosConformidad/ui/screens/acuerdo-conformidad.screen.dart';
-
-import 'package:map_launcher/map_launcher.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class AprobacionCotizacion extends StatefulWidget {
   final Cotizacion cotizacion;
@@ -152,16 +148,6 @@ class _AprobacionCotizacionState extends State<AprobacionCotizacion> {
                         );
                 }),
                 ElevatedButton(
-                  onPressed: () async {
-                    await MapLauncher.showDirections(
-                      mapType: MapType.google,
-                      destination: Coords(19.723446, -101.185014),
-                      directionsMode: DirectionsMode.driving,
-                    );
-                  },
-                  child: const Text("COORDENADAS"),
-                ),
-                ElevatedButton(
                   onPressed: () => controller.lanzarMapa(),
                   child: const Text("URL LAUNCHER"),
                 ),
@@ -183,7 +169,6 @@ class _AprobacionCotizacionState extends State<AprobacionCotizacion> {
                                 ).then((value) async {
                                   ClipboardData? d = await Clipboard.getData(
                                       Clipboard.kTextPlain);
-                                  print(d?.text);
 
                                   Get.snackbar(
                                     "Direccion copiada",

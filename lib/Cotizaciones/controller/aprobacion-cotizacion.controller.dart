@@ -3,6 +3,10 @@ import 'dart:async';
 import 'package:get/get.dart';
 import 'package:grupolias/Cotizaciones/model/cotizacion.model.dart';
 import 'package:grupolias/Cotizaciones/service/cotizaciones.service.dart';
+import 'package:grupolias/Tickets/model/ciudad.model.dart';
+import 'package:grupolias/Tickets/model/ticket.model.dart';
+import 'package:grupolias/Tickets/service/ciudad.service.dart';
+import 'package:grupolias/Tickets/service/ticket.service.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../service/gps.service.dart';
@@ -12,7 +16,7 @@ class AprobacionCotizacionController extends GetxController {
   //Tiempo transcurrido
   Rx<String> tiempoTranscurridoMsg = '0 mintos'.obs;
   Rx<int> minutos = 0.obs;
-  var sePuedeAbrirMapa = false.obs;
+  var sePuedeAbrirMapa = true.obs;
 
   var urlMapa = "".obs;
 
@@ -20,7 +24,7 @@ class AprobacionCotizacionController extends GetxController {
     int mins =
         (DateTime.now().difference(cotizacion.value.createdAt!).inMinutes);
     tiempoTranscurridoMsg.value = "$mins minutos";
-    Timer.periodic(const Duration(seconds: 30), (timer) {
+    Timer.periodic(const Duration(seconds: 20), (timer) {
       checkEstadoCotizacion();
 
       var creacionDelTicket = cotizacion.value.createdAt!;
@@ -50,22 +54,45 @@ class AprobacionCotizacionController extends GetxController {
     GPS.setPermisoGPS();
     var ubicacion = await GPS.getUbicacionActual();
 
+    //Se obtienen datos del ticket
+    TicketService ticketSservice = TicketService();
+    Ticket? ticket =
+        await ticketSservice.getTicketById(cotizacion.value.ticketId!);
+
+    CiudadService ciudadService = CiudadService();
+    Ciudad? ciudad = await ciudadService.getCiudadById(ticket.ciudadId);
+
+    var direccion = '';
+
+    //Si el ticket tiene la colonia vacia
+    //forma una URL de direcciones cuyo destino son coordenadas
+    if (ticket.colonia == "") {
+      direccion = "${ticket.calle}";
+      direccion = direccion.replaceAll(" ", "");
+    } else {
+      //En caso de que no este vacio, se forma una url con una direccion
+      direccion =
+          "${ticket.calle}+${ticket.colonia}+${ticket.numeroDomicilio}+${ciudad.nombre}";
+      direccion = direccion.replaceAll(" ", "+");
+    }
+
+    //Url que se desplegara a google maps
     urlMapa.value =
-        'https://www.google.com/maps/dir/${ubicacion.latitude},${ubicacion.longitude}/Instituto+Tecnologico+de+Morelia';
+        'https://www.google.com/maps/dir/${ubicacion.latitude},${ubicacion.longitude}/$direccion';
 
-    Uri googleUrl = Uri.parse(urlMapa.value);
+    Uri url = Uri.parse(urlMapa.value);
 
-    sePuedeAbrirMapa.value = await canLaunchUrl(googleUrl);
+    sePuedeAbrirMapa.value = await canLaunchUrl(url);
     if (sePuedeAbrirMapa.value) {
       sePuedeAbrirMapa.value = true;
       await launchUrl(
-        googleUrl,
+        url,
         mode: LaunchMode.externalNonBrowserApplication,
       );
     } else {
       sePuedeAbrirMapa.value = false;
       // ignore: avoid_print
-      print('Could not open the map.');
+      print('No se puede abrir el mapa en este dispositivo.');
     }
   }
 }
