@@ -4,7 +4,7 @@ import 'package:grupolias/Tickets/controller/ticket.controller.dart';
 import 'package:grupolias/Tickets/model/ticket.model.dart';
 import 'package:grupolias/Tickets/service/ticket.service.dart';
 import 'package:grupolias/Tickets/service/ticketDetalles.service.dart';
-import 'package:grupolias/NavBar/ui/pluguin/navbar.dart';
+import '../../controller/tickets.detalles.controller.dart';
 import 'map.screen.dart';
 
 class Ticketdetalles extends StatefulWidget {
@@ -19,7 +19,11 @@ class Ticketdetalles extends StatefulWidget {
 }
 
 class _TicketdetallesState extends State<Ticketdetalles> {
-  final TicketController controller = Get.put(TicketController());
+  final TicketController ticketsController = Get.put(TicketController());
+
+  final TicketsDetallesController controllerTD =
+      Get.put(TicketsDetallesController());
+
   late int idTicket;
 
   @override
@@ -38,15 +42,11 @@ class _TicketdetallesState extends State<Ticketdetalles> {
         ),
         backgroundColor: Colors.black,
         toolbarHeight: 80,
+        // ignore: prefer_const_literals_to_create_immutables
         actions: [
-          IconButton(
-              onPressed: () {
-                Get.to(() => const BasicBottomNavBar());
-              },
-              icon: const Icon(Icons.home)),
           const ImageIcon(
             AssetImage('assets/gpolias.png'),
-            size: 80,
+            size: 50,
           ),
         ],
       ),
@@ -65,8 +65,8 @@ class _TicketdetallesState extends State<Ticketdetalles> {
                   }
 
                   Ticket? data = snapshot.data;
-                  controller.getCiudadByTicket(data!.ciudadId);
-                  controller.ticket.value = data;
+                  ticketsController.getCiudadByTicket(data!.ciudadId);
+                  ticketsController.ticket.value = data;
                   return Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -127,7 +127,7 @@ class _TicketdetallesState extends State<Ticketdetalles> {
                       ),
                       Obx(
                         () => Text(
-                          "${controller.ciudad.value.nombre}",
+                          "${ticketsController.ciudad.value.nombre}",
                           style: const TextStyle(
                             fontSize: 15,
                           ),
@@ -164,25 +164,9 @@ class _TicketdetallesState extends State<Ticketdetalles> {
                 style: ElevatedButton.styleFrom(primary: Colors.black),
                 child: const Text("Tomar Ticket"),
                 onPressed: () {
-                  var ticketActualizado = controller.ticket.value;
-                  ticketActualizado.estado = "TOMADO";
-
-                  FutureBuilder<Ticket>(
-                    future: TicketDetallesService().actualizarEstado(
-                        ticketActualizado.id,
-                        ticketActualizado.estado.toString()),
-                    builder: (context, snapshot) {
-                      if (snapshot.hasData) {
-                        controller.ticket.value = snapshot.data!;
-                        return Text(snapshot.data!.estado.toString());
-                      } else if (snapshot.hasError) {
-                        return Text('${snapshot.error}');
-                      }
-                      return const CircularProgressIndicator();
-                    },
-                  );
-                  Get.to(
-                      () => MapScreen(idTicket: controller.ticket.value.id!));
+                  controllerTD.tomarTicket(ticketsController.ticket.value);
+                  Get.to(() =>
+                      MapScreen(idTicket: ticketsController.ticket.value.id!));
                 },
               )
             ],

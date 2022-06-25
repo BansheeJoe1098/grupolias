@@ -19,10 +19,10 @@ class Mapita {
 
     print(await canLaunchUrl(googleUrl));
     if (await canLaunchUrl(googleUrl)) {
-      await launchUrl(
-        googleUrl,
-        mode: LaunchMode.externalApplication,
-      );
+      // await launchUrl(
+      //   googleUrl,
+      //   mode: LaunchMode.externalApplication,
+      // );
     } else {
       throw 'Could not open the map.';
     }
