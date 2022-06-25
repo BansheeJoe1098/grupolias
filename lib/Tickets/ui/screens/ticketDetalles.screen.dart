@@ -165,8 +165,6 @@ class _TicketdetallesState extends State<Ticketdetalles> {
                 child: const Text("Tomar Ticket"),
                 onPressed: () {
                   controllerTD.tomarTicket(ticketsController.ticket.value);
-                  Get.to(() =>
-                      MapScreen(idTicket: ticketsController.ticket.value.id!));
                 },
               )
             ],

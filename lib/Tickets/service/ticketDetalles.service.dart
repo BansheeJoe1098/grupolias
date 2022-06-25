@@ -7,21 +7,24 @@ import '../model/ticket.model.dart';
 class TicketDetallesService {
   String url = '${Constants.API_URL}/tickets';
 
-  Future<Ticket> actualizarEstado(int? id, String estado) async {
-    var data = '{"estado": "$estado"}';
-
+  Future<Ticket?> tomarTicket(int id, String data) async {
     final response = await http.patch(
-      Uri.parse('$url/$id'),
+      Uri.parse('$url/tomar/$id'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
       body: data,
     );
 
+    if (response.statusCode == 409) {
+      throw Exception(
+        '''Fallo al tomar el ticket, 
+          es posible que el ticket ya haya sido tomado''',
+      );
+    }
     if (response.statusCode == 200) {
       return Ticket.fromJson(jsonDecode(response.body));
-    } else {
-      throw Exception('Fallo al realizar la actualización');
     }
+    return null;
   }
 }

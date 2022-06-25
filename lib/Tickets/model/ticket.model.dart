@@ -2,7 +2,7 @@
 //
 //     final ticket = ticketFromJson(jsonString);
 
-// ignore_for_file: prefer_null_aware_operators, prefer_if_null_operators
+// ignore_for_file: prefer_if_null_operators, prefer_null_aware_operators
 
 import 'dart:convert';
 
@@ -44,6 +44,7 @@ class Ticket {
     this.marcaCarro,
     this.isServicioDomestico,
     this.isServicioForaneo,
+    this.tecnicoId,
     this.createdAt,
     this.updatedAt,
   });
@@ -84,6 +85,7 @@ class Ticket {
   String? marcaCarro;
   bool? isServicioDomestico;
   bool? isServicioForaneo;
+  int? tecnicoId;
   DateTime? createdAt;
   DateTime? updatedAt;
 
@@ -160,6 +162,7 @@ class Ticket {
         isServicioForaneo: json["is_servicio_foraneo"] == null
             ? null
             : json["is_servicio_foraneo"],
+        tecnicoId: json["tecnicoId"] == null ? null : json["tecnicoId"],
         createdAt: json["createdAt"] == null
             ? null
             : DateTime.parse(json["createdAt"]),
@@ -213,6 +216,7 @@ class Ticket {
             isServicioDomestico == null ? null : isServicioDomestico,
         "is_servicio_foraneo":
             isServicioForaneo == null ? null : isServicioForaneo,
+        "tecnicoId": tecnicoId == null ? null : tecnicoId,
         "createdAt": createdAt == null ? null : createdAt?.toIso8601String(),
         "updatedAt": updatedAt == null ? null : updatedAt?.toIso8601String(),
       };
