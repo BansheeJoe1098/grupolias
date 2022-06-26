@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../controller/ticket.controller.dart';
-import '../../model/ticket.model.dart';
-import '../screens/ticketDetalles.screen.dart';
+import '../../controllers/ticket.controller.dart';
+import '../../models/ticket.model.dart';
+import '../screens/ticket-detalles.screen.dart';
 
-class CardListWidget extends StatefulWidget {
-  const CardListWidget({
+class TicketListItem extends StatefulWidget {
+  const TicketListItem({
     Key? key,
     required this.ticket,
   }) : super(key: key);
@@ -14,10 +14,10 @@ class CardListWidget extends StatefulWidget {
   final Ticket ticket;
 
   @override
-  State<CardListWidget> createState() => _CardListWidgetState();
+  State<TicketListItem> createState() => _TicketListItemState();
 }
 
-class _CardListWidgetState extends State<CardListWidget> {
+class _TicketListItemState extends State<TicketListItem> {
   final controller = Get.put(TicketController());
   late int? idTicket;
   @override
@@ -47,7 +47,7 @@ class _CardListWidgetState extends State<CardListWidget> {
             icon: const Icon(Icons.arrow_forward_ios),
             onPressed: () {
               Get.to(
-                () => Ticketdetalles(
+                () => TicketdetallesScreen(
                   titulo: "Ticket ${widget.ticket.numExpediente}",
                   idTicket: widget.ticket.id!,
                 ),

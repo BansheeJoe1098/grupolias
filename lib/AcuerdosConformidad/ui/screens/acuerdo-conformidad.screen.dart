@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:grupolias/Cotizaciones/model/cotizacion.model.dart';
+import 'package:grupolias/Cotizaciones/models/cotizacion.model.dart';
 
-import '../../controller/acuerdo-conformidad.controller.dart';
+import '../../controllers/acuerdo-conformidad.controller.dart';
 
 class AcuerdoConformidadScreen extends StatefulWidget {
   final Cotizacion cotizacion;

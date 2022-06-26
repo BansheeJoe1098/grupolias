@@ -3,7 +3,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 import 'package:grupolias/Global/services/auth.service.dart';
 
-import '../../NavBar/ui/pluguin/navbar.dart';
+import '../../Home/ui/screens/home.screen.dart';
 
 class LoginController extends GetxController {
   final formKey = GlobalKey<FormState>();
@@ -30,7 +30,7 @@ class LoginController extends GetxController {
 
       await storage.read(key: 'token');
 
-      Get.off(() => const BasicBottomNavBar());
+      Get.off(() => const Home());
     }
   }
 }

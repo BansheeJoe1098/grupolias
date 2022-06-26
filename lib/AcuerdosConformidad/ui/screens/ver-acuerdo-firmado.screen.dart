@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:grupolias/AcuerdosConformidad/controller/ver-acuerdo-conformidad.controller.dart';
-import 'package:grupolias/NavBar/ui/pluguin/navbar.dart';
+import 'package:grupolias/AcuerdosConformidad/controllers/ver-acuerdo-conformidad.controller.dart';
+import 'package:grupolias/Home/ui/screens/home.screen.dart';
 
-import '../../model/acuerdo-conformidad.model.dart';
+import '../../models/acuerdo-conformidad.model.dart';
 
 class VerAcuerdoFirmadoScreen extends StatefulWidget {
   final AcuerdoConformidad acuerdoConformidad;
@@ -39,7 +39,7 @@ class _VerAcuerdoFirmadoScreenState extends State<VerAcuerdoFirmadoScreen> {
         ),
         onPressed: () {
           Get.offAll(
-            () => const BasicBottomNavBar(),
+            () => const Home(),
           );
         },
       ),

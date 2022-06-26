@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:grupolias/Cotizaciones/controller/aprobacion-cotizacion.controller.dart';
-import 'package:grupolias/Cotizaciones/model/cotizacion.model.dart';
-import 'package:grupolias/NavBar/ui/pluguin/navbar.dart';
+import 'package:grupolias/Cotizaciones/controllers/aprobacion-cotizacion.controller.dart';
+import 'package:grupolias/Cotizaciones/models/cotizacion.model.dart';
+import 'package:grupolias/Home/ui/screens/home.screen.dart';
 import 'package:grupolias/AcuerdosConformidad/ui/screens/acuerdo-conformidad.screen.dart';
 
 class AprobacionCotizacion extends StatefulWidget {
@@ -37,7 +37,7 @@ class _AprobacionCotizacionState extends State<AprobacionCotizacion> {
         actions: [
           IconButton(
               onPressed: () {
-                Get.to(() => const BasicBottomNavBar());
+                Get.to(() => const Home());
               },
               icon: const Icon(Icons.home)),
           const ImageIcon(

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:grupolias/Tickets/model/ticket.model.dart';
-import 'package:grupolias/Tickets/service/ticket.service.dart';
+import 'package:grupolias/Tickets/models/ticket.model.dart';
+import 'package:grupolias/Tickets/services/ticket.service.dart';
 import 'package:grupolias/Tickets/ui/widgets/CardListTickets.widget.dart';
 
-import '../../controller/ticket.controller.dart';
+import '../../controllers/ticket.controller.dart';
 
 class TicketsScreen extends StatelessWidget {
   TicketsScreen({Key? key}) : super(key: key);
@@ -74,11 +74,13 @@ class TicketsScreen extends StatelessWidget {
                             child: CircularProgressIndicator(),
                           );
                         } else {
+                          //Tickets que vienen de la API
                           List<Ticket>? listaTickets = snapshot.data;
 
+                          //Tickets como tarjetas
                           List<Widget> list = [];
 
-                          listaTickets?.forEach((element) {
+                          listaTickets?.forEach((ticket) {
                             list.add(
                               Container(
                                 height: 100,
@@ -96,8 +98,8 @@ class TicketsScreen extends StatelessWidget {
                                     ),
                                   ],
                                 ),
-                                child: CardListWidget(
-                                  ticket: element,
+                                child: TicketListItem(
+                                  ticket: ticket,
                                 ),
                               ),
                             );

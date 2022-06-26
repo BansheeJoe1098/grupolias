@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'package:grupolias/Cotizaciones/controller/cotizaciones.controller.dart';
+import 'package:grupolias/Cotizaciones/controllers/cotizaciones.controller.dart';
 
 class CotizacionesScreen extends StatefulWidget {
   const CotizacionesScreen({Key? key, required this.idTicket})

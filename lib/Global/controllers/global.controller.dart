@@ -1,7 +1,7 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 import 'package:grupolias/Global/services/auth.service.dart';
-import 'package:grupolias/NavBar/ui/pluguin/navbar.dart';
+import 'package:grupolias/Home/ui/screens/home.screen.dart';
 
 class GlobalController extends GetxController {
   Rx<bool> isAuth = false.obs;
@@ -16,7 +16,7 @@ class GlobalController extends GetxController {
     this.isAuth.value = isAuth;
 
     if (isAuth) {
-      Get.off(() => const BasicBottomNavBar());
+      Get.off(() => const Home());
     }
   }
 }

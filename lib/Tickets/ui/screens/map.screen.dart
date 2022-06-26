@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:grupolias/Cotizaciones/ui/screens/cotizaciones.screen.dart';
-import 'package:grupolias/Tickets/service/map.service.dart';
+import 'package:grupolias/Tickets/services/map.service.dart';
 
-import '../../controller/ticket.controller.dart';
+import '../../controllers/ticket.controller.dart';
 
 class MapScreen extends StatefulWidget {
   const MapScreen({Key? key, required this.idTicket}) : super(key: key);

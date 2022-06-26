@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:grupolias/Cotizaciones/model/cotizacion.model.dart';
-import 'package:grupolias/Cotizaciones/service/cotizaciones.service.dart';
+import 'package:grupolias/Cotizaciones/models/cotizacion.model.dart';
+import 'package:grupolias/Cotizaciones/services/cotizaciones.service.dart';
 import 'package:grupolias/Cotizaciones/ui/screens/aprobacion-cotizacion.screen.dart';
 
 class TusTicketsScreen extends StatefulWidget {
