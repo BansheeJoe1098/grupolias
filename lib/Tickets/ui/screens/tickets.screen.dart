@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:grupolias/Tickets/models/ticket.model.dart';
 import 'package:grupolias/Tickets/services/ticket.service.dart';
-import 'package:grupolias/Tickets/ui/widgets/CardListTickets.widget.dart';
+import 'package:grupolias/Tickets/ui/widgets/ticket-list-item.widget.dart';
 
 import '../../controllers/ticket.controller.dart';
 
@@ -83,18 +83,17 @@ class TicketsScreen extends StatelessWidget {
                           listaTickets?.forEach((ticket) {
                             list.add(
                               Container(
-                                height: 100,
+                                height: 120,
                                 padding: const EdgeInsets.all(8),
                                 margin: const EdgeInsets.all(8),
                                 alignment: AlignmentDirectional.topStart,
-                                decoration: BoxDecoration(
+                                decoration: const BoxDecoration(
                                   color: Colors.white,
-                                  borderRadius: BorderRadius.circular(10),
-                                  boxShadow: const [
+                                  boxShadow: [
                                     BoxShadow(
-                                      color: Colors.blueGrey,
+                                      color: Colors.grey,
                                       blurRadius: 10,
-                                      offset: Offset(0, 3), // Shadow position
+                                      offset: Offset(0, 5), // Shadow position
                                     ),
                                   ],
                                 ),

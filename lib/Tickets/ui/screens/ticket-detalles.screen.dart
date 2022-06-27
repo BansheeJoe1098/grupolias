@@ -5,8 +5,8 @@ import 'package:grupolias/Tickets/models/ticket.model.dart';
 import 'package:grupolias/Tickets/services/ticket.service.dart';
 import '../../controllers/tickets.detalles.controller.dart';
 
-class TicketdetallesScreen extends StatefulWidget {
-  const TicketdetallesScreen(
+class TicketDetallesScreen extends StatefulWidget {
+  const TicketDetallesScreen(
       {Key? key, required this.titulo, required this.idTicket})
       : super(key: key);
 
@@ -14,10 +14,10 @@ class TicketdetallesScreen extends StatefulWidget {
   final int idTicket;
 
   @override
-  State<TicketdetallesScreen> createState() => _TicketdetallesScreenState();
+  State<TicketDetallesScreen> createState() => _TicketDetallesScreenState();
 }
 
-class _TicketdetallesScreenState extends State<TicketdetallesScreen> {
+class _TicketDetallesScreenState extends State<TicketDetallesScreen> {
   final TicketController ticketsController = Get.put(TicketController());
 
   final TicketsDetallesController controllerTD =
@@ -64,7 +64,7 @@ class _TicketdetallesScreenState extends State<TicketdetallesScreen> {
                   }
 
                   Ticket? data = snapshot.data;
-                  ticketsController.getCiudadByTicket(data!.ciudadId);
+                  ticketsController.getCiudadById(data!.ciudadId);
                   ticketsController.ticket.value = data;
                   return Column(
                     crossAxisAlignment: CrossAxisAlignment.start,

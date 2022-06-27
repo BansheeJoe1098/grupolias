@@ -167,8 +167,7 @@ class _AprobacionCotizacionState extends State<AprobacionCotizacion> {
                                     text: controller.urlMapa.value,
                                   ),
                                 ).then((value) async {
-                                  ClipboardData? d = await Clipboard.getData(
-                                      Clipboard.kTextPlain);
+                                  await Clipboard.getData(Clipboard.kTextPlain);
 
                                   Get.snackbar(
                                     "Direccion copiada",

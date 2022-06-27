@@ -17,7 +17,6 @@ class Mapita {
 
     Uri googleUrl = Uri.parse('google.navigation:q=$direccion');
 
-    print(await canLaunchUrl(googleUrl));
     if (await canLaunchUrl(googleUrl)) {
       // await launchUrl(
       //   googleUrl,

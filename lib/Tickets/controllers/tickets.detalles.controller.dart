@@ -6,7 +6,7 @@ import 'package:grupolias/Global/widgets/custom.snackbar.dart';
 import 'package:grupolias/Home/ui/screens/home.screen.dart';
 
 import '../models/ticket.model.dart';
-import '../services/ticketDetalles.service.dart';
+import '../services/ticket-detalles.service.dart';
 import '../ui/screens/map.screen.dart';
 
 class TicketsDetallesController extends GetxController {

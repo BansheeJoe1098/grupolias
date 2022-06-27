@@ -18,7 +18,7 @@ class TicketController extends GetxController {
     update();
   }
 
-  void getCiudadByTicket(int? idCiudad) async {
+  void getCiudadById(int? idCiudad) async {
     ciudad.value = await CiudadService().getCiudadById(idCiudad);
     update();
   }
