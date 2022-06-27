@@ -138,9 +138,9 @@ class _AprobacionCotizacionState extends State<AprobacionCotizacion> {
                               style: ElevatedButton.styleFrom(
                                   primary: Colors.black),
                               onPressed: () {
-                                Get.to(AcuerdoConformidadScreen(
-                                  cotizacion: controller.cotizacion.value,
-                                ));
+                                Get.to(() => AcuerdoConformidadScreen(
+                                      cotizacion: controller.cotizacion.value,
+                                    ));
                               },
                               child: const Text("Acuerdo de conformidad"),
                             ),

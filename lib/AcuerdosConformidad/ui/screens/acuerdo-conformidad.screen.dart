@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:grupolias/Cotizaciones/models/cotizacion.model.dart';
+import 'package:jiffy/jiffy.dart';
 
 import '../../controllers/acuerdo-conformidad.controller.dart';
 
@@ -26,6 +27,8 @@ class _AcuerdoConformidadScreenState extends State<AcuerdoConformidadScreen> {
     super.initState();
     controller.cotizacion = widget.cotizacion;
     controller.getTicketAcuerdo();
+    //Translate date time to español
+    Jiffy.locale("es_us");
   }
 
   @override
@@ -105,7 +108,7 @@ class _AcuerdoConformidadScreenState extends State<AcuerdoConformidadScreen> {
                         ),
                       ),
                       Text(
-                        " ${DateTime.now()}",
+                        " ${Jiffy(DateTime.now()).format("dd MMMM yyyy HH:mm")}",
                         style: const TextStyle(fontSize: 20),
                       ),
                       const SizedBox(
