@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:grupolias/Cotizaciones/ui/screens/cotizaciones.screen.dart';
 import 'package:grupolias/Tickets/controllers/ticket.controller.dart';
 import 'package:grupolias/Tickets/models/ticket.model.dart';
 import 'package:grupolias/Tickets/services/ticket.service.dart';
@@ -29,6 +30,7 @@ class _TicketDetallesScreenState extends State<TicketDetallesScreen> {
   void initState() {
     super.initState();
     idTicket = widget.idTicket;
+    controllerTD.getTicket(idTicket);
   }
 
   @override
@@ -54,7 +56,7 @@ class _TicketDetallesScreenState extends State<TicketDetallesScreen> {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              FutureBuilder<Ticket>(
+              FutureBuilder<Ticket?>(
                 future: TicketService().getTicketById(idTicket),
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
@@ -145,7 +147,13 @@ class _TicketDetallesScreenState extends State<TicketDetallesScreen> {
                       const SizedBox(
                         height: 25,
                       ),
-                      ElevatedButton(
+                    ],
+                  );
+                },
+              ),
+              Obx(
+                (() => controllerTD.ticket.value.estado == "NUEVO"
+                    ? ElevatedButton(
                         style: ElevatedButton.styleFrom(
                           primary: Colors.black,
                         ),
@@ -156,9 +164,24 @@ class _TicketDetallesScreenState extends State<TicketDetallesScreen> {
                           );
                         },
                       )
-                    ],
-                  );
-                },
+                    : const SizedBox()),
+              ),
+              Obx(
+                (() => controllerTD.ticket.value.estado == "TOMADO"
+                    ? ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          primary: Colors.green,
+                        ),
+                        child: const Text("Cotizar Ticket"),
+                        onPressed: () {
+                          Get.to(
+                            () => CotizacionesScreen(
+                              idTicket: idTicket,
+                            ),
+                          );
+                        },
+                      )
+                    : const SizedBox()),
               ),
             ],
           ),

@@ -4,11 +4,20 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:grupolias/Global/widgets/custom.snackbar.dart';
 import 'package:grupolias/Home/ui/screens/home.screen.dart';
+import 'package:grupolias/Tickets/services/ticket.service.dart';
 
 import '../models/ticket.model.dart';
 import '../services/ticket-detalles.service.dart';
 
 class TicketsDetallesController extends GetxController {
+  var ticket = Ticket().obs;
+
+  void getTicket(int idTicket) async {
+    Ticket? t = await TicketService().getTicketById(idTicket);
+    ticket.value = t;
+    update();
+  }
+
   void tomarTicket(Ticket t) async {
     try {
       //Se hace el json requerido
