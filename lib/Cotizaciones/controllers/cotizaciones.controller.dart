@@ -8,6 +8,7 @@ import 'package:get/get.dart';
 import 'package:flutter/services.dart';
 import 'package:grupolias/Cotizaciones/models/create-cotizacion.dto.dart';
 import 'package:grupolias/Cotizaciones/ui/screens/aprobacion-cotizacion.screen.dart';
+import 'package:grupolias/Global/widgets/custom.snackbar.dart';
 import 'package:grupolias/Tickets/services/ticket.service.dart';
 
 import 'package:image_picker/image_picker.dart';
@@ -57,17 +58,17 @@ class CotizacionesController extends GetxController {
         var respuesta = await cotizacionService.create(cot, foto!);
 
         if (respuesta != null) {
-          Get.snackbar(
-            "Exito",
-            "Cotizacion enviado",
-            snackPosition: SnackPosition.BOTTOM,
-            backgroundColor: Colors.green,
+          CustomSnackBar(
+            titulo: "Exito",
+            descripcion: "Cotizacion Enviada con exito",
+            color: Colors.green,
           );
+
           await ticketService.setCotizado(ticketId.value);
 
-          Get.to(AprobacionCotizacion(
-            cotizacion: respuesta,
-          ));
+          Get.offAll(() => AprobacionCotizacion(
+                cotizacion: respuesta,
+              ));
 
           return respuesta;
         }

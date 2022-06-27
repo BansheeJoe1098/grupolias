@@ -57,6 +57,22 @@ class CotizacionesService {
     }
   }
 
+  Future<Cotizacion?> getCotizacionByTicket(int idTicket) async {
+    var url = '$cotizacionurl/ticket/$idTicket';
+    var res = await http.get(
+      Uri.parse(url),
+      headers: {
+        HttpHeaders.contentTypeHeader: 'application/json',
+      },
+    );
+
+    if (res.statusCode == 200) {
+      return Cotizacion.fromJson(jsonDecode(res.body));
+    } else {
+      throw Exception("Error al obtener las cotizaciones");
+    }
+  }
+
   Future<Cotizacion?> statusCotizacion(int idCotizacion) async {
     var url = '$cotizacionurl/$idCotizacion/status';
     var res = await http.get(

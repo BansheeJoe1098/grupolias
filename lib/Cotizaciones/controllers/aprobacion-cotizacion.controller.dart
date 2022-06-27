@@ -47,7 +47,7 @@ class AprobacionCotizacionController extends GetxController {
     }
   }
 
-  void lanzarMapa() async {
+  void lanzarMapa(int ticketId) async {
     // Uri googleUrl =
     //     Uri.parse('google.navigation:q=Tec+de+morelia&avoid=t');
 
@@ -56,8 +56,7 @@ class AprobacionCotizacionController extends GetxController {
 
     //Se obtienen datos del ticket
     TicketService ticketSservice = TicketService();
-    Ticket? ticket =
-        await ticketSservice.getTicketById(cotizacion.value.ticketId!);
+    Ticket? ticket = await ticketSservice.getTicketById(ticketId);
 
     CiudadService ciudadService = CiudadService();
     Ciudad? ciudad = await ciudadService.getCiudadById(ticket.ciudadId);

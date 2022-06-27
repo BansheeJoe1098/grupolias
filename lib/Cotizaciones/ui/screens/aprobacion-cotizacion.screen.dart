@@ -148,8 +148,9 @@ class _AprobacionCotizacionState extends State<AprobacionCotizacion> {
                         );
                 }),
                 ElevatedButton(
-                  onPressed: () => controller.lanzarMapa(),
-                  child: const Text("URL LAUNCHER"),
+                  onPressed: () => controller
+                      .lanzarMapa(controller.cotizacion.value.ticketId!),
+                  child: const Text("Como llegar"),
                 ),
                 //Si no se puede abrir el mapa, se despliega el botón con la URL
                 //del mapa origen y destino

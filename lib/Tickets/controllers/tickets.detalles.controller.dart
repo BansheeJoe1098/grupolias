@@ -2,6 +2,8 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:grupolias/Cotizaciones/models/cotizacion.model.dart';
+import 'package:grupolias/Cotizaciones/services/cotizaciones.service.dart';
 import 'package:grupolias/Global/widgets/custom.snackbar.dart';
 import 'package:grupolias/Home/ui/screens/home.screen.dart';
 import 'package:grupolias/Tickets/services/ticket.service.dart';
@@ -11,10 +13,20 @@ import '../services/ticket-detalles.service.dart';
 
 class TicketsDetallesController extends GetxController {
   var ticket = Ticket().obs;
+  Rx<Cotizacion?> cotizacion = Cotizacion().obs;
 
   void getTicket(int idTicket) async {
     Ticket? t = await TicketService().getTicketById(idTicket);
     ticket.value = t;
+    update();
+  }
+
+  Future<Cotizacion?> getCotizacionByIdTicket(int idTicket) async {
+    try {
+      Cotizacion? c =
+          await CotizacionesService().getCotizacionByTicket(idTicket);
+      cotizacion.value = c;
+    } catch (e) {}
     update();
   }
 
