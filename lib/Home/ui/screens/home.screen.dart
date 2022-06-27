@@ -2,11 +2,12 @@
 
 import 'package:flutter/material.dart';
 import 'package:grupolias/Perfil/ui/screens/perfil.screen.dart';
-import 'package:grupolias/Cotizaciones/ui/screens/tus-tickets.screen.dart';
+import 'package:grupolias/TusTickets/ui/screens/tus-tickets.screen.dart';
 import 'package:grupolias/Tickets/ui/screens/tickets.screen.dart';
 
 class Home extends StatefulWidget {
-  const Home({Key? key}) : super(key: key);
+  final int itemScreen;
+  const Home({Key? key, this.itemScreen = 0}) : super(key: key);
 
   @override
   _HomeState createState() => _HomeState();
@@ -20,6 +21,12 @@ class _HomeState extends State<Home> {
     const TusTicketsScreen(),
     const PerfilScreen(),
   ];
+
+  @override
+  void initState() {
+    super.initState();
+    _screenSeleccionada = widget.itemScreen;
+  }
 
   void _setScreen(int index) {
     setState(() {

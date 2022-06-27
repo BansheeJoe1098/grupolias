@@ -3,6 +3,11 @@ import 'package:get/get.dart';
 import 'package:grupolias/Cotizaciones/models/cotizacion.model.dart';
 import 'package:grupolias/Cotizaciones/services/cotizaciones.service.dart';
 import 'package:grupolias/Cotizaciones/ui/screens/aprobacion-cotizacion.screen.dart';
+import 'package:grupolias/Cotizaciones/ui/screens/cotizaciones.screen.dart';
+import 'package:grupolias/Tickets/ui/screens/ticket-detalles.screen.dart';
+import 'package:grupolias/TusTickets/services/tus-tickets.service.dart';
+
+import '../../../Tickets/models/ticket.model.dart';
 
 class TusTicketsScreen extends StatefulWidget {
   const TusTicketsScreen({Key? key}) : super(key: key);
@@ -27,21 +32,26 @@ class _TusTicketsScreenState extends State<TusTicketsScreen> {
           ),
         ],
       ),
-      body: FutureBuilder<List<Cotizacion>>(
-        future: CotizacionesService().cotizacionesByTecnico(),
+      body: FutureBuilder<List<Ticket>?>(
+        future: TusTicketsService().ticketsOfTecnico(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            List<Cotizacion>? cotizaciones = snapshot.data;
+            List<Ticket>? ticketsList = snapshot.data;
             List<Widget> list = [];
 
-            cotizaciones?.forEach((cot) {
+            ticketsList?.forEach((ticket) {
               list.add(
                 Card(
                   child: ListTile(
-                    title: Text(cot.id.toString()),
-                    subtitle: Text(cot.diagnosticoProblema.toString()),
+                    title: Text(ticket.id.toString()),
+                    subtitle: Text(ticket.problematica.toString()),
                     onTap: () {
-                      Get.to(AprobacionCotizacion(cotizacion: cot));
+                      Get.to(
+                        () => TicketDetallesScreen(
+                          titulo: ticket.numExpediente!,
+                          idTicket: ticket.id!,
+                        ),
+                      );
                     },
                   ),
                 ),

@@ -36,7 +36,7 @@ class _TicketDetallesScreenState extends State<TicketDetallesScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Detalle del ${widget.titulo}',
+          'Expediente ${widget.titulo}',
           style: const TextStyle(fontStyle: FontStyle.italic),
         ),
         backgroundColor: Colors.black,
@@ -108,16 +108,6 @@ class _TicketDetallesScreenState extends State<TicketDetallesScreen> {
                           style: const TextStyle(
                             fontSize: 15,
                           )),
-                      const SizedBox(height: 20),
-                      const Text(
-                        "Expediente 📃",
-                        style: TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.bold),
-                      ),
-                      Text("${data.numExpediente}",
-                          style: const TextStyle(
-                            fontSize: 15,
-                          )),
                       const SizedBox(height: 10),
                       const Text(
                         "Ciudad 🌁",
@@ -154,18 +144,22 @@ class _TicketDetallesScreenState extends State<TicketDetallesScreen> {
                           )),
                       const SizedBox(
                         height: 25,
+                      ),
+                      ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          primary: Colors.black,
+                        ),
+                        child: const Text("Tomar Ticket"),
+                        onPressed: () {
+                          controllerTD.tomarTicket(
+                            ticketsController.ticket.value,
+                          );
+                        },
                       )
                     ],
                   );
                 },
               ),
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(primary: Colors.black),
-                child: const Text("Tomar Ticket"),
-                onPressed: () {
-                  controllerTD.tomarTicket(ticketsController.ticket.value);
-                },
-              )
             ],
           ),
         ),

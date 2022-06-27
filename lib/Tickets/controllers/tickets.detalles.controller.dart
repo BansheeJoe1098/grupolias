@@ -7,7 +7,6 @@ import 'package:grupolias/Home/ui/screens/home.screen.dart';
 
 import '../models/ticket.model.dart';
 import '../services/ticket-detalles.service.dart';
-import '../ui/screens/map.screen.dart';
 
 class TicketsDetallesController extends GetxController {
   void tomarTicket(Ticket t) async {
@@ -30,8 +29,10 @@ class TicketsDetallesController extends GetxController {
         color: Colors.green,
       );
 
-      Get.to(
-        () => MapScreen(idTicket: t.id!),
+      Get.offAll(
+        () => const Home(
+          itemScreen: 1,
+        ),
       );
     } catch (e) {
       CustomSnackBar(

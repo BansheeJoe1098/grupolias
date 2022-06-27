@@ -57,25 +57,6 @@ class CotizacionesService {
     }
   }
 
-  Future<List<Cotizacion>> cotizacionesByTecnico() async {
-    //TODO: Obtener el id del tecnico a partir de la sesion
-    var res = await http.get(
-      Uri.parse("$cotizacionurl/tecnico/${1}"),
-      headers: {
-        HttpHeaders.contentTypeHeader: 'application/json',
-      },
-    );
-
-    if (res.statusCode == 200) {
-      var cotizaciones = jsonDecode(res.body) as List<dynamic>;
-      return cotizaciones
-          .map((cotizacion) => Cotizacion.fromJson(cotizacion))
-          .toList();
-    } else {
-      throw Exception("Error al obtener las cotizaciones");
-    }
-  }
-
   Future<Cotizacion?> statusCotizacion(int idCotizacion) async {
     var url = '$cotizacionurl/$idCotizacion/status';
     var res = await http.get(
