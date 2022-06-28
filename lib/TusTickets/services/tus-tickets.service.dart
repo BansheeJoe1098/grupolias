@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import '../../Tickets/models/ticket.model.dart';
 import '../../constants.dart';
 

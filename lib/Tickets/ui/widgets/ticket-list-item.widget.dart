@@ -74,7 +74,7 @@ class _TicketListItemState extends State<TicketListItem> {
         ),
         Container(
           decoration: BoxDecoration(
-            color: Color.fromARGB(172, 236, 236, 236),
+            color: const Color.fromARGB(172, 236, 236, 236),
             borderRadius: BorderRadius.circular(10),
           ),
           child: IconButton(

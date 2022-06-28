@@ -23,11 +23,20 @@ class TicketsDetallesController extends GetxController {
 
   Future<Cotizacion?> getCotizacionByIdTicket(int idTicket) async {
     try {
-      Cotizacion? c =
+      Cotizacion? cot =
           await CotizacionesService().getCotizacionByTicket(idTicket);
-      cotizacion.value = c;
-    } catch (e) {}
-    update();
+      cotizacion.value = cot;
+
+      update();
+      return cot;
+    } catch (e) {
+      CustomSnackBar(
+        titulo: "Error: ${e.toString()}",
+        descripcion: "Error al consultar la cotizacion",
+        color: Colors.red,
+      );
+      return null;
+    }
   }
 
   void tomarTicket(Ticket t) async {

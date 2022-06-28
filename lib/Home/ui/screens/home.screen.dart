@@ -17,7 +17,7 @@ class _HomeState extends State<Home> {
   int _screenSeleccionada = 0;
 
   static final List<Widget> _screens = <Widget>[
-    TicketsScreen(),
+    const TicketsScreen(),
     const TusTicketsScreen(),
     const PerfilScreen(),
   ];

@@ -1,18 +1,41 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
+import 'package:grupolias/Global/controllers/global.controller.dart';
+import 'package:grupolias/LoginPage/ui/screens/login.screen.dart';
 import 'package:grupolias/Tickets/models/ticket.model.dart';
 import 'package:grupolias/Tickets/services/ticket.service.dart';
 import 'package:grupolias/Tickets/ui/widgets/ticket-list-item.widget.dart';
 
 import '../../controllers/ticket.controller.dart';
 
-class TicketsScreen extends StatelessWidget {
-  TicketsScreen({Key? key}) : super(key: key);
+class TicketsScreen extends StatefulWidget {
+  const TicketsScreen({Key? key}) : super(key: key);
 
+  @override
+  State<TicketsScreen> createState() => _TicketsScreenState();
+}
+
+class _TicketsScreenState extends State<TicketsScreen> {
   final controller = Get.put(TicketController());
+  final globalController = Get.put(GlobalController());
+  @override
+  void initState() {
+    super.initState();
+    globalController.getUsuarioLogueado();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: () async {
+          const storage = FlutterSecureStorage();
+          await storage.delete(key: 'token');
+          Get.offAll(() => const LoginScreen());
+        },
+        child: const Icon(Icons.logout_sharp),
+      ),
       appBar: AppBar(
         automaticallyImplyLeading: false,
         backgroundColor: Colors.black,
@@ -45,16 +68,18 @@ class TicketsScreen extends StatelessWidget {
                       color: Colors.black,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        children: const [
-                          Text(
-                            'Bienvenido Jose',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 30,
-                              fontWeight: FontWeight.w900,
+                        children: [
+                          Obx(
+                            () => Text(
+                              'Bienvenido ${globalController.tecnicoLogueado.value?.nombre}',
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 30,
+                                fontWeight: FontWeight.w900,
+                              ),
                             ),
                           ),
-                          Text(
+                          const Text(
                             'Estos son los tickets que tenemos para ti',
                             style: TextStyle(
                               color: Colors.white,

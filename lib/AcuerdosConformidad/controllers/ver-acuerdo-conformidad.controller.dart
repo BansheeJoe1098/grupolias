@@ -1,5 +1,7 @@
 import 'package:easy_pdf_viewer/easy_pdf_viewer.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:grupolias/Global/widgets/custom.snackbar.dart';
 
 class VerAcuerdoConformidadController extends GetxController {
   var isLoading = false.obs;
@@ -11,7 +13,11 @@ class VerAcuerdoConformidadController extends GetxController {
 
       return document;
     } catch (e) {
-      print(e);
+      CustomSnackBar(
+        titulo: 'Error al cargor el documento',
+        descripcion: e.toString(),
+        color: Colors.red,
+      );
     }
 
     isLoading.value = false;

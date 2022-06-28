@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:grupolias/Cotizaciones/models/cotizacion.model.dart';
-import 'package:grupolias/Cotizaciones/services/cotizaciones.service.dart';
-import 'package:grupolias/Cotizaciones/ui/screens/aprobacion-cotizacion.screen.dart';
-import 'package:grupolias/Cotizaciones/ui/screens/cotizaciones.screen.dart';
 import 'package:grupolias/Tickets/ui/screens/ticket-detalles.screen.dart';
 import 'package:grupolias/TusTickets/services/tus-tickets.service.dart';
 
