@@ -1,9 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
+import '../../controllers/perfil.controller.dart';
 import '../widgets/perfil-img-picker.widget.dart';
 
-class PerfilScreen extends StatelessWidget {
+class PerfilScreen extends StatefulWidget {
   const PerfilScreen({Key? key}) : super(key: key);
+
+  @override
+  State<PerfilScreen> createState() => _PerfilScreenState();
+}
+
+class _PerfilScreenState extends State<PerfilScreen> {
+  final controller = Get.put(PerfilController());
+  @override
+  void initState() {
+    super.initState();
+    controller.getFotoPerfil();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -40,17 +54,31 @@ class PerfilScreen extends StatelessWidget {
                     width: 130,
                     height: 130,
                     decoration: BoxDecoration(
-                        border: Border.all(width: 4, color: Colors.white),
-                        boxShadow: [
-                          BoxShadow(
-                              spreadRadius: 2,
-                              blurRadius: 10,
-                              color: Colors.black.withOpacity(0.1))
-                        ],
-                        shape: BoxShape.circle,
-                        image: const DecorationImage(
-                            fit: BoxFit.cover,
-                            image: AssetImage('assets/gpolias.png'))),
+                      border: Border.all(width: 4, color: Colors.white),
+                      boxShadow: [
+                        BoxShadow(
+                            spreadRadius: 2,
+                            blurRadius: 10,
+                            color: Colors.black.withOpacity(0.1))
+                      ],
+                      shape: BoxShape.circle,
+                    ),
+                    child: GetBuilder<PerfilController>(builder: (_) {
+                      return Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: controller.imagenUsuarioLoguado == null
+                            ? Image.asset(
+                                'assets/gpolias.png',
+                                height: 200,
+                                width: 200,
+                              )
+                            : Image.network(
+                                "${controller.imagenUsuarioLoguado}",
+                                height: 200,
+                                width: 200,
+                              ),
+                      );
+                    }),
                   ),
                   Positioned(
                     bottom: 0,
@@ -59,7 +87,9 @@ class PerfilScreen extends StatelessWidget {
                       onTap: () {
                         showBottomSheet(
                             context: context,
-                            builder: ((builder) => PerfilImgPicker()));
+                            builder: ((builder) => PerfilImgPicker(
+                                  perfilController: controller,
+                                )));
                       },
                       child: Container(
                         height: 40,

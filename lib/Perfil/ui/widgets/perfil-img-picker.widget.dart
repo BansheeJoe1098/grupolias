@@ -3,16 +3,26 @@
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
+import '../../controllers/perfil.controller.dart';
+
 class PerfilImgPicker extends StatefulWidget {
-  const PerfilImgPicker({Key? key}) : super(key: key);
+  final PerfilController perfilController;
+  const PerfilImgPicker({Key? key, required this.perfilController})
+      : super(key: key);
 
   @override
   State<PerfilImgPicker> createState() => _PerfilImgPickerState();
 }
 
 class _PerfilImgPickerState extends State<PerfilImgPicker> {
-  late PickedFile _imageFile;
-  final ImagePicker _picker = ImagePicker();
+  late PerfilController controller;
+
+  @override
+  void initState() {
+    super.initState();
+    controller = widget.perfilController;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -39,14 +49,14 @@ class _PerfilImgPickerState extends State<PerfilImgPicker> {
               FlatButton.icon(
                 icon: const Icon(Icons.camera),
                 onPressed: () {
-                  takePhoto(ImageSource.camera);
+                  controller.tomarFoto(ImageSource.camera);
                 },
                 label: const Text("Camara"),
               ),
               FlatButton.icon(
                 icon: const Icon(Icons.image),
                 onPressed: () {
-                  takePhoto(ImageSource.gallery);
+                  controller.tomarFoto(ImageSource.gallery);
                 },
                 label: const Text("Galeria"),
               ),
@@ -55,14 +65,5 @@ class _PerfilImgPickerState extends State<PerfilImgPicker> {
         ],
       ),
     );
-  }
-
-  void takePhoto(ImageSource source) async {
-    final pickedFile = await _picker.getImage(
-      source: source,
-    );
-    setState(() {
-      _imageFile = pickedFile!;
-    });
   }
 }

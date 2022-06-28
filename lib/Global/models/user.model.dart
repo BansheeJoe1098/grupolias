@@ -16,6 +16,7 @@ class User {
     this.createdAt,
     this.updatedAt,
     this.rol,
+    this.imgPerfilId,
     this.hashedRt,
   });
 
@@ -27,6 +28,7 @@ class User {
   DateTime? createdAt;
   DateTime? updatedAt;
   String? rol;
+  int? imgPerfilId;
   String? hashedRt;
 
   factory User.fromRawJson(String str) => User.fromJson(json.decode(str));
@@ -46,6 +48,7 @@ class User {
             ? null
             : DateTime.parse(json["updatedAt"]),
         rol: json["rol"] == null ? null : json["rol"],
+        imgPerfilId: json["img_perfilId"] == null ? null : json["img_perfilId"],
         hashedRt: json["hashedRt"] == null ? null : json["hashedRt"],
       );
 
@@ -58,6 +61,7 @@ class User {
         "createdAt": createdAt == null ? null : createdAt?.toIso8601String(),
         "updatedAt": updatedAt == null ? null : updatedAt?.toIso8601String(),
         "rol": rol == null ? null : rol,
+        "img_perfilId": imgPerfilId == null ? null : imgPerfilId,
         "hashedRt": hashedRt == null ? null : hashedRt,
       };
 }

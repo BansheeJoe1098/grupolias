@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 import 'package:grupolias/Global/services/auth.service.dart';
@@ -7,6 +9,9 @@ import 'package:grupolias/Perfil/services/tecnico.service.dart';
 import '../../Perfil/models/tecnico.model.dart';
 import '../models/user.model.dart';
 import '../services/user.service.dart';
+
+import 'package:http/http.dart' as http;
+import 'package:http_parser/http_parser.dart' as http_parser;
 
 class GlobalController extends GetxController {
   Rx<bool> isAuth = false.obs;
