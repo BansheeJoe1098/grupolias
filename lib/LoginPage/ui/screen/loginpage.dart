@@ -114,7 +114,8 @@ class _LoginPageState extends State<LoginPage> {
                           // ignore: deprecated_member_use
                           child: RaisedButton(
                             onPressed: () {
-                              loginController.login();
+                              //loginController.login();
+                              Get.to(BasicBottomNavBar());
                             },
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(30.0)),
