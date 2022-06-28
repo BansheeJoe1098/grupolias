@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../widgets/perfil-img-picker.widget.dart';
+
 class PerfilScreen extends StatelessWidget {
   const PerfilScreen({Key? key}) : super(key: key);
 
@@ -31,11 +33,49 @@ class PerfilScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Center(
-              child: CircleAvatar(
-                backgroundImage: AssetImage('assets/profile.png'),
-                backgroundColor: Colors.black,
-                radius: 60.0,
+            Center(
+              child: Stack(
+                children: [
+                  Container(
+                    width: 130,
+                    height: 130,
+                    decoration: BoxDecoration(
+                        border: Border.all(width: 4, color: Colors.white),
+                        boxShadow: [
+                          BoxShadow(
+                              spreadRadius: 2,
+                              blurRadius: 10,
+                              color: Colors.black.withOpacity(0.1))
+                        ],
+                        shape: BoxShape.circle,
+                        image: const DecorationImage(
+                            fit: BoxFit.cover,
+                            image: AssetImage('assets/gpolias.png'))),
+                  ),
+                  Positioned(
+                    bottom: 0,
+                    right: 0,
+                    child: InkWell(
+                      onTap: () {
+                        showBottomSheet(
+                            context: context,
+                            builder: ((builder) => PerfilImgPicker()));
+                      },
+                      child: Container(
+                        height: 40,
+                        width: 40,
+                        decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            border: Border.all(width: 4, color: Colors.white),
+                            color: Colors.black),
+                        child: const Icon(
+                          Icons.camera_alt,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                  )
+                ],
               ),
             ),
             const SizedBox(
