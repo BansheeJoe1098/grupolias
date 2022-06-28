@@ -32,7 +32,15 @@ class GlobalController extends GetxController {
     User? user = await service.getUsuarioLogueado();
 
     if (user != null) {
+      //Se refresca el token
+      const storage = FlutterSecureStorage();
+      storage.delete(key: 'token');
+      storage.write(key: 'token', value: user.hashedRt);
+
+      //Se asigna el usuario actual
       usuarioLogueado.value = user;
+
+      //Se obtiene el tecnico actual
       await getTecnicoByUserId(user.id!);
       return user;
     }
