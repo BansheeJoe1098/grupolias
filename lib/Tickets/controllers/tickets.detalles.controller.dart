@@ -25,7 +25,9 @@ class TicketsDetallesController extends GetxController {
     try {
       Cotizacion? cot =
           await CotizacionesService().getCotizacionByTicket(idTicket);
-      cotizacion.value = cot;
+      if (cot != null) {
+        cotizacion.value = cot;
+      }
 
       update();
       return cot;

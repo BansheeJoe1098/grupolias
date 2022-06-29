@@ -69,7 +69,8 @@ class CotizacionesService {
     if (res.statusCode == 200) {
       return Cotizacion.fromJson(jsonDecode(res.body));
     } else {
-      throw Exception("Error al obtener las cotizaciones");
+      print(res.body);
+      return null;
     }
   }
 
@@ -85,7 +86,7 @@ class CotizacionesService {
     if (res.statusCode == 200) {
       return Cotizacion.fromJson(jsonDecode(res.body));
     } else {
-      throw Exception("Error al obtener las cotizaciones");
+      return null;
     }
   }
 }

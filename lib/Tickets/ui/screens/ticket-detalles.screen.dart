@@ -23,11 +23,8 @@ class TicketDetallesScreen extends StatefulWidget {
 
 class _TicketDetallesScreenState extends State<TicketDetallesScreen> {
   final TicketController ticketsController = Get.put(TicketController());
-
-  final TicketsDetallesController controllerTD =
-      Get.put(TicketsDetallesController());
-
   final controllerCotizacion = Get.put(AprobacionCotizacionController());
+  final controllerTD = Get.put(TicketsDetallesController());
 
   late int idTicket;
 

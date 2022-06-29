@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:grupolias/AcuerdosConformidad/models/acuerdo-conformidad.dto.dart';
 import 'package:grupolias/AcuerdosConformidad/models/acuerdo-conformidad.model.dart';
+import 'package:grupolias/Global/controllers/global.controller.dart';
 import 'package:grupolias/Signature/ui/screens/signature.screen.dart';
 import 'package:grupolias/Tickets/services/ticket.service.dart';
 
@@ -28,6 +29,12 @@ class AcuerdoConformidadController extends GetxController {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Enviando')),
       );
+
+      //-------Se obtiene el ID del usuario logueado--------//
+      GlobalController global = GlobalController();
+      global.getUsuarioLogueado();
+
+      print(global.usuarioLogueado.value?.id);
 
       //---------------Se envia registro de acuerdo -----------------//
       AcuerdoDto acuerdoDTO = AcuerdoDto(
