@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/services.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 import 'package:grupolias/Perfil/services/tecnico.service.dart';
 import 'package:image_picker/image_picker.dart';
@@ -10,6 +11,7 @@ import '../../Global/controllers/global.controller.dart';
 import '../../Global/image.model.dart';
 import '../../Global/models/user.model.dart';
 import '../../Global/services/user.service.dart';
+import '../../LoginPage/ui/screens/login.screen.dart';
 
 class PerfilController extends GetxController {
   File? foto;
@@ -85,5 +87,11 @@ class PerfilController extends GetxController {
 
     if (imagen != null) imagenUsuarioLoguado = imagen.url;
     update();
+  }
+
+  void logout() async {
+    const storage = FlutterSecureStorage();
+    await storage.delete(key: 'token');
+    Get.offAll(() => const LoginScreen());
   }
 }

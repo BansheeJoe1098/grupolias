@@ -25,6 +25,14 @@ class _PerfilScreenState extends State<PerfilScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.black,
+        tooltip: 'Cerrar sesión',
+        onPressed: () => controller.logout(),
+        child: const Icon(
+          Icons.exit_to_app,
+        ),
+      ),
       appBar: AppBar(
         automaticallyImplyLeading: false,
         title: const Text(
@@ -164,7 +172,6 @@ class _PerfilScreenState extends State<PerfilScreen> {
                   color: Color.fromARGB(255, 95, 94, 92),
                   fontWeight: FontWeight.bold,
                   fontSize: 20.0,
-                  letterSpacing: 2.0,
                 ),
               ),
             ),

@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 import 'package:grupolias/Global/controllers/global.controller.dart';
-import 'package:grupolias/LoginPage/ui/screens/login.screen.dart';
 import 'package:grupolias/Tickets/models/ticket.model.dart';
 import 'package:grupolias/Tickets/services/ticket.service.dart';
 import 'package:grupolias/Tickets/ui/widgets/ticket-list-item.widget.dart';
@@ -28,14 +26,6 @@ class _TicketsScreenState extends State<TicketsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        onPressed: () async {
-          const storage = FlutterSecureStorage();
-          await storage.delete(key: 'token');
-          Get.offAll(() => const LoginScreen());
-        },
-        child: const Icon(Icons.logout_sharp),
-      ),
       appBar: AppBar(
         automaticallyImplyLeading: false,
         backgroundColor: Colors.black,
