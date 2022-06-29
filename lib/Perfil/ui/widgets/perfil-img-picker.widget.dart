@@ -25,44 +25,79 @@ class _PerfilImgPickerState extends State<PerfilImgPicker> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 100.0,
-      width: MediaQuery.of(context).size.width,
-      margin: const EdgeInsets.symmetric(
-        horizontal: 20,
-        vertical: 20,
-      ),
-      child: Column(
-        children: <Widget>[
-          const Text(
-            "Choose Profile photo",
-            style: TextStyle(
-              fontSize: 20.0,
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Container(
+        height: 100.0,
+        width: MediaQuery.of(context).size.width,
+        decoration: const BoxDecoration(
+          color: Colors.black,
+          borderRadius: BorderRadius.all(Radius.circular(10.0)),
+        ),
+        margin: const EdgeInsets.symmetric(
+          horizontal: 20,
+          vertical: 20,
+        ),
+        child: Column(
+          children: <Widget>[
+            const Text(
+              "Tomar foto desde",
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 20.0,
+              ),
             ),
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              FlatButton.icon(
-                icon: const Icon(Icons.camera),
-                onPressed: () {
-                  controller.tomarFoto(ImageSource.camera);
-                },
-                label: const Text("Camara"),
-              ),
-              FlatButton.icon(
-                icon: const Icon(Icons.image),
-                onPressed: () {
-                  controller.tomarFoto(ImageSource.gallery);
-                },
-                label: const Text("Galeria"),
-              ),
-            ],
-          )
-        ],
+            const SizedBox(
+              height: 20,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                const Spacer(),
+                FlatButton.icon(
+                  color: Colors.white,
+                  icon: const Icon(
+                    Icons.camera,
+                    color: Colors.black,
+                  ),
+                  onPressed: () {
+                    //Se toma foto de la camara
+                    controller.tomarFoto(
+                      ImageSource.camera,
+                    );
+                  },
+                  label: const Text(
+                    "Camara",
+                    style: TextStyle(
+                      color: Colors.black,
+                    ),
+                  ),
+                ),
+                const Spacer(),
+                FlatButton.icon(
+                  color: Colors.white,
+                  icon: const Icon(
+                    Icons.image,
+                    color: Colors.black,
+                  ),
+                  onPressed: () {
+                    controller.tomarFoto(
+                      //Se toma la foto desde la galeria
+                      ImageSource.gallery,
+                    );
+                  },
+                  label: const Text(
+                    "Galeria",
+                    style: TextStyle(
+                      color: Colors.black,
+                    ),
+                  ),
+                ),
+                const Spacer(),
+              ],
+            )
+          ],
+        ),
       ),
     );
   }

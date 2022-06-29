@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:grupolias/Global/controllers/global.controller.dart';
 
 import '../../controllers/perfil.controller.dart';
 import '../widgets/perfil-img-picker.widget.dart';
@@ -13,10 +14,12 @@ class PerfilScreen extends StatefulWidget {
 
 class _PerfilScreenState extends State<PerfilScreen> {
   final controller = Get.put(PerfilController());
+  final globalController = Get.put(GlobalController());
   @override
   void initState() {
     super.initState();
     controller.getFotoPerfil();
+    globalController.getUsuarioLogueado();
   }
 
   @override
@@ -25,11 +28,9 @@ class _PerfilScreenState extends State<PerfilScreen> {
       appBar: AppBar(
         automaticallyImplyLeading: false,
         title: const Text(
-          'GRUPO LIAS',
+          'Tu Perfil',
           style: TextStyle(
-            fontStyle: FontStyle.italic,
             fontSize: 20.0,
-            letterSpacing: 2.0,
           ),
         ),
         backgroundColor: Colors.black,
@@ -54,12 +55,16 @@ class _PerfilScreenState extends State<PerfilScreen> {
                     width: 130,
                     height: 130,
                     decoration: BoxDecoration(
-                      border: Border.all(width: 4, color: Colors.white),
+                      border: Border.all(
+                        width: 4,
+                        color: Colors.white,
+                      ),
                       boxShadow: [
                         BoxShadow(
-                            spreadRadius: 2,
-                            blurRadius: 10,
-                            color: Colors.black.withOpacity(0.1))
+                          spreadRadius: 2,
+                          blurRadius: 10,
+                          color: Colors.black.withOpacity(0.1),
+                        )
                       ],
                       shape: BoxShape.circle,
                     ),
@@ -86,18 +91,24 @@ class _PerfilScreenState extends State<PerfilScreen> {
                     child: InkWell(
                       onTap: () {
                         showBottomSheet(
-                            context: context,
-                            builder: ((builder) => PerfilImgPicker(
-                                  perfilController: controller,
-                                )));
+                          context: context,
+                          //El image picker muesta las opciones para cambiar foto
+                          builder: ((builder) => PerfilImgPicker(
+                                perfilController: controller,
+                              )),
+                        );
                       },
                       child: Container(
                         height: 40,
                         width: 40,
                         decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            border: Border.all(width: 4, color: Colors.white),
-                            color: Colors.black),
+                          shape: BoxShape.circle,
+                          border: Border.all(
+                            width: 4,
+                            color: Colors.white,
+                          ),
+                          color: Colors.black,
+                        ),
                         child: const Icon(
                           Icons.camera_alt,
                           color: Colors.white,
@@ -111,66 +122,73 @@ class _PerfilScreenState extends State<PerfilScreen> {
             const SizedBox(
               height: 50.0,
             ),
-            const Text(
-              'Jose Garcia',
-              style: TextStyle(
-                color: Colors.black,
-                fontWeight: FontWeight.bold,
-                fontSize: 28.0,
-                letterSpacing: 2.0,
+            Obx(
+              () => Text(
+                '''${globalController.tecnicoLogueado.value?.nombre} ${globalController.tecnicoLogueado.value?.apellidoPaterno} ${globalController.tecnicoLogueado.value?.apellidoMaterno}
+                ''',
+                style: const TextStyle(
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 28.0,
+                ),
               ),
             ),
-            const SizedBox(
-              height: 10.0,
+            Obx(
+              () => Text(
+                '${globalController.tecnicoLogueado.value?.telefono}',
+                style: const TextStyle(
+                  color: Colors.black,
+                  fontSize: 20.0,
+                ),
+              ),
             ),
             const Text(
-              '4431256540',
+              "Servicios que ofreces",
               style: TextStyle(
                 color: Colors.black,
                 fontWeight: FontWeight.bold,
                 fontSize: 20.0,
-                letterSpacing: 2.0,
               ),
+            ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: globalController.listaServicios(),
             ),
             const SizedBox(
               height: 10.0,
             ),
-            const Text(
-              'Plomero\nElectricista',
-              style: TextStyle(
-                color: Color.fromARGB(255, 102, 100, 100),
-                letterSpacing: 2.0,
-              ),
-            ),
-            const SizedBox(
-              height: 10.0,
-            ),
-            const Text(
-              'Mexico,DF',
-              style: TextStyle(
-                color: Color.fromARGB(255, 95, 94, 92),
-                fontWeight: FontWeight.bold,
-                fontSize: 20.0,
-                letterSpacing: 2.0,
+            Obx(
+              () => Text(
+                '${globalController.ciudadTecnico.value?.nombre} - ${globalController.estadoTecnico.value?.nombre}',
+                style: const TextStyle(
+                  color: Color.fromARGB(255, 95, 94, 92),
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20.0,
+                  letterSpacing: 2.0,
+                ),
               ),
             ),
             const SizedBox(
               height: 10.0,
             ),
             Row(
-              children: const [
-                Icon(
+              children: [
+                const Icon(
                   Icons.email,
                   color: Colors.black,
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 10.0,
                 ),
-                Text(
-                  'jose.garcia@flutter.prof',
-                  style: TextStyle(
-                      letterSpacing: 1.0, color: Colors.black, fontSize: 18.0),
-                ),
+                Obx(
+                  () => Text(
+                    '${globalController.usuarioLogueado.value?.email}',
+                    style: const TextStyle(
+                        letterSpacing: 1.0,
+                        color: Colors.black,
+                        fontSize: 18.0),
+                  ),
+                )
               ],
             ),
           ],

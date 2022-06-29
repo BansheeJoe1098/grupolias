@@ -7,6 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:grupolias/Global/image.model.dart';
 
+import '../../Tickets/models/ciudad.model.dart';
+import '../../Tickets/models/estado.model.dart';
 import '../../constants.dart';
 import '../../Global/widgets/custom.snackbar.dart';
 import '../models/tecnico.model.dart';
@@ -16,7 +18,9 @@ import 'package:http_parser/http_parser.dart' as http_parser;
 
 class TecnicoService {
   String url = '${Constants.API_URL}/tecnicos';
-  String imagenesurl = '${Constants.API_URL}/imagenes';
+  String imagenesURL = '${Constants.API_URL}/imagenes';
+  String ciudadURL = '${Constants.API_URL}/ciudades';
+  String estadosURL = '${Constants.API_URL}/estados';
 
   Future<Tecnico?> getTecnicoByUserId(int id) async {
     const storage = FlutterSecureStorage();
@@ -57,7 +61,7 @@ class TecnicoService {
     });
 
     Response<String> res = await dio.post(
-      "$imagenesurl/upload",
+      "$imagenesURL/upload",
       data: resFoto,
       options: Options(
         headers: token != null ? {'Authorization': 'Bearer $token'} : null,
@@ -79,13 +83,62 @@ class TecnicoService {
   }
 
   Future<Imagen?> getImagenPerfil(int imageProfileId) async {
-    final response = await http.get(Uri.parse('$imagenesurl/$imageProfileId'));
+    const storage = FlutterSecureStorage();
+    var token = await storage.read(key: 'token');
+    final response = await http.get(
+      Uri.parse('$imagenesURL/$imageProfileId'),
+      headers: token != null ? {'Authorization': 'Bearer $token'} : null,
+    );
 
     if (response.statusCode == 200) {
       return Imagen.fromRawJson(response.body);
     } else {
       CustomSnackBar(
         titulo: "Error al obtener la foto de perfil",
+        descripcion: "Error: ${response.statusCode}",
+        color: Colors.red,
+      );
+
+      return null;
+    }
+  }
+
+  Future<Ciudad?> getCiudadTecnico(int idCiudad) async {
+    const storage = FlutterSecureStorage();
+    var token = await storage.read(key: 'token');
+
+    final response = await http.get(
+      Uri.parse('$ciudadURL/$idCiudad'),
+      headers: token != null ? {'Authorization': 'Bearer $token'} : null,
+    );
+
+    if (response.statusCode == 200) {
+      return Ciudad.fromRawJson(response.body);
+    } else {
+      CustomSnackBar(
+        titulo: "Error al obtener la ciudad",
+        descripcion: "Error: ${response.statusCode}",
+        color: Colors.red,
+      );
+
+      return null;
+    }
+  }
+
+  Future<Estado?> getEstadoTecnico(int idEstado) async {
+    const storage = FlutterSecureStorage();
+    var token = await storage.read(key: 'token');
+
+    final response = await http.get(
+      Uri.parse('$estadosURL/$idEstado'),
+      headers: token != null ? {'Authorization': 'Bearer $token'} : null,
+    );
+
+    if (response.statusCode == 200) {
+      return Estado.fromRawJson(response.body);
+    } else {
+      CustomSnackBar(
+        titulo: "Error al obtener la ciudad",
         descripcion: "Error: ${response.statusCode}",
         color: Colors.red,
       );

@@ -45,6 +45,7 @@ class Ticket {
     this.isServicioDomestico,
     this.isServicioForaneo,
     this.tecnicoId,
+    this.isArchivado,
     this.createdAt,
     this.updatedAt,
   });
@@ -86,6 +87,7 @@ class Ticket {
   bool? isServicioDomestico;
   bool? isServicioForaneo;
   int? tecnicoId;
+  bool? isArchivado;
   DateTime? createdAt;
   DateTime? updatedAt;
 
@@ -163,6 +165,7 @@ class Ticket {
             ? null
             : json["is_servicio_foraneo"],
         tecnicoId: json["tecnicoId"] == null ? null : json["tecnicoId"],
+        isArchivado: json["is_archivado"] == null ? null : json["is_archivado"],
         createdAt: json["createdAt"] == null
             ? null
             : DateTime.parse(json["createdAt"]),
@@ -217,6 +220,7 @@ class Ticket {
         "is_servicio_foraneo":
             isServicioForaneo == null ? null : isServicioForaneo,
         "tecnicoId": tecnicoId == null ? null : tecnicoId,
+        "is_archivado": isArchivado == null ? null : isArchivado,
         "createdAt": createdAt == null ? null : createdAt?.toIso8601String(),
         "updatedAt": updatedAt == null ? null : updatedAt?.toIso8601String(),
       };

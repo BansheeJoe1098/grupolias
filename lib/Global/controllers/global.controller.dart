@@ -1,22 +1,22 @@
-import 'dart:io';
-
+import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 import 'package:grupolias/Global/services/auth.service.dart';
 import 'package:grupolias/Home/ui/screens/home.screen.dart';
 import 'package:grupolias/Perfil/services/tecnico.service.dart';
+import 'package:grupolias/Tickets/models/estado.model.dart';
 
 import '../../Perfil/models/tecnico.model.dart';
+import '../../Tickets/models/ciudad.model.dart';
 import '../models/user.model.dart';
 import '../services/user.service.dart';
-
-import 'package:http/http.dart' as http;
-import 'package:http_parser/http_parser.dart' as http_parser;
 
 class GlobalController extends GetxController {
   Rx<bool> isAuth = false.obs;
   Rx<User?> usuarioLogueado = User().obs;
   Rx<Tecnico?> tecnicoLogueado = Tecnico().obs;
+  Rx<Ciudad?> ciudadTecnico = Ciudad().obs;
+  Rx<Estado?> estadoTecnico = Estado().obs;
 
   Future<void> isAutenticado() async {
     const storage = FlutterSecureStorage();
@@ -59,8 +59,66 @@ class GlobalController extends GetxController {
 
     if (tecnico != null) {
       tecnicoLogueado.value = tecnico;
+      getCiudadTecnico();
       return tecnico;
     }
     return null;
+  }
+
+  Future<Ciudad?> getCiudadTecnico() async {
+    TecnicoService service = TecnicoService();
+    Ciudad? ciudad = await service.getCiudadTecnico(
+      tecnicoLogueado.value!.ciudadId!,
+    );
+
+    if (ciudad != null) {
+      ciudadTecnico.value = ciudad;
+      getEstadoTecnico();
+      return ciudad;
+    }
+    return null;
+  }
+
+  Future<Estado?> getEstadoTecnico() async {
+    TecnicoService service = TecnicoService();
+    Estado? estado =
+        await service.getEstadoTecnico(ciudadTecnico.value!.estadoId!);
+
+    if (estado != null) {
+      estadoTecnico.value = estado;
+      return estado;
+    }
+    return null;
+  }
+
+  List<Widget> listaServicios() {
+    List<Widget> list = [];
+
+    tecnicoLogueado.value?.servicio?.forEach((servicio) {
+      list.add(
+        Column(
+          children: [
+            const SizedBox(
+              height: 4.0,
+            ),
+            Container(
+              decoration: BoxDecoration(
+                color: Colors.grey[300],
+                borderRadius: BorderRadius.circular(3),
+              ),
+              child: Text(
+                servicio.nombre!,
+                style: const TextStyle(
+                  color: Colors.grey,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 16.0,
+                ),
+              ),
+            ),
+          ],
+        ),
+      );
+    });
+    return list;
   }
 }
