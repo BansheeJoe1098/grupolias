@@ -56,15 +56,22 @@ class _BotonesTicketWidgetState extends State<BotonesTicketWidget> {
                     );
                   },
                 )
-              : const SizedBox()),
+              : const SizedBox(
+                  height: 20,
+                )),
         ),
         Obx(
           (() => controllerTD.ticket.value.estado == "TOMADO"
               ? ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    primary: Colors.green,
-                  ),
-                  child: const Text("Llegué"),
+                      primary: Colors.red,
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 20, vertical: 10),
+                      textStyle: const TextStyle(
+                          fontSize: 20, fontWeight: FontWeight.bold),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(50))),
+                  child: const Text("Pulse Cuando Llegué ‼‼"),
                   onPressed: () {
                     Get.to(
                       () => FotoLlegadaScreen(
@@ -93,11 +100,21 @@ class _BotonesTicketWidgetState extends State<BotonesTicketWidget> {
                     );
                   },
                 )
-              : const SizedBox()),
+              : const SizedBox(
+                  height: 20,
+                )),
         ),
         Obx(
           (() => controllerTD.ticket.value.tecnicoId != null
               ? ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                      primary: Colors.green,
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 20, vertical: 10),
+                      textStyle: const TextStyle(
+                          fontSize: 20, fontWeight: FontWeight.bold),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(50))),
                   onPressed: () => controllerCotizacion.lanzarMapa(
                     idTicket,
                   ),
