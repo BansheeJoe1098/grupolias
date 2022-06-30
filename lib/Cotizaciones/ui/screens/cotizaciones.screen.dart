@@ -100,7 +100,7 @@ class _CotizacionesScreenState extends State<CotizacionesScreen> {
                     ),
                     Center(
                       child: MaterialButton(
-                          onPressed: () => controller.tomarFoto(),
+                          onPressed: () => controller.setFotoPreSolucion(),
                           color: Colors.white,
                           child: Column(
                             mainAxisSize: MainAxisSize.min,
@@ -108,14 +108,14 @@ class _CotizacionesScreenState extends State<CotizacionesScreen> {
                               GetBuilder<CotizacionesController>(builder: (_) {
                                 return Padding(
                                   padding: const EdgeInsets.all(8.0),
-                                  child: controller.foto == null
+                                  child: controller.fotoPresolucion == null
                                       ? Image.asset(
                                           'assets/gpolias.png',
                                           height: 200,
                                           width: 200,
                                         )
                                       : Image.file(
-                                          controller.foto!,
+                                          controller.fotoPresolucion!,
                                           height: 200,
                                           width: 200,
                                           fit: BoxFit.cover,

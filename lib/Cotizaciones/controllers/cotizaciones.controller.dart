@@ -8,9 +8,9 @@ import 'package:get/get.dart';
 import 'package:flutter/services.dart';
 import 'package:grupolias/Cotizaciones/models/create-cotizacion.dto.dart';
 import 'package:grupolias/Cotizaciones/ui/screens/aprobacion-cotizacion.screen.dart';
+import 'package:grupolias/Global/services/camera.service.dart';
 import 'package:grupolias/Global/widgets/custom.snackbar.dart';
 import 'package:grupolias/Tickets/services/ticket.service.dart';
-
 import 'package:image_picker/image_picker.dart';
 
 import 'package:path_provider/path_provider.dart';
@@ -29,11 +29,12 @@ class CotizacionesController extends GetxController {
 
   var ticketId = 0.obs;
   var total = 0.0.obs;
-  File? foto;
+  File? fotoLlegada;
+  File? fotoPresolucion;
   Rx<Cotizacion?> cotizacion = null.obs;
 
   Future<Cotizacion?> submit(BuildContext context) async {
-    if (cotizacionFormKey.currentState!.validate() && foto != null) {
+    if (cotizacionFormKey.currentState!.validate() && fotoPresolucion != null) {
       cotizacionFormKey.currentState!.save();
 
       ScaffoldMessenger.of(context).showSnackBar(
@@ -55,7 +56,7 @@ class CotizacionesController extends GetxController {
       var cotizacionService = CotizacionesService();
       var ticketService = TicketService();
       try {
-        var respuesta = await cotizacionService.create(cot, foto!);
+        var respuesta = await cotizacionService.create(cot, fotoPresolucion!);
 
         if (respuesta != null) {
           CustomSnackBar(
@@ -79,28 +80,27 @@ class CotizacionesController extends GetxController {
     return null;
   }
 
-  Future<String?> tomarFoto() async {
+  Future<String?> setFotoPreSolucion() async {
     try {
-      final XFile? image = await ImagePicker().pickImage(
-        source: ImageSource.camera,
-        imageQuality: 50,
-      );
-      if (image == null) {
-        return null;
-      }
-      final File temporalFile = File(image.path);
-      foto = temporalFile;
+      //Se toma la imagen desde la camara
+      CameraService service = CameraService();
+      File? saved = await service.camara();
 
-      //save image on gallery
-      var directory = await getApplicationDocumentsDirectory();
+      fotoPresolucion = saved;
+    } on PlatformException catch (e) {
+      return "Error: Se necesita permisos de camara $e";
+    }
+    update();
+    return null;
+  }
 
-      var path = directory.path;
-      var arrRuta = foto!.path.split('/');
-      var nombreArchivo = arrRuta[arrRuta.length - 1];
+  Future<String?> setFotoLlegada() async {
+    try {
+      //Se toma la imagen desde la camara
+      CameraService service = CameraService();
+      File? savedImage = await service.camara();
 
-      File savedImage = await temporalFile.copy('$path/$nombreArchivo');
-
-      foto = savedImage;
+      fotoLlegada = savedImage;
     } on PlatformException catch (e) {
       return "Error: Se necesita permisos de camara $e";
     }
