@@ -6,22 +6,21 @@ import 'package:get/get.dart';
 import 'package:grupolias/Cotizaciones/controllers/cotizaciones.controller.dart';
 
 class CotizacionesScreen extends StatefulWidget {
-  const CotizacionesScreen({Key? key, required this.idTicket})
+  final CotizacionesController cotizacionesController;
+  const CotizacionesScreen({Key? key, required this.cotizacionesController})
       : super(key: key);
-  final int idTicket;
 
   @override
   State<CotizacionesScreen> createState() => _CotizacionesScreenState();
 }
 
 class _CotizacionesScreenState extends State<CotizacionesScreen> {
-  final controller = Get.put(CotizacionesController());
-  late int idTicket;
+  late CotizacionesController controller;
+
   @override
   void initState() {
     super.initState();
-    idTicket = widget.idTicket;
-    controller.ticketId.value = idTicket;
+    controller = widget.cotizacionesController;
   }
 
   @override

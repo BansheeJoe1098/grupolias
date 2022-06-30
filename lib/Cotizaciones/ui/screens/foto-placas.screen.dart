@@ -1,28 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:grupolias/Cotizaciones/ui/screens/cotizaciones.screen.dart';
-import 'package:grupolias/Global/widgets/custom.snackbar.dart';
 
+import '../../../Global/widgets/custom.snackbar.dart';
 import '../../controllers/cotizaciones.controller.dart';
+import '../screens/cotizaciones.screen.dart';
 import '../widgets/boton-tomar-foto.widget.dart';
-import 'foto-placas.screen.dart';
 
-class FotoLlegadaScreen extends StatefulWidget {
-  final int idTicket;
-  const FotoLlegadaScreen({Key? key, required this.idTicket}) : super(key: key);
+class FotoPlacasScreen extends StatefulWidget {
+  final CotizacionesController cotizacionesController;
+  const FotoPlacasScreen({Key? key, required this.cotizacionesController})
+      : super(key: key);
 
   @override
-  State<FotoLlegadaScreen> createState() => _FotoLlegadaScreenState();
+  State<FotoPlacasScreen> createState() => _FotoPlacasScreenState();
 }
 
-class _FotoLlegadaScreenState extends State<FotoLlegadaScreen> {
-  final controller = Get.put(CotizacionesController());
-
+class _FotoPlacasScreenState extends State<FotoPlacasScreen> {
+  late CotizacionesController controller;
+  late int idTicket;
   @override
   void initState() {
     super.initState();
-    controller.ticketId.value = widget.idTicket;
-    controller.getTicket();
+    controller = widget.cotizacionesController;
   }
 
   @override
@@ -33,22 +32,16 @@ class _FotoLlegadaScreenState extends State<FotoLlegadaScreen> {
         onPressed: () => {
           controller.fotoLlegada == null
               ? CustomSnackBar(
-                  titulo: "Tome foto de llegada",
+                  titulo: "Tome foto de las placas del auto",
                   descripcion:
                       "Nececita tomar una foto de llegada para cotizar ticket",
                   color: Colors.red,
                 )
-              : controller.ticket.value.asistenciaVial == true
-                  ? Get.to(
-                      () => FotoPlacasScreen(
-                        cotizacionesController: controller,
-                      ),
-                    )
-                  : Get.to(
-                      () => CotizacionesScreen(
-                        cotizacionesController: controller,
-                      ),
-                    )
+              : Get.to(
+                  () => CotizacionesScreen(
+                    cotizacionesController: controller,
+                  ),
+                )
         },
         label: const Text("Siguiente"),
         icon: const Icon(Icons.navigate_next),
@@ -57,7 +50,7 @@ class _FotoLlegadaScreenState extends State<FotoLlegadaScreen> {
         backgroundColor: Colors.black,
         title: Row(
           children: const [
-            Text("Foto llegada"),
+            Text("Foto de placas"),
             Spacer(),
             ImageIcon(
               AssetImage('assets/gpolias.png'),
@@ -73,7 +66,7 @@ class _FotoLlegadaScreenState extends State<FotoLlegadaScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const Text(
-                "Toma foto de tu llegada",
+                "Toma foto de las placas del auto",
                 style: TextStyle(
                   fontSize: 30,
                   fontWeight: FontWeight.bold,
@@ -86,16 +79,16 @@ class _FotoLlegadaScreenState extends State<FotoLlegadaScreen> {
                     child: InkWell(
                       borderRadius: BorderRadius.circular(10),
                       onTap: () {
-                        controller.setFotoLlegada();
+                        controller.setFotoPlacas();
                       },
                       child: GetBuilder<CotizacionesController>(builder: (_) {
-                        return controller.fotoLlegada == null
+                        return controller.fotoPlacas == null
                             ? const BotonTomarFoto()
                             : Container(
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(10),
                                 ),
-                                child: Image.file(controller.fotoLlegada!),
+                                child: Image.file(controller.fotoPlacas!),
                               );
                       }),
                     ),

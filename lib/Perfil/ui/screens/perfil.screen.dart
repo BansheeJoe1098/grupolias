@@ -132,7 +132,7 @@ class _PerfilScreenState extends State<PerfilScreen> {
               const SizedBox(
                 height: 50.0,
               ),
-              Text(
+              const Text(
                 'Nombre:',
                 style: TextStyle(
                   color: Colors.black54,
@@ -168,7 +168,7 @@ class _PerfilScreenState extends State<PerfilScreen> {
                   ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               const Text(
@@ -186,7 +186,7 @@ class _PerfilScreenState extends State<PerfilScreen> {
               const SizedBox(
                 height: 20.0,
               ),
-              Text(
+              const Text(
                 'Localidad:',
                 style: TextStyle(
                   color: Colors.black54,

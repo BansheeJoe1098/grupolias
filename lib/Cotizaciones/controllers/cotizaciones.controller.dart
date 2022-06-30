@@ -11,9 +11,7 @@ import 'package:grupolias/Cotizaciones/ui/screens/aprobacion-cotizacion.screen.d
 import 'package:grupolias/Global/services/camera.service.dart';
 import 'package:grupolias/Global/widgets/custom.snackbar.dart';
 import 'package:grupolias/Tickets/services/ticket.service.dart';
-import 'package:image_picker/image_picker.dart';
-
-import 'package:path_provider/path_provider.dart';
+import '../../Tickets/models/ticket.model.dart';
 import '../models/cotizacion.model.dart';
 import '../services/cotizaciones.service.dart';
 
@@ -31,7 +29,9 @@ class CotizacionesController extends GetxController {
   var total = 0.0.obs;
   File? fotoLlegada;
   File? fotoPresolucion;
+  File? fotoPlacas;
   Rx<Cotizacion?> cotizacion = null.obs;
+  Rx<Ticket> ticket = Ticket().obs;
 
   Future<Cotizacion?> submit(BuildContext context) async {
     if (cotizacionFormKey.currentState!.validate() && fotoPresolucion != null) {
@@ -108,6 +108,30 @@ class CotizacionesController extends GetxController {
     return null;
   }
 
+  Future<String?> setFotoPlacas() async {
+    try {
+      //Se toma la imagen desde la camara
+      CameraService service = CameraService();
+      File? savedImage = await service.camara();
+
+      fotoPlacas = savedImage;
+    } on PlatformException catch (e) {
+      return "Error: Se necesita permisos de camara $e";
+    }
+    update();
+    return null;
+  }
+
+  Future<Ticket?> getTicket() async {
+    var ticketService = TicketService();
+    var ticket = await ticketService.getTicketById(ticketId.value);
+
+    print(ticket.toRawJson());
+    if (ticket != null) {
+      this.ticket.value = ticket;
+    }
+  }
+
   String? validadorTextArea(String? value) {
     var tamano = value?.length;
     if (tamano! < 20) {
@@ -151,14 +175,6 @@ class CotizacionesController extends GetxController {
         total.value = 0;
       }
     }
-  }
-
-  // Api Simulation
-  Future<bool> checkUser(String user, String password) {
-    if (user == 'foo@foo.com' && password == '123') {
-      return Future.value(true);
-    }
-    return Future.value(false);
   }
 
   @override
