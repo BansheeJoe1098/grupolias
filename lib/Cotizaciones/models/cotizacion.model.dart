@@ -4,6 +4,10 @@
 
 // ignore_for_file: prefer_if_null_operators, prefer_null_aware_operators
 
+// To parse this JSON data, do
+//
+//     final cotizacion = cotizacionFromJson(jsonString);
+
 import 'dart:convert';
 
 class Cotizacion {
@@ -20,6 +24,9 @@ class Cotizacion {
     this.preSolucionId,
     this.isAprobado,
     this.aprobadoPorUsuarioId,
+    this.horaLlegada,
+    this.imgLlegadaId,
+    this.imgPlacas,
     this.createdAt,
     this.updatedAt,
   });
@@ -36,6 +43,9 @@ class Cotizacion {
   int? preSolucionId;
   bool? isAprobado;
   int? aprobadoPorUsuarioId;
+  DateTime? horaLlegada;
+  int? imgLlegadaId;
+  int? imgPlacas;
   DateTime? createdAt;
   DateTime? updatedAt;
 
@@ -71,6 +81,12 @@ class Cotizacion {
         aprobadoPorUsuarioId: json["aprobado_por_usuarioId"] == null
             ? null
             : json["aprobado_por_usuarioId"],
+        horaLlegada: json["hora_llegada"] == null
+            ? null
+            : DateTime.parse(json["hora_llegada"]),
+        imgLlegadaId:
+            json["img_llegadaId"] == null ? null : json["img_llegadaId"],
+        imgPlacas: json["img_placas"] == null ? null : json["img_placas"],
         createdAt: json["createdAt"] == null
             ? null
             : DateTime.parse(json["createdAt"]),
@@ -95,6 +111,10 @@ class Cotizacion {
         "is_aprobado": isAprobado == null ? null : isAprobado,
         "aprobado_por_usuarioId":
             aprobadoPorUsuarioId == null ? null : aprobadoPorUsuarioId,
+        "hora_llegada":
+            horaLlegada == null ? null : horaLlegada?.toIso8601String(),
+        "img_llegadaId": imgLlegadaId == null ? null : imgLlegadaId,
+        "img_placas": imgPlacas == null ? null : imgPlacas,
         "createdAt": createdAt == null ? null : createdAt?.toIso8601String(),
         "updatedAt": updatedAt == null ? null : updatedAt?.toIso8601String(),
       };
