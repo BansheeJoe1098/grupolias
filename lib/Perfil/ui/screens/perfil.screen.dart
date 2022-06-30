@@ -65,7 +65,7 @@ class _PerfilScreenState extends State<PerfilScreen> {
                     decoration: BoxDecoration(
                       border: Border.all(
                         width: 4,
-                        color: Colors.white,
+                        color: Colors.black,
                       ),
                       boxShadow: [
                         BoxShadow(
@@ -77,8 +77,8 @@ class _PerfilScreenState extends State<PerfilScreen> {
                       shape: BoxShape.circle,
                     ),
                     child: GetBuilder<PerfilController>(builder: (_) {
-                      return Padding(
-                        padding: const EdgeInsets.all(8.0),
+                      return ClipOval(
+                        //padding: const EdgeInsets.all(8.0),
                         child: controller.imagenUsuarioLoguado == null
                             ? Image.asset(
                                 'assets/gpolias.png',
@@ -89,6 +89,7 @@ class _PerfilScreenState extends State<PerfilScreen> {
                                 "${controller.imagenUsuarioLoguado}",
                                 height: 200,
                                 width: 200,
+                                fit: BoxFit.fill,
                               ),
                       );
                     }),
@@ -130,6 +131,14 @@ class _PerfilScreenState extends State<PerfilScreen> {
             const SizedBox(
               height: 50.0,
             ),
+            Text(
+              'Nombre:',
+              style: TextStyle(
+                color: Colors.black54,
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
             Obx(
               () => Text(
                 '''${globalController.tecnicoLogueado.value?.nombre} ${globalController.tecnicoLogueado.value?.apellidoPaterno} ${globalController.tecnicoLogueado.value?.apellidoMaterno}
@@ -141,6 +150,14 @@ class _PerfilScreenState extends State<PerfilScreen> {
                 ),
               ),
             ),
+            const Text(
+              'Telefono:',
+              style: TextStyle(
+                color: Colors.black54,
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
             Obx(
               () => Text(
                 '${globalController.tecnicoLogueado.value?.telefono}',
@@ -150,8 +167,11 @@ class _PerfilScreenState extends State<PerfilScreen> {
                 ),
               ),
             ),
+            SizedBox(
+              height: 20,
+            ),
             const Text(
-              "Servicios que ofreces",
+              "Servicios que ofreces:",
               style: TextStyle(
                 color: Colors.black,
                 fontWeight: FontWeight.bold,
@@ -163,20 +183,36 @@ class _PerfilScreenState extends State<PerfilScreen> {
               children: globalController.listaServicios(),
             ),
             const SizedBox(
-              height: 10.0,
+              height: 20.0,
+            ),
+            Text(
+              'Localidad:',
+              style: TextStyle(
+                color: Colors.black54,
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+              ),
             ),
             Obx(
               () => Text(
                 '${globalController.ciudadTecnico.value?.nombre} - ${globalController.estadoTecnico.value?.nombre}',
                 style: const TextStyle(
-                  color: Color.fromARGB(255, 95, 94, 92),
+                  color: Colors.black,
                   fontWeight: FontWeight.bold,
                   fontSize: 20.0,
                 ),
               ),
             ),
             const SizedBox(
-              height: 10.0,
+              height: 20.0,
+            ),
+            const Text(
+              'Correo Electronico:',
+              style: TextStyle(
+                color: Colors.black54,
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+              ),
             ),
             Row(
               children: [

@@ -28,7 +28,7 @@ class _PerfilImgPickerState extends State<PerfilImgPicker> {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(
-        height: 100.0,
+        height: 120.0,
         width: MediaQuery.of(context).size.width,
         decoration: const BoxDecoration(
           color: Colors.black,
@@ -40,12 +40,27 @@ class _PerfilImgPickerState extends State<PerfilImgPicker> {
         ),
         child: Column(
           children: <Widget>[
-            const Text(
-              "Tomar foto desde",
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 20.0,
-              ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Text(
+                  "Tomar foto desde",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 20.0,
+                  ),
+                ),
+                IconButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  icon: Icon(
+                    Icons.close,
+                    color: Colors.white,
+                  ),
+                )
+              ],
             ),
             const SizedBox(
               height: 20,
