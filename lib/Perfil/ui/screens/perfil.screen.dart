@@ -89,7 +89,7 @@ class _PerfilScreenState extends State<PerfilScreen> {
                                 "${controller.imagenUsuarioLoguado}",
                                 height: 200,
                                 width: 200,
-                                fit: BoxFit.fill,
+                                fit: BoxFit.cover,
                               ),
                       );
                     }),
