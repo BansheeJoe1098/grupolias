@@ -42,7 +42,7 @@ class TecnicoService {
   }
 
   Future<Imagen?> updateFotoPerfil(int id, File foto) async {
-    FlutterSecureStorage storage = FlutterSecureStorage();
+    FlutterSecureStorage storage = const FlutterSecureStorage();
     var token = await storage.read(key: 'token');
     //Se sube la imagen con DIO
     var dio = Dio();

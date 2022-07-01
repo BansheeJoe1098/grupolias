@@ -4,6 +4,14 @@
 
 // ignore_for_file: prefer_null_aware_operators, prefer_if_null_operators
 
+// To parse this JSON data, do
+//
+//     final cotizacionDto = cotizacionDtoFromJson(jsonString);
+
+// To parse this JSON data, do
+//
+//     final cotizacionDto = cotizacionDtoFromJson(jsonString);
+
 import 'dart:convert';
 
 class CreateCotizacionDto {
@@ -17,6 +25,8 @@ class CreateCotizacionDto {
     this.ticketId,
     this.tecnicoId,
     this.preSolucionId,
+    this.imgLlegadaId,
+    this.imgPlacasId,
   });
 
   String? diagnosticoProblema;
@@ -28,6 +38,8 @@ class CreateCotizacionDto {
   int? ticketId;
   int? tecnicoId;
   int? preSolucionId;
+  int? imgLlegadaId;
+  int? imgPlacasId;
 
   factory CreateCotizacionDto.fromRawJson(String str) =>
       CreateCotizacionDto.fromJson(json.decode(str));
@@ -44,16 +56,22 @@ class CreateCotizacionDto {
         fechaContacto: json["fecha_contacto"] == null
             ? null
             : DateTime.parse(json["fecha_contacto"]),
-        costoManoObra:
-            json["costo_mano_obra"] == null ? null : json["costo_mano_obra"],
-        costoMateriales:
-            json["costo_materiales"] == null ? null : json["costo_materiales"],
-        totalCotizacion:
-            json["total_cotizacion"] == null ? null : json["total_cotizacion"],
+        costoManoObra: json["costo_mano_obra"] == null
+            ? null
+            : json["costo_mano_obra"].toDouble(),
+        costoMateriales: json["costo_materiales"] == null
+            ? null
+            : json["costo_materiales"].toDouble(),
+        totalCotizacion: json["total_cotizacion"] == null
+            ? null
+            : json["total_cotizacion"].toDouble(),
         ticketId: json["ticketId"] == null ? null : json["ticketId"],
         tecnicoId: json["tecnicoId"] == null ? null : json["tecnicoId"],
         preSolucionId:
             json["preSolucionId"] == null ? null : json["preSolucionId"],
+        imgLlegadaId:
+            json["img_llegadaId"] == null ? null : json["img_llegadaId"],
+        imgPlacasId: json["img_placasId"] == null ? null : json["img_placasId"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -68,5 +86,7 @@ class CreateCotizacionDto {
         "ticketId": ticketId == null ? null : ticketId,
         "tecnicoId": tecnicoId == null ? null : tecnicoId,
         "preSolucionId": preSolucionId == null ? null : preSolucionId,
+        "img_llegadaId": imgLlegadaId == null ? null : imgLlegadaId,
+        "img_placasId": imgPlacasId == null ? null : imgPlacasId,
       };
 }

@@ -1,8 +1,7 @@
-// ignore_for_file: avoid_print, depend_on_referenced_packages
+// ignore_for_file: avoid_print, depend_on_referenced_packages, unused_import
 
 import 'dart:convert';
 
-import 'package:dio/dio.dart';
 import 'package:grupolias/Cotizaciones/models/cotizacion.model.dart';
 import 'package:grupolias/Cotizaciones/models/create-cotizacion.dto.dart';
 
@@ -10,50 +9,54 @@ import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:http_parser/http_parser.dart' as http_parser;
 
+import '../../Global/image.model.dart';
+import '../../Global/services/imagenes.service.dart';
 import '../../constants.dart';
 
 class CotizacionesService {
   String cotizacionurl = '${Constants.API_URL}/cotizaciones-tecnico';
   String imagenesurl = '${Constants.API_URL}/imagenes';
 
-  Future<Cotizacion?> create(CreateCotizacionDto cotizacion, File foto) async {
-    //Se sube la imagen con DIO
-    var dio = Dio();
-    dio.options.connectTimeout = 10000;
-    dio.options.receiveTimeout = 10000;
-    //Se toma el nombre y la extensión de la imagen
-    String nombreFoto = foto.path.split('/').last;
-    String ext = foto.path.split('.').last;
+  Future<Cotizacion?> create(
+    CreateCotizacionDto cotizacion,
+    bool isAsistenciaVial,
+    File preSolucion,
+    File fotoLlegada,
+    File? fotoPlacas,
+  ) async {
+    ImagenesService imgService = ImagenesService();
+    //Se sube imagen de foto llegada
+    Imagen? imgFotoLlegada = await imgService.subirImagen(fotoLlegada);
 
-    FormData resFoto = FormData.fromMap({
-      "file": await MultipartFile.fromFile(
-        foto.path,
-        filename: nombreFoto,
-        contentType: http_parser.MediaType('image', ext),
-      ),
-    });
+    //Se sube imagen de pre solucion
+    Imagen? imgPresolucion = await imgService.subirImagen(preSolucion);
 
-    var res = await dio.post("$imagenesurl/upload", data: resFoto);
-    print(res.data);
+    //Si el  ticket es vial
+    //Se sube imagen de foto placas
 
-    if (res.statusCode == 201) {
-      cotizacion.preSolucionId = res.data!["id"];
-      var resCotizacion = await http.post(
-        Uri.parse(cotizacionurl),
-        body: cotizacion.toRawJson(),
-        headers: {
-          HttpHeaders.contentTypeHeader: 'application/json',
-        },
-      );
-      print(resCotizacion.body);
+    Imagen? imgPlacas;
+    if (isAsistenciaVial) {
+      imgPlacas = await imgService.subirImagen(fotoPlacas!);
+    }
 
-      if (resCotizacion.statusCode == 201) {
-        return Cotizacion.fromJson(jsonDecode(resCotizacion.body));
-      } else {
-        throw ("Error al crear la cotización");
-      }
+    if (imgFotoLlegada != null) cotizacion.imgLlegadaId = imgFotoLlegada.id;
+    if (imgPlacas != null) cotizacion.imgPlacasId = imgPlacas.id;
+    if (imgPresolucion != null) cotizacion.preSolucionId = imgPresolucion.id;
+
+    var resCotizacion = await http.post(
+      Uri.parse(cotizacionurl),
+      body: cotizacion.toRawJson(),
+      headers: {
+        HttpHeaders.contentTypeHeader: 'application/json',
+      },
+    );
+
+    print(resCotizacion.body.toString());
+
+    if (resCotizacion.statusCode == 201) {
+      return Cotizacion.fromJson(jsonDecode(resCotizacion.body));
     } else {
-      throw Exception("Error al subir la imagen");
+      throw ("Error al crear la cotización");
     }
   }
 

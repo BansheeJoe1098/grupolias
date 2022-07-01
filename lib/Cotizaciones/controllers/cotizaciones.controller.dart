@@ -18,6 +18,7 @@ import '../services/cotizaciones.service.dart';
 class CotizacionesController extends GetxController {
   final cotizacionFormKey = GlobalKey<FormState>();
 
+//Controles del formulario de cotizacion
   var diagnosticoProblema = TextEditingController();
   var solucionTecnico = TextEditingController();
   var fechaContacto = TextEditingController();
@@ -25,8 +26,10 @@ class CotizacionesController extends GetxController {
   var costoMateriales = TextEditingController();
   var totalCotizacion = TextEditingController();
 
+//Id del ticket de la cotizacion
   var ticketId = 0.obs;
   var total = 0.0.obs;
+  //Fotos relacionadas con la cotizacion
   File? fotoLlegada;
   File? fotoPresolucion;
   File? fotoPlacas;
@@ -41,22 +44,37 @@ class CotizacionesController extends GetxController {
         const SnackBar(content: Text('Enviando')),
       );
 
-      CreateCotizacionDto cot = CreateCotizacionDto(
+      // var payload = {
+      //   "diagnostico_problema": diagnosticoProblema.text,
+      //   "solucion_tecnico": solucionTecnico.text,
+      //   "fecha_contacto": DateTime.now().toUtc().toIso8601String(),
+      //   "costo_mano_obra": double.parse(costoManoObra.text),
+      //   "costo_materiales": double.parse(costoMateriales.text),
+      //   "total_cotizacion": total.value,
+      //   "ticketId": ticket.value.id,
+      //   "tecnicoId": ticket.value.tecnicoId,
+      // };
+
+      var payload = CreateCotizacionDto(
         diagnosticoProblema: diagnosticoProblema.text,
         solucionTecnico: solucionTecnico.text,
         fechaContacto: DateTime.now().toUtc(),
         costoManoObra: double.parse(costoManoObra.text),
         costoMateriales: double.parse(costoMateriales.text),
         totalCotizacion: total.value,
-        ticketId: ticketId.value,
-        //TODO: Sacar id del tecnico desde la sesion
-        tecnicoId: 1,
+        ticketId: ticket.value.id,
+        tecnicoId: ticket.value.tecnicoId,
       );
 
-      var cotizacionService = CotizacionesService();
-      var ticketService = TicketService();
       try {
-        var respuesta = await cotizacionService.create(cot, fotoPresolucion!);
+        var cotizacionService = CotizacionesService();
+        var respuesta = await cotizacionService.create(
+          payload,
+          ticket.value.asistenciaVial!,
+          fotoPresolucion!,
+          fotoLlegada!,
+          fotoPlacas,
+        );
 
         if (respuesta != null) {
           CustomSnackBar(
@@ -65,11 +83,14 @@ class CotizacionesController extends GetxController {
             color: Colors.green,
           );
 
+          TicketService ticketService = TicketService();
           await ticketService.setCotizado(ticketId.value);
 
-          Get.offAll(() => AprobacionCotizacion(
-                cotizacion: respuesta,
-              ));
+          Get.offAll(
+            () => AprobacionCotizacion(
+              cotizacion: respuesta,
+            ),
+          );
 
           return respuesta;
         }
@@ -126,10 +147,7 @@ class CotizacionesController extends GetxController {
     var ticketService = TicketService();
     var ticket = await ticketService.getTicketById(ticketId.value);
 
-    print(ticket.toRawJson());
-    if (ticket != null) {
-      this.ticket.value = ticket;
-    }
+    return this.ticket.value = ticket;
   }
 
   String? validadorTextArea(String? value) {
