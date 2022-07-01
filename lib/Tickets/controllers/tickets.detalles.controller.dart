@@ -8,6 +8,9 @@ import 'package:grupolias/Global/widgets/custom.snackbar.dart';
 import 'package:grupolias/Home/ui/screens/home.screen.dart';
 import 'package:grupolias/Tickets/services/ticket.service.dart';
 
+import '../../Global/controllers/global.controller.dart';
+import '../../Global/models/user.model.dart';
+import '../../Perfil/models/tecnico.model.dart';
 import '../models/ticket.model.dart';
 import '../services/ticket-detalles.service.dart';
 
@@ -42,11 +45,17 @@ class TicketsDetallesController extends GetxController {
   }
 
   void tomarTicket(Ticket t) async {
+    GlobalController globals = GlobalController();
+
+    User? user = await globals.getUsuarioLogueado();
+
+    Tecnico? tecnico = await globals.getTecnicoByUserId(user!.id!);
+
     try {
       //Se hace el json requerido
       var data = jsonEncode(<String, dynamic>{
         "estado": "TOMADO",
-        "tecnicoId": 1 //TODO: TOMAR ID DEL TECNICO LOGUEADO
+        "tecnicoId": tecnico!.id!,
       });
 
       //Manda la actualizacion a la API
