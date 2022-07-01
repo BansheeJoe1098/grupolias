@@ -34,8 +34,6 @@ class AcuerdoConformidadController extends GetxController {
       GlobalController global = GlobalController();
       global.getUsuarioLogueado();
 
-      print(global.usuarioLogueado.value?.id);
-
       //---------------Se envia registro de acuerdo -----------------//
       AcuerdoDto acuerdoDTO = AcuerdoDto(
         descripcionProblema: cotizacion.diagnosticoProblema,

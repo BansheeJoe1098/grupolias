@@ -55,7 +55,7 @@ class _PerfilImgPickerState extends State<PerfilImgPicker> {
                   onPressed: () {
                     Navigator.pop(context);
                   },
-                  icon: Icon(
+                  icon: const Icon(
                     Icons.close,
                     color: Colors.white,
                   ),

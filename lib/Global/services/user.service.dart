@@ -19,7 +19,14 @@ class UserService {
         headers: token != null ? {'Authorization': 'Bearer $token'} : null);
 
     if (response.statusCode == 200) {
-      return User.fromRawJson(response.body);
+      var user = User.fromRawJson(response.body);
+
+      //Se refresca el token
+      const storage = FlutterSecureStorage();
+      storage.delete(key: 'token');
+      storage.write(key: 'token', value: user.hashedRt);
+
+      return user;
     } else {
       CustomSnackBar(
         titulo: "Error: ${response.statusCode}",
