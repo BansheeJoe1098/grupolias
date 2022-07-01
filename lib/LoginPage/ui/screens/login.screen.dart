@@ -5,6 +5,7 @@ import '../../controllers/login.controller.dart';
 import 'package:get/get.dart';
 import 'package:grupolias/Global/controllers/global.controller.dart';
 import 'package:grupolias/Home/ui/screens/home.screen.dart';
+import 'package:grupolias/Perfil/ui/screens/user.final.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -132,7 +133,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           child: RaisedButton(
                             onPressed: () {
                               loginController.login();
-                              //Get.to(Home());
+                              //Get.to(UserFinal());
                             },
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(30.0)),

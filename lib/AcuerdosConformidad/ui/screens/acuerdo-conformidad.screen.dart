@@ -4,6 +4,7 @@ import 'package:grupolias/Cotizaciones/models/cotizacion.model.dart';
 import 'package:jiffy/jiffy.dart';
 
 import '../../controllers/acuerdo-conformidad.controller.dart';
+import 'package:grupolias/Perfil/ui/screens/user.final.dart';
 
 class AcuerdoConformidadScreen extends StatefulWidget {
   final Cotizacion cotizacion;
@@ -51,7 +52,8 @@ class _AcuerdoConformidadScreenState extends State<AcuerdoConformidadScreen> {
         child: FloatingActionButton(
           backgroundColor: Colors.black,
           onPressed: () {
-            controller.submit(context);
+            //controller.submit(context);
+            Get.to(UserFinal());
           },
           child: const Icon(Icons.send),
         ),

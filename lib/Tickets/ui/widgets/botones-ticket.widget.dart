@@ -71,7 +71,7 @@ class _BotonesTicketWidgetState extends State<BotonesTicketWidget> {
                           fontSize: 20, fontWeight: FontWeight.bold),
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(50))),
-                  child: const Text("Pulse Cuando Llegué ‼‼"),
+                  child: const Text(" Pulse Cuando Llegué ‼‼ "),
                   onPressed: () {
                     Get.to(
                       () => FotoLlegadaScreen(
