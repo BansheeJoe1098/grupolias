@@ -1,3 +1,5 @@
+import '../../Global/controllers/global.controller.dart';
+import '../../Global/models/user.model.dart';
 import '../../Tickets/models/ticket.model.dart';
 import '../../constants.dart';
 
@@ -9,8 +11,10 @@ class TusTicketsService {
 
   Future<List<Ticket>?> ticketsOfTecnico() async {
     //TODO: Sacar el Id desde la sesion del usuario
+    GlobalController global = GlobalController();
+    User? user = await global.getUsuarioLogueado();
     final response = await http.get(
-      Uri.parse("$url/tecnico/${1}"),
+      Uri.parse("$url/tecnico/${user!.id!}"),
     );
     final jsonData = json.decode(response.body);
     final lista =
