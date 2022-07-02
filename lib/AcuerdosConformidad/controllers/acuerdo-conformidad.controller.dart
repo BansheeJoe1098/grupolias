@@ -10,6 +10,7 @@ import 'package:grupolias/Signature/ui/screens/signature.screen.dart';
 import 'package:grupolias/Tickets/services/ticket.service.dart';
 
 import '../../Cotizaciones/models/cotizacion.model.dart';
+import '../../Global/models/user.model.dart';
 import '../../Tickets/models/ticket.model.dart';
 import '../services/acuerdo-conformidad.service.dart';
 
@@ -32,7 +33,8 @@ class AcuerdoConformidadController extends GetxController {
 
       //-------Se obtiene el ID del usuario logueado--------//
       GlobalController global = GlobalController();
-      global.getUsuarioLogueado();
+      //global.getUsuarioLogueado();
+      User? user = await global.getUsuarioLogueado();
 
       //---------------Se envia registro de acuerdo -----------------//
       AcuerdoDto acuerdoDTO = AcuerdoDto(
@@ -46,7 +48,7 @@ class AcuerdoConformidadController extends GetxController {
         acuerdoFirmado:
             "FALTA FIRMA DESDE FLUTTER", //TODO: Acomodar la vaina de la firma
         ticketId: ticket.id,
-        usuarioFinalId: 1, //TODO: Cambiar por el usuario final
+        usuarioFinalId: user!.id!, //TODO: Cambiar por el usuario final
         direccion:
             '${ticket.calle!} ${ticket.numeroDomicilio!} ${ticket.colonia!}',
       );

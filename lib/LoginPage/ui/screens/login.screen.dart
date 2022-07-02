@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import '../../controllers/login.controller.dart';
 import 'package:get/get.dart';
 import 'package:grupolias/Global/controllers/global.controller.dart';
-import 'package:grupolias/Home/ui/screens/home.screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
