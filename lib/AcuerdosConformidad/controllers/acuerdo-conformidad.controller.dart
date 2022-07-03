@@ -3,38 +3,74 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:grupolias/AcuerdosConformidad/models/acuerdo-conformidad.dto.dart';
-import 'package:grupolias/AcuerdosConformidad/models/acuerdo-conformidad.model.dart';
-import 'package:grupolias/Global/controllers/global.controller.dart';
-import 'package:grupolias/Signature/ui/screens/signature.screen.dart';
-import 'package:grupolias/Tickets/services/ticket.service.dart';
-
-import '../../Cotizaciones/models/cotizacion.model.dart';
-import '../../Global/models/user.model.dart';
-import '../../Tickets/models/ticket.model.dart';
+import 'package:grupolias/AcuerdosConformidad/models/acuerdo-final.model.dart';
+import '../../AcuerdosConformidad/models/dto/acuerdo-conformidad-dto.model.dart';
+import '../../AcuerdosConformidad/models/acuerdo-conformidad.model.dart';
+import '../../AcuerdosConformidad/models/dto/usuario-final-dto.model.dart';
+import '../../AcuerdosConformidad/services/usuario-final.service.dart';
+import '../../AcuerdosConformidad/ui/screens/acuerdo-conformidad.screen.dart';
 import '../services/acuerdo-conformidad.service.dart';
 
-class AcuerdoConformidadController extends GetxController {
-  late Cotizacion cotizacion;
-  late Ticket ticket;
-  final acuerdoFormKey = GlobalKey<FormState>();
+import '../../Tickets/services/ticket.service.dart';
+import '../../Tickets/models/ticket.model.dart';
 
+import '../../Cotizaciones/models/cotizacion.model.dart';
+
+import '../../Signature/ui/screens/signature.screen.dart';
+
+class AcuerdoConformidadController extends GetxController {
+  var cotizacion = Cotizacion();
+  var ticket = Ticket();
+  Rx<UsuarioFinal?> usuarioFinal = null.obs;
+
+  //Acuerdo de conformidad
+  final observacionesFormKey = GlobalKey<FormState>();
+  var acuerdoConformidad = AcuerdoConformidad().obs;
+
+  //Iamgen de la fima del acuerdo
+  File? imagenFirma;
+
+  //Controles del formulario de observaciones
   var observaciones = TextEditingController();
 
-  File? fotofirma;
-  late Rx<AcuerdoConformidad?> acuerdo;
+  //Controles del formulario de usuario final
+  final usuarioFinalFormKey = GlobalKey<FormState>();
 
-  Future<AcuerdoConformidad?> submit(BuildContext context) async {
-    if (acuerdoFormKey.currentState!.validate()) {
-      acuerdoFormKey.currentState!.save();
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Enviando')),
+  var nombreUsuario = TextEditingController();
+  var aPaterno = TextEditingController();
+  var aMaterno = TextEditingController();
+  var email = TextEditingController();
+  var telefono = TextEditingController();
+
+  void enviarUsuarioFinal() async {
+    if (usuarioFinalFormKey.currentState!.validate()) {
+      usuarioFinalFormKey.currentState!.save();
+
+      var paload = UsuarioFinalDto(
+        telefono: telefono.text.split(' ').join(''),
+        nombre: nombreUsuario.text,
+        apellidoPaterno: aPaterno.text,
+        apellidoMaterno: aMaterno.text,
+        correo: email.text == "" ? null : email.text.split(' ').join(''),
       );
 
-      //-------Se obtiene el ID del usuario logueado--------//
-      GlobalController global = GlobalController();
-      //global.getUsuarioLogueado();
-      User? user = await global.getUsuarioLogueado();
+      var service = UsuarioFinalService();
+      var respuesta = await service.create(paload);
+
+      if (respuesta != null) {
+        usuarioFinal.value = respuesta;
+        Get.to(
+          () => AcuerdoConformidadScreen(
+            controller: this,
+          ),
+        );
+      }
+    }
+  }
+
+  Future<AcuerdoConformidad?> enviarAcuerdo() async {
+    if (observacionesFormKey.currentState!.validate()) {
+      observacionesFormKey.currentState!.save();
 
       //---------------Se envia registro de acuerdo -----------------//
       AcuerdoDto acuerdoDTO = AcuerdoDto(
@@ -45,20 +81,26 @@ class AcuerdoConformidadController extends GetxController {
         horaRecepcionServicio: ticket.createdAt,
         horaLlegadaServicio: cotizacion.createdAt,
         fechaAcuerdo: DateTime.now().toUtc(),
-        acuerdoFirmado:
-            "FALTA FIRMA DESDE FLUTTER", //TODO: Acomodar la vaina de la firma
         ticketId: ticket.id,
-        usuarioFinalId: user!.id!, //TODO: Cambiar por el usuario final
+        usuarioFinalId: usuarioFinal.value?.id,
         direccion:
-            '${ticket.calle!} ${ticket.numeroDomicilio!} ${ticket.colonia!}',
+            '${ticket.calle!},${ticket.numeroDomicilio!},${ticket.colonia!}',
       );
 
       var service = AcuerdoService();
       var respuesta = await service.create(acuerdoDTO);
 
-      //---------------Se firma el acuerdo -----------------//
       if (respuesta != null) {
+        acuerdoConformidad.value = respuesta;
+        Get.snackbar(
+          "Exito",
+          "Acuerdo Enviado",
+          snackPosition: SnackPosition.BOTTOM,
+          backgroundColor: Colors.green,
+        );
         Get.to(() => SignatureScreen(acuerdoDto: respuesta));
+
+        return respuesta;
       } else {
         Get.snackbar(
           "Error",
@@ -66,19 +108,7 @@ class AcuerdoConformidadController extends GetxController {
           snackPosition: SnackPosition.BOTTOM,
           backgroundColor: Colors.red,
         );
-
-        return null;
       }
-
-      Get.snackbar(
-        "Exito",
-        "Acuerdo Enviado",
-        snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: Colors.green,
-      );
-
-      var ticketService = TicketService();
-      await ticketService.setACerrar(ticket.id!);
     }
     return null;
   }

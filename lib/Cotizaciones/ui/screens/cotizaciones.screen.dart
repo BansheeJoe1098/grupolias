@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'package:grupolias/Cotizaciones/controllers/cotizaciones.controller.dart';
+import 'package:grupolias/Global/widgets/custom.snackbar.dart';
 
 class CotizacionesScreen extends StatefulWidget {
   final CotizacionesController cotizacionesController;
@@ -27,7 +28,7 @@ class _CotizacionesScreenState extends State<CotizacionesScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Cotizacion"),
+        title: const Text("Cotizar Ticket"),
         backgroundColor: Colors.black,
         toolbarHeight: 80,
         actions: const [
@@ -42,7 +43,15 @@ class _CotizacionesScreenState extends State<CotizacionesScreen> {
         child: FloatingActionButton(
           backgroundColor: Colors.black,
           onPressed: () {
-            controller.submit(context);
+            if (controller.fotoPresolucion != null) {
+              controller.submit(context);
+            } else {
+              CustomSnackBar(
+                titulo: "Tome foto de la problematica",
+                descripcion: "Esta foto es necesaria para la cotizacion",
+                color: Colors.red,
+              );
+            }
           },
           child: const Icon(Icons.send),
         ),
@@ -57,36 +66,6 @@ class _CotizacionesScreenState extends State<CotizacionesScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text(
-                      "Diagnóstico del problema 🦸‍♀️",
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20,
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    TextFormField(
-                      maxLines: 5,
-                      textAlignVertical: TextAlignVertical.top,
-                      controller: controller.diagnosticoProblema,
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
-                      validator: (value) {
-                        return controller.validadorTextArea(value);
-                      },
-                      decoration: const InputDecoration(
-                        labelText: 'Diagnostico del problema ',
-                        hintText:
-                            'Ej: Se encontró cocodrilo en la alberca del domicilio',
-                        filled: true,
-                        fillColor: Colors.white,
-                        border: OutlineInputBorder(),
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
                     const Text(
                       "Tomar foto del problema 📷",
                       style: TextStyle(
@@ -129,6 +108,51 @@ class _CotizacionesScreenState extends State<CotizacionesScreen> {
                       height: 20,
                     ),
                     const Text(
+                      "Diagnóstico del problema 🦸‍♀️",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    TextFormField(
+                      maxLines: 5,
+                      textAlignVertical: TextAlignVertical.top,
+                      controller: controller.diagnosticoProblema,
+                      textInputAction: TextInputAction.next,
+                      maxLength: 300,
+                      validator: (value) {
+                        return controller.validadorTextArea(value);
+                      },
+                      decoration: const InputDecoration(
+                        labelText: 'Diagnostico del problema ',
+                        hintText:
+                            'Ej: Se encontró cocodrilo en la alberca del domicilio',
+                        floatingLabelStyle: TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        filled: true,
+                        fillColor: Color.fromARGB(255, 230, 230, 230),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.zero),
+                          borderSide: BorderSide.none,
+                        ),
+                        focusedBorder: UnderlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.zero),
+                          borderSide: BorderSide(
+                            color: Colors.black,
+                            width: 2,
+                          ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    const Text(
                       "Solucion propuesta 💡",
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
@@ -136,22 +160,36 @@ class _CotizacionesScreenState extends State<CotizacionesScreen> {
                       ),
                     ),
                     const SizedBox(
-                      height: 20,
+                      height: 10,
                     ),
                     TextFormField(
                       maxLines: 5,
                       textAlignVertical: TextAlignVertical.top,
                       controller: controller.solucionTecnico,
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
+                      textInputAction: TextInputAction.next,
                       validator: (value) {
                         return controller.validadorTextArea(value);
                       },
                       decoration: const InputDecoration(
                         labelText: 'Solucion propuesta',
                         hintText: 'Ej: Se le realizó una limpieza a la alberca',
+                        floatingLabelStyle: TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold,
+                        ),
                         filled: true,
-                        fillColor: Colors.white,
-                        border: OutlineInputBorder(),
+                        fillColor: Color.fromARGB(255, 230, 230, 230),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.zero),
+                          borderSide: BorderSide.none,
+                        ),
+                        focusedBorder: UnderlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.zero),
+                          borderSide: BorderSide(
+                            color: Colors.black,
+                            width: 2,
+                          ),
+                        ),
                       ),
                       onChanged: (text) {},
                     ),
@@ -166,11 +204,11 @@ class _CotizacionesScreenState extends State<CotizacionesScreen> {
                       ),
                     ),
                     const SizedBox(
-                      height: 20,
+                      height: 10,
                     ),
                     TextFormField(
                       controller: controller.costoManoObra,
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
+                      textInputAction: TextInputAction.next,
                       validator: (value) {
                         return controller.validadorCostos(value);
                       },
@@ -180,11 +218,29 @@ class _CotizacionesScreenState extends State<CotizacionesScreen> {
                       decoration: const InputDecoration(
                         hintText: '0.00',
                         labelText: 'Costo Mano de obra',
-                        prefixIcon: Icon(Icons.monetization_on_outlined),
-                        border: OutlineInputBorder(),
+                        prefixIcon: Icon(
+                          Icons.monetization_on_outlined,
+                          color: Colors.black,
+                        ),
+                        floatingLabelStyle: TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        filled: true,
+                        fillColor: Color.fromARGB(255, 230, 230, 230),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.zero),
+                          borderSide: BorderSide.none,
+                        ),
+                        focusedBorder: UnderlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.zero),
+                          borderSide: BorderSide(
+                            color: Colors.black,
+                            width: 2,
+                          ),
+                        ),
                       ),
                       keyboardType: TextInputType.number,
-                      textInputAction: TextInputAction.done,
                     ),
                     const SizedBox(
                       height: 20,
@@ -197,11 +253,11 @@ class _CotizacionesScreenState extends State<CotizacionesScreen> {
                       ),
                     ),
                     const SizedBox(
-                      height: 20,
+                      height: 10,
                     ),
                     TextFormField(
                       controller: controller.costoMateriales,
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
+                      textInputAction: TextInputAction.done,
                       validator: (value) {
                         return controller.validadorCostos(value);
                       },
@@ -211,11 +267,29 @@ class _CotizacionesScreenState extends State<CotizacionesScreen> {
                       decoration: const InputDecoration(
                         hintText: '0.00',
                         labelText: 'Costo  Materiales',
-                        prefixIcon: Icon(Icons.monetization_on_outlined),
-                        border: OutlineInputBorder(),
+                        prefixIcon: Icon(
+                          Icons.monetization_on_outlined,
+                          color: Colors.black,
+                        ),
+                        floatingLabelStyle: TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        filled: true,
+                        fillColor: Color.fromARGB(255, 230, 230, 230),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.zero),
+                          borderSide: BorderSide.none,
+                        ),
+                        focusedBorder: UnderlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.zero),
+                          borderSide: BorderSide(
+                            color: Colors.black,
+                            width: 2,
+                          ),
+                        ),
                       ),
                       keyboardType: TextInputType.number,
-                      textInputAction: TextInputAction.done,
                     ),
                     const SizedBox(
                       height: 20,

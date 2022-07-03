@@ -57,7 +57,7 @@ class _FotoLlegadaScreenState extends State<FotoLlegadaScreen> {
         backgroundColor: Colors.black,
         title: Row(
           children: const [
-            Text("Foto llegada"),
+            Text("Cotizar Ticket"),
             Spacer(),
             ImageIcon(
               AssetImage('assets/gpolias.png'),

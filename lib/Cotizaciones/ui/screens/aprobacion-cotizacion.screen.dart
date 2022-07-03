@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:grupolias/AcuerdosConformidad/ui/screens/usuario-final.screen.dart';
 import 'package:grupolias/Cotizaciones/controllers/aprobacion-cotizacion.controller.dart';
 import 'package:grupolias/Cotizaciones/models/cotizacion.model.dart';
 import 'package:grupolias/Home/ui/screens/home.screen.dart';
-import 'package:grupolias/AcuerdosConformidad/ui/screens/acuerdo-conformidad.screen.dart';
+import 'package:grupolias/Tickets/ui/screens/ticket-detalles.screen.dart';
 
 class AprobacionCotizacion extends StatefulWidget {
   final Cotizacion cotizacion;
@@ -33,16 +34,10 @@ class _AprobacionCotizacionState extends State<AprobacionCotizacion> {
         title: const Text("A espera de aprobación"),
         backgroundColor: Colors.black,
         toolbarHeight: 80,
-        automaticallyImplyLeading: false,
-        actions: [
-          IconButton(
-              onPressed: () {
-                Get.to(() => const Home());
-              },
-              icon: const Icon(Icons.home)),
-          const ImageIcon(
+        actions: const [
+          ImageIcon(
             AssetImage('assets/gpolias.png'),
-            size: 80,
+            size: 50,
           ),
         ],
       ),
@@ -113,76 +108,46 @@ class _AprobacionCotizacionState extends State<AprobacionCotizacion> {
                         ),
                 ),
                 const SizedBox(height: 10),
-                Obx(() {
-                  return controller.cotizacion.value.isAprobado == false
-                      ? const Text(
-                          "Esperando aprobación",
-                          style: TextStyle(
-                            fontSize: 20,
-                            color: Colors.red,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        )
-                      : Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const Text(
-                              "Aprobado",
-                              style: TextStyle(
-                                fontSize: 20,
-                                color: Colors.green,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                  primary: Colors.black),
-                              onPressed: () {
-                                Get.to(() => AcuerdoConformidadScreen(
-                                      cotizacion: controller.cotizacion.value,
-                                    ));
-                              },
-                              child: const Text("Acuerdo de conformidad"),
-                            ),
-                          ],
-                        );
-                }),
-                ElevatedButton(
-                  onPressed: () => controller
-                      .lanzarMapa(controller.cotizacion.value.ticketId!),
-                  child: const Text("Como llegar"),
-                ),
-                //Si no se puede abrir el mapa, se despliega el botón con la URL
-                //del mapa origen y destino
                 Obx(
-                  (() => controller.sePuedeAbrirMapa.value
-                      ? const Text("")
-                      : Column(
-                          children: [
-                            const SelectableText(
-                                "No se pudo lanzar mapa copia la dirección y pegala en google maps"),
-                            IconButton(
-                              onPressed: () {
-                                Clipboard.setData(
-                                  ClipboardData(
-                                    text: controller.urlMapa.value,
-                                  ),
-                                ).then((value) async {
-                                  await Clipboard.getData(Clipboard.kTextPlain);
-
-                                  Get.snackbar(
-                                    "Direccion copiada",
-                                    "Use la app de google maps para abrirla",
-                                    snackPosition: SnackPosition.BOTTOM,
-                                    duration: const Duration(seconds: 5),
+                  () {
+                    return controller.cotizacion.value.isAprobado == false
+                        ? const Text(
+                            "Esperando aprobación",
+                            style: TextStyle(
+                              fontSize: 20,
+                              color: Colors.red,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          )
+                        : Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const Text(
+                                "Aprobado",
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  color: Colors.green,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                    primary: Colors.black),
+                                onPressed: () {
+                                  Get.offAll(
+                                    () => UsuarioFinalScreen(
+                                      cotizacion: cotizacion!,
+                                    ),
                                   );
-                                });
-                              },
-                              icon: const Icon(Icons.copy),
-                            )
-                          ],
-                        )),
-                )
+                                },
+                                child: const Text(
+                                  "Realizar acuerdo de conformidad",
+                                ),
+                              ),
+                            ],
+                          );
+                  },
+                ),
               ],
             ),
           ),

@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:grupolias/AcuerdosConformidad/ui/screens/usuario-final.screen.dart';
+import 'package:grupolias/Cotizaciones/ui/screens/aprobacion-cotizacion.screen.dart';
 import 'package:grupolias/Cotizaciones/ui/screens/foto-llegada.screen.dart';
 
 import '../../../Cotizaciones/controllers/aprobacion-cotizacion.controller.dart';
-import '../../../Cotizaciones/ui/screens/aprobacion-cotizacion.screen.dart';
 import '../../controllers/ticket.controller.dart';
 import '../../controllers/tickets.detalles.controller.dart';
 
@@ -48,6 +49,7 @@ class _BotonesTicketWidgetState extends State<BotonesTicketWidget> {
               ? ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     primary: Colors.black,
+                    minimumSize: const Size.fromHeight(50),
                   ),
                   child: const Text("Tomar Ticket"),
                   onPressed: () {
@@ -57,21 +59,24 @@ class _BotonesTicketWidgetState extends State<BotonesTicketWidget> {
                   },
                 )
               : const SizedBox(
-                  height: 20,
+                  height: 10,
                 )),
+        ),
+        const SizedBox(
+          height: 10,
         ),
         Obx(
           (() => controllerTD.ticket.value.estado == "TOMADO"
               ? ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                      primary: Colors.red,
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 20, vertical: 10),
-                      textStyle: const TextStyle(
-                          fontSize: 20, fontWeight: FontWeight.bold),
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(50))),
-                  child: const Text(" Pulse Cuando Llegué ‼‼ "),
+                    primary: Colors.green,
+                    minimumSize: const Size.fromHeight(50),
+                    textStyle: const TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  child: const Text("Ya he llegado"),
                   onPressed: () {
                     Get.to(
                       () => FotoLlegadaScreen(
@@ -82,13 +87,17 @@ class _BotonesTicketWidgetState extends State<BotonesTicketWidget> {
                 )
               : const SizedBox()),
         ),
+        const SizedBox(
+          height: 10,
+        ),
         Obx(
           (() => controllerTD.ticket.value.estado == "COTIZADO"
               ? ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    primary: Colors.grey,
+                    primary: Colors.amber,
+                    minimumSize: const Size.fromHeight(50),
                   ),
-                  child: const Text("Estado de aprobacion"),
+                  child: const Text("Ver estado de aprobacion"),
                   onPressed: () async {
                     await controllerTD.getCotizacionByIdTicket(
                       idTicket,
@@ -100,27 +109,59 @@ class _BotonesTicketWidgetState extends State<BotonesTicketWidget> {
                     );
                   },
                 )
-              : const SizedBox(
-                  height: 20,
-                )),
+              : const SizedBox()),
+        ),
+        const SizedBox(
+          height: 10,
         ),
         Obx(
-          (() => controllerTD.ticket.value.tecnicoId != null
+          (() => controllerTD.ticket.value.estado == "EN PROCESO"
               ? ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                      primary: Colors.green,
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 20, vertical: 10),
-                      textStyle: const TextStyle(
-                          fontSize: 20, fontWeight: FontWeight.bold),
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(50))),
+                    primary: Colors.blue,
+                    minimumSize: const Size.fromHeight(50),
+                  ),
+                  child: const Text(
+                    "Realizar acuerdo de conformidad",
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  ),
+                  onPressed: () async {
+                    await controllerTD.getCotizacionByIdTicket(
+                      idTicket,
+                    );
+                    Get.to(
+                      () => UsuarioFinalScreen(
+                        cotizacion: controllerTD.cotizacion.value!,
+                      ),
+                    );
+                  },
+                )
+              : const SizedBox()),
+        ),
+        const SizedBox(
+          height: 10,
+        ),
+        Obx(
+          (() => controllerTD.ticket.value.tecnicoId != null &&
+                  controllerTD.ticket.value.estado != "FINALIZADO"
+              ? ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.black,
+                    minimumSize: const Size.fromHeight(50),
+                    textStyle: const TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                   onPressed: () => controllerCotizacion.lanzarMapa(
                     idTicket,
                   ),
                   child: const Text("Como llegar"),
                 )
               : const SizedBox()),
+        ),
+        const SizedBox(
+          height: 10,
         ),
 
         /* Si no se puede abrir el mapa, se despliega 

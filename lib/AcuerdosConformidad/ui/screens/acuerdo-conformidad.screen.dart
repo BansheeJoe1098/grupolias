@@ -1,16 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:grupolias/Cotizaciones/models/cotizacion.model.dart';
 import 'package:jiffy/jiffy.dart';
 
 import '../../controllers/acuerdo-conformidad.controller.dart';
-import 'package:grupolias/Perfil/ui/screens/user.final.dart';
 
 class AcuerdoConformidadScreen extends StatefulWidget {
-  final Cotizacion cotizacion;
+  final AcuerdoConformidadController controller;
   const AcuerdoConformidadScreen({
     Key? key,
-    required this.cotizacion,
+    required this.controller,
   }) : super(key: key);
 
   @override
@@ -19,14 +16,13 @@ class AcuerdoConformidadScreen extends StatefulWidget {
 }
 
 class _AcuerdoConformidadScreenState extends State<AcuerdoConformidadScreen> {
-  final acuerdoFormKey = GlobalKey<FormState>();
+  late AcuerdoConformidadController controller;
 
-  final controller = Get.put(AcuerdoConformidadController());
   late int idTicket;
   @override
   void initState() {
     super.initState();
-    controller.cotizacion = widget.cotizacion;
+    controller = widget.controller;
     controller.getTicketAcuerdo();
     //Translate date time to español
     Jiffy.locale("es_us");
@@ -47,15 +43,16 @@ class _AcuerdoConformidadScreenState extends State<AcuerdoConformidadScreen> {
           ),
         ],
       ),
-      floatingActionButton: Tooltip(
-        message: "Enviar Acuerdo",
-        child: FloatingActionButton(
-          backgroundColor: Colors.black,
-          onPressed: () {
-            //controller.submit(context);
-            Get.to(UserFinal());
-          },
-          child: const Icon(Icons.send),
+      floatingActionButton: FloatingActionButton.extended(
+        backgroundColor: Colors.black,
+        onPressed: () async {
+          await controller.enviarAcuerdo();
+        },
+        label: Row(
+          children: const [
+            Text('Enviar  '),
+            Icon(Icons.send),
+          ],
         ),
       ),
       body: Stack(
@@ -64,7 +61,7 @@ class _AcuerdoConformidadScreenState extends State<AcuerdoConformidadScreen> {
             child: Padding(
               padding: const EdgeInsets.all(15.0),
               child: Form(
-                  key: controller.acuerdoFormKey,
+                  key: controller.observacionesFormKey,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -74,9 +71,6 @@ class _AcuerdoConformidadScreenState extends State<AcuerdoConformidadScreen> {
                           fontWeight: FontWeight.bold,
                           fontSize: 20,
                         ),
-                      ),
-                      const SizedBox(
-                        height: 20,
                       ),
                       Text(
                         " ${controller.cotizacion.diagnosticoProblema}",
@@ -91,9 +85,6 @@ class _AcuerdoConformidadScreenState extends State<AcuerdoConformidadScreen> {
                           fontWeight: FontWeight.bold,
                           fontSize: 20,
                         ),
-                      ),
-                      const SizedBox(
-                        height: 20,
                       ),
                       Text(
                         " ${controller.cotizacion.solucionTecnico}",
@@ -122,6 +113,9 @@ class _AcuerdoConformidadScreenState extends State<AcuerdoConformidadScreen> {
                           fontWeight: FontWeight.bold,
                           fontSize: 20,
                         ),
+                      ),
+                      const SizedBox(
+                        height: 20,
                       ),
                       TextFormField(
                         validator: (value) {

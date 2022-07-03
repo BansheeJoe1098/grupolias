@@ -44,17 +44,6 @@ class CotizacionesController extends GetxController {
         const SnackBar(content: Text('Enviando')),
       );
 
-      // var payload = {
-      //   "diagnostico_problema": diagnosticoProblema.text,
-      //   "solucion_tecnico": solucionTecnico.text,
-      //   "fecha_contacto": DateTime.now().toUtc().toIso8601String(),
-      //   "costo_mano_obra": double.parse(costoManoObra.text),
-      //   "costo_materiales": double.parse(costoMateriales.text),
-      //   "total_cotizacion": total.value,
-      //   "ticketId": ticket.value.id,
-      //   "tecnicoId": ticket.value.tecnicoId,
-      // };
-
       var payload = CreateCotizacionDto(
         diagnosticoProblema: diagnosticoProblema.text,
         solucionTecnico: solucionTecnico.text,

@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 import 'package:grupolias/AcuerdosConformidad/models/acuerdo-conformidad.model.dart';
 
 import '../../constants.dart';
-import '../models/acuerdo-conformidad.dto.dart';
+import '../models/dto/acuerdo-conformidad-dto.model.dart';
 
 class AcuerdoService {
   String acuerdourl = '${Constants.API_URL}/acuerdos-conformidad';
