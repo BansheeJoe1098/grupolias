@@ -66,31 +66,6 @@ class _BotonesTicketWidgetState extends State<BotonesTicketWidget> {
           height: 10,
         ),
         Obx(
-          (() => controllerTD.ticket.value.estado == "TOMADO"
-              ? ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    primary: Colors.green,
-                    minimumSize: const Size.fromHeight(50),
-                    textStyle: const TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  child: const Text("Ya he llegado"),
-                  onPressed: () {
-                    Get.to(
-                      () => FotoLlegadaScreen(
-                        idTicket: idTicket,
-                      ),
-                    );
-                  },
-                )
-              : const SizedBox()),
-        ),
-        const SizedBox(
-          height: 10,
-        ),
-        Obx(
           (() => controllerTD.ticket.value.estado == "COTIZADO"
               ? ElevatedButton(
                   style: ElevatedButton.styleFrom(
@@ -159,6 +134,34 @@ class _BotonesTicketWidgetState extends State<BotonesTicketWidget> {
                   child: const Text("Como llegar"),
                 )
               : const SizedBox()),
+        ),
+        const SizedBox(
+          height: 10,
+        ),
+        Obx(
+          (() => controllerTD.ticket.value.estado == "TOMADO"
+              ? ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.green,
+                    minimumSize: const Size.fromHeight(50),
+                    textStyle: const TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  child: const Text("Ya he llegado"),
+                  onPressed: () {
+                    Get.to(
+                      () => FotoLlegadaScreen(
+                        idTicket: idTicket,
+                      ),
+                    );
+                  },
+                )
+              : const SizedBox()),
+        ),
+        const SizedBox(
+          height: 10,
         ),
         Obx(
           (() => controllerTD.ticket.value.estado == "FINALIZADO"
