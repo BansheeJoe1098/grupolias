@@ -49,9 +49,9 @@ class _UsuarioFinalScreenState extends State<UsuarioFinalScreen> {
         onPressed: () {
           controller.enviarUsuarioFinal();
         },
-        icon: const Icon(Icons.send),
+        icon: const Icon(Icons.navigate_next_sharp),
         label: const Text(
-          'Enviar Acuerdo',
+          'Siguiente',
         ),
       ),
       body: SingleChildScrollView(

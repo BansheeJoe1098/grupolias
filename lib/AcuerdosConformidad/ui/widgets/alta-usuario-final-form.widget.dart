@@ -194,7 +194,8 @@ class AltaUsuariosFinalesForm extends StatelessWidget {
             textAlignVertical: TextAlignVertical.top,
             controller: controller.email,
             maxLength: 100,
-            textInputAction: TextInputAction.search,
+            textInputAction: TextInputAction.next,
+            keyboardType: TextInputType.emailAddress,
             autovalidateMode: AutovalidateMode.onUserInteraction,
             validator: (value) {
               value = value!.split(" ").join("");
