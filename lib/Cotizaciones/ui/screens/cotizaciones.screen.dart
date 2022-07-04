@@ -304,7 +304,7 @@ class _CotizacionesScreenState extends State<CotizacionesScreen> {
                       ),
                     ),
                     const SizedBox(
-                      height: 20,
+                      height: 100,
                     ),
                   ],
                 ),
