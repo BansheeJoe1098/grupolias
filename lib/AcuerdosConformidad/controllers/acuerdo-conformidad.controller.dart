@@ -21,7 +21,7 @@ import '../../Signature/ui/screens/signature.screen.dart';
 class AcuerdoConformidadController extends GetxController {
   var cotizacion = Cotizacion();
   var ticket = Ticket();
-  Rx<UsuarioFinal?> usuarioFinal = null.obs;
+  Rx<UsuarioFinal?> usuarioFinal = UsuarioFinal().obs;
 
   //Acuerdo de conformidad
   final observacionesFormKey = GlobalKey<FormState>();
@@ -55,7 +55,7 @@ class AcuerdoConformidadController extends GetxController {
       );
 
       var service = UsuarioFinalService();
-      var respuesta = await service.create(paload);
+      UsuarioFinal? respuesta = await service.create(paload);
 
       if (respuesta != null) {
         usuarioFinal.value = respuesta;
