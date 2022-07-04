@@ -160,6 +160,27 @@ class _BotonesTicketWidgetState extends State<BotonesTicketWidget> {
                 )
               : const SizedBox()),
         ),
+        Obx(
+          (() => controllerTD.ticket.value.estado == "FINALIZADO"
+              ? Container(
+                  height: 50,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: Colors.grey,
+                  ),
+                  child: const Center(
+                    child: Text(
+                      "Ticket finalizado",
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                )
+              : const SizedBox()),
+        ),
         const SizedBox(
           height: 10,
         ),
