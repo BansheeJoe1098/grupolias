@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:easy_pdf_viewer/easy_pdf_viewer.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:grupolias/Global/widgets/custom.snackbar.dart';
 import 'package:grupolias/constants.dart';
 import 'package:http/http.dart' as http;
@@ -19,8 +20,13 @@ class TicketService {
     return lista;
   }
 
-  Future<List<Ticket>> getByEstado(String estado) async {
-    final response = await http.get(Uri.parse("$url/estado/$estado"));
+  Future<List<Ticket>> ticketsByCiudadOfUser() async {
+    const storage = FlutterSecureStorage();
+    var token = await storage.read(key: 'token');
+
+    final response = await http.get(Uri.parse("$url/ciudad"),
+        headers: token != null ? {'Authorization': 'Bearer $token'} : null);
+
     final jsonData = json.decode(response.body);
     final lista =
         List<Ticket>.from(jsonData.map((item) => Ticket.fromJson(item)));

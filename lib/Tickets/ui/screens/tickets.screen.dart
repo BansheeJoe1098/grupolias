@@ -81,7 +81,7 @@ class _TicketsScreenState extends State<TicketsScreen> {
                       ),
                     ),
                     FutureBuilder<List<Ticket>>(
-                      future: TicketService().getByEstado("NUEVO"),
+                      future: TicketService().ticketsByCiudadOfUser(),
                       builder: (context, snapshot) {
                         if (snapshot.connectionState ==
                             ConnectionState.waiting) {
