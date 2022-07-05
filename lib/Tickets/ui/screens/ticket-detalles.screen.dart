@@ -126,51 +126,83 @@ class _TicketDetallesScreenState extends State<TicketDetallesScreen> {
                         ),
                       ),
                       const SizedBox(height: 20),
-                      const Text(
-                        "Colonia 🏡",
-                        style: TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.bold),
+                      data.colonia == null
+                          ? Column(
+                              children: [
+                                const Text(
+                                  "Colonia 🏠",
+                                  style: TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                Text(
+                                  "${data.colonia}",
+                                  style: const TextStyle(
+                                    fontSize: 15,
+                                  ),
+                                ),
+                                const SizedBox(height: 20),
+                              ],
+                            )
+                          : const SizedBox(),
+                      data.colonia == null
+                          ? const Text(
+                              "Calle 🚗",
+                              style: TextStyle(
+                                  fontSize: 20, fontWeight: FontWeight.bold),
+                            )
+                          : const Text(
+                              "Coordenadas 📍",
+                              style: TextStyle(
+                                  fontSize: 20, fontWeight: FontWeight.bold),
+                            ),
+                      Text(
+                        "${data.calle}",
+                        style: const TextStyle(
+                          fontSize: 15,
+                        ),
                       ),
-                      Text("${data.colonia}",
-                          style: const TextStyle(
-                            fontSize: 15,
-                          )),
-                      const SizedBox(height: 20),
-                      const Text(
-                        "Calle 🚗",
-                        style: TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.bold),
-                      ),
-                      Text("${data.calle}",
-                          style: const TextStyle(
-                            fontSize: 15,
-                          )),
                       const SizedBox(
                         height: 25,
                       ),
-                      const Text(
-                        "Numero Exterior",
-                        style: TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.bold),
-                      ),
-                      Text("${data.numeroDomicilio}",
-                          style: const TextStyle(
-                            fontSize: 15,
-                          )),
-                      const SizedBox(
-                        height: 25,
-                      ),
-                      const Text(
-                        "Numero Interior",
-                        style: TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.bold),
-                      ),
-                      data.numInterior != ""
-                          ? Text("${data.numInterior}",
-                              style: const TextStyle(
-                                fontSize: 15,
-                              ))
-                          : const Text("Sin Numero Interior"),
+                      data.numeroDomicilio == null
+                          ? Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const Text(
+                                  "Numero Exterior",
+                                  style: TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                Text(
+                                  "${data.numeroDomicilio}",
+                                  style: const TextStyle(
+                                    fontSize: 15,
+                                  ),
+                                ),
+                              ],
+                            )
+                          : const SizedBox(),
+                      data.numInterior == null
+                          ? Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const Text(
+                                  "Numero Interior",
+                                  style: TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                data.numInterior != ""
+                                    ? Text("${data.numInterior}",
+                                        style: const TextStyle(
+                                          fontSize: 15,
+                                        ))
+                                    : const Text("Sin Numero Interior"),
+                              ],
+                            )
+                          : const SizedBox(),
                     ],
                   );
                 },

@@ -61,7 +61,7 @@ class _TicketsScreenState extends State<TicketsScreen> {
                         children: [
                           Obx(
                             () => Text(
-                              'Bienvenido ${globalController.tecnicoLogueado.value?.nombre}',
+                              'Bienvenid@ ${globalController.tecnicoLogueado.value?.nombre}',
                               style: const TextStyle(
                                 color: Colors.white,
                                 fontSize: 30,
