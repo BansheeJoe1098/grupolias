@@ -39,8 +39,41 @@ class _TusTicketsScreenState extends State<TusTicketsScreen> {
               list.add(
                 Card(
                   child: ListTile(
-                    title: Text(ticket.id.toString()),
-                    subtitle: Text(ticket.problematica.toString()),
+                    title: Text(ticket.numExpediente.toString()),
+                    subtitle: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          ticket.problematica.toString(),
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                        const SizedBox(height: 10),
+                        Container(
+                          decoration: BoxDecoration(
+                            color: ticket.estado == "TOMADO"
+                                ? Colors.deepPurple[200]
+                                : ticket.estado == "COTIZADO"
+                                    ? Colors.grey[200]
+                                    : ticket.estado == "EN PROCESO"
+                                        ? Colors.amber[200]
+                                        : ticket.estado == "A CERRAR"
+                                            ? Colors.blueAccent[200]
+                                            : Colors.red[200],
+                            borderRadius: BorderRadius.circular(3),
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.all(4.0),
+                            child: Text(
+                              ticket.estado.toString(),
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                     onTap: () {
                       Get.to(
                         () => TicketDetallesScreen(
