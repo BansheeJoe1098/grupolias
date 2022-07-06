@@ -184,6 +184,36 @@ class _BotonesTicketWidgetState extends State<BotonesTicketWidget> {
                 )
               : const SizedBox()),
         ),
+        Obx(
+          (() => controllerTD.ticket.value.estado != "FINALIZADO"
+              ? ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.red,
+                    minimumSize: const Size.fromHeight(50),
+                    textStyle: const TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: const [
+                      Icon(
+                        Icons.cancel,
+                        color: Colors.white,
+                      ),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      Text("Abortar ticket"),
+                    ],
+                  ),
+                  onPressed: () {
+                    //TODO: Abortar ticket
+                  },
+                )
+              : const SizedBox()),
+        ),
         const SizedBox(
           height: 10,
         ),
