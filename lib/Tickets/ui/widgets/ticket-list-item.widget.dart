@@ -24,8 +24,6 @@ class _TicketListItemState extends State<TicketListItem> {
   void initState() {
     super.initState();
     controller.ticket.value = widget.ticket;
-    idTicket = widget.ticket.id;
-    controller.getCiudadById(controller.ticket.value.ciudadId);
   }
 
   @override
@@ -59,11 +57,9 @@ class _TicketListItemState extends State<TicketListItem> {
             Row(
               children: [
                 const Icon(Icons.location_pin),
-                Obx(
-                  () => Text(
-                    "${controller.ciudad.value.nombre}",
-                    maxLines: 2,
-                  ),
+                Text(
+                  "${controller.ticket.value.calle}",
+                  maxLines: 2,
                 ),
               ],
             )
