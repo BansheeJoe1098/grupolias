@@ -58,9 +58,7 @@ class _BotonesTicketWidgetState extends State<BotonesTicketWidget> {
                     );
                   },
                 )
-              : const SizedBox(
-                  height: 10,
-                )),
+              : const SizedBox()),
         ),
         const SizedBox(
           height: 10,
@@ -131,7 +129,16 @@ class _BotonesTicketWidgetState extends State<BotonesTicketWidget> {
                   onPressed: () => controllerCotizacion.lanzarMapa(
                     idTicket,
                   ),
-                  child: const Text("Como llegar"),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: const [
+                      Icon(Icons.map),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      Text("Como llegar"),
+                    ],
+                  ),
                 )
               : const SizedBox()),
         ),
@@ -149,7 +156,16 @@ class _BotonesTicketWidgetState extends State<BotonesTicketWidget> {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  child: const Text("Ya he llegado"),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: const [
+                      Icon(Icons.person_pin),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      Text("Ya he llegado"),
+                    ],
+                  ),
                   onPressed: () {
                     Get.to(
                       () => FotoLlegadaScreen(
@@ -184,6 +200,9 @@ class _BotonesTicketWidgetState extends State<BotonesTicketWidget> {
                 )
               : const SizedBox()),
         ),
+        const SizedBox(
+          height: 10,
+        ),
         Obx(
           (() => controllerTD.ticket.value.estado != "FINALIZADO" &&
                   controllerTD.ticket.value.estado != "NUEVO"
@@ -217,9 +236,6 @@ class _BotonesTicketWidgetState extends State<BotonesTicketWidget> {
                   },
                 )
               : const SizedBox()),
-        ),
-        const SizedBox(
-          height: 10,
         ),
 
         /* Si no se puede abrir el mapa, se despliega 

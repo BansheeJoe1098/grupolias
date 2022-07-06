@@ -81,7 +81,7 @@ class _TicketListItemState extends State<TicketListItem> {
             onPressed: () {
               Get.to(
                 () => TicketDetallesScreen(
-                  titulo: "Ticket ${widget.ticket.numExpediente}",
+                  titulo: "${widget.ticket.numExpediente}",
                   idTicket: widget.ticket.id!,
                 ),
               );

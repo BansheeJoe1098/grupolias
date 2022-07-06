@@ -86,7 +86,7 @@ class _TicketDetallesScreenState extends State<TicketDetallesScreen> {
                           fontWeight: FontWeight.w300,
                         ),
                       ),
-                      const SizedBox(height: 20),
+                      const SizedBox(height: 10),
                       const Text(
                         "Problematica",
                         style: TextStyle(
@@ -101,7 +101,7 @@ class _TicketDetallesScreenState extends State<TicketDetallesScreen> {
                           fontWeight: FontWeight.w300,
                         ),
                       ),
-                      const SizedBox(height: 20),
+                      const SizedBox(height: 10),
                       const Text(
                         "Fecha y Día 🕰",
                         style: TextStyle(
@@ -111,7 +111,9 @@ class _TicketDetallesScreenState extends State<TicketDetallesScreen> {
                           style: const TextStyle(
                             fontSize: 15,
                           )),
-                      const SizedBox(height: 10),
+                      const SizedBox(
+                        height: 10,
+                      ),
                       const Text(
                         "Ciudad 🌁",
                         style: TextStyle(
@@ -125,9 +127,10 @@ class _TicketDetallesScreenState extends State<TicketDetallesScreen> {
                           ),
                         ),
                       ),
-                      const SizedBox(height: 20),
-                      data.colonia == null
+                      const SizedBox(height: 10),
+                      data.colonia != ""
                           ? Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 const Text(
                                   "Colonia 🏠",
@@ -141,11 +144,13 @@ class _TicketDetallesScreenState extends State<TicketDetallesScreen> {
                                     fontSize: 15,
                                   ),
                                 ),
-                                const SizedBox(height: 20),
+                                const SizedBox(
+                                  height: 10,
+                                ),
                               ],
                             )
                           : const SizedBox(),
-                      data.colonia == null
+                      data.colonia != ""
                           ? const Text(
                               "Calle 🚗",
                               style: TextStyle(
@@ -163,9 +168,9 @@ class _TicketDetallesScreenState extends State<TicketDetallesScreen> {
                         ),
                       ),
                       const SizedBox(
-                        height: 25,
+                        height: 10,
                       ),
-                      data.numeroDomicilio == null
+                      data.colonia != ""
                           ? Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -184,7 +189,10 @@ class _TicketDetallesScreenState extends State<TicketDetallesScreen> {
                               ],
                             )
                           : const SizedBox(),
-                      data.numInterior == null
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      data.colonia != ""
                           ? Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
