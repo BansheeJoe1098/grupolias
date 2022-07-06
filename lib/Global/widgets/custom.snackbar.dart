@@ -16,7 +16,7 @@ class CustomSnackBar {
       descripcion,
       backgroundColor: color,
       colorText: Colors.white,
-      snackPosition: SnackPosition.BOTTOM,
+      snackPosition: SnackPosition.TOP,
       duration: const Duration(seconds: 8),
       isDismissible: true,
       dismissDirection: DismissDirection.horizontal,

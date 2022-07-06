@@ -185,7 +185,8 @@ class _BotonesTicketWidgetState extends State<BotonesTicketWidget> {
               : const SizedBox()),
         ),
         Obx(
-          (() => controllerTD.ticket.value.estado != "FINALIZADO"
+          (() => controllerTD.ticket.value.estado != "FINALIZADO" &&
+                  controllerTD.ticket.value.estado != "NUEVO"
               ? ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     primary: Colors.red,
@@ -208,8 +209,11 @@ class _BotonesTicketWidgetState extends State<BotonesTicketWidget> {
                       Text("Abortar ticket"),
                     ],
                   ),
-                  onPressed: () {
-                    //TODO: Abortar ticket
+                  onPressed: () async {
+                    ticketsController.abortarTicket(
+                      ticketsController.ticket.value,
+                      controllerTD.cotizacion.value,
+                    );
                   },
                 )
               : const SizedBox()),
