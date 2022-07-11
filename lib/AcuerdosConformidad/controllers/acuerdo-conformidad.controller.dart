@@ -3,7 +3,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:grupolias/AcuerdosConformidad/models/acuerdo-final.model.dart';
+import 'package:grupolias/AcuerdosConformidad/models/dto/usuario-final.model.dart';
 import '../../AcuerdosConformidad/models/dto/acuerdo-conformidad-dto.model.dart';
 import '../../AcuerdosConformidad/models/acuerdo-conformidad.model.dart';
 import '../../AcuerdosConformidad/models/dto/usuario-final-dto.model.dart';
@@ -20,7 +20,8 @@ import '../../Signature/ui/screens/signature.screen.dart';
 class AcuerdoConformidadController extends GetxController {
   var cotizacion = Cotizacion();
   var ticket = Ticket();
-  Rx<UsuarioFinal?> usuarioFinal = UsuarioFinal().obs;
+  UsuarioFinal? usuarioFinal;
+  var isUserRegistrado = false.obs;
 
   //Acuerdo de conformidad
   final observacionesFormKey = GlobalKey<FormState>();
@@ -53,11 +54,18 @@ class AcuerdoConformidadController extends GetxController {
         correo: email.text == "" ? null : email.text.split(' ').join(''),
       );
 
-      var service = UsuarioFinalService();
-      UsuarioFinal? respuesta = await service.create(paload);
-
-      if (respuesta != null) {
-        usuarioFinal.value = respuesta;
+      if (!isUserRegistrado.value) {
+        var service = UsuarioFinalService();
+        UsuarioFinal? respuesta = await service.create(paload);
+        if (respuesta != null) {
+          usuarioFinal = respuesta;
+          Get.to(
+            () => AcuerdoConformidadScreen(
+              controller: this,
+            ),
+          );
+        }
+      } else {
         Get.to(
           () => AcuerdoConformidadScreen(
             controller: this,
@@ -65,6 +73,14 @@ class AcuerdoConformidadController extends GetxController {
         );
       }
     }
+  }
+
+  clearForm() {
+    isUserRegistrado.value = false;
+    nombreUsuario.clear();
+    aPaterno.clear();
+    aMaterno.clear();
+    email.clear();
   }
 
   Future<AcuerdoConformidad?> enviarAcuerdo() async {
@@ -81,13 +97,30 @@ class AcuerdoConformidadController extends GetxController {
         horaLlegadaServicio: cotizacion.createdAt,
         fechaAcuerdo: DateTime.now().toUtc(),
         ticketId: ticket.id,
-        usuarioFinalId: usuarioFinal.value?.id,
+        usuarioFinalId: usuarioFinal?.id,
         direccion:
             '${ticket.calle!},${ticket.numeroDomicilio != "" ? ticket.numeroDomicilio : ""},${ticket.colonia! != "" ? ticket.colonia : ""}',
       );
       Get.to(() => SignatureScreen(acuerdoDto: acuerdoDTO));
     }
     return null;
+  }
+
+  void getUsuarioFinalByTelefono() async {
+    var service = UsuarioFinalService();
+    UsuarioFinal? respuesta = await service.getByTelefono(telefono.text);
+    isUserRegistrado.value = true;
+    update();
+    if (respuesta != null) {
+      usuarioFinal = respuesta;
+      nombreUsuario.text = respuesta.nombre!;
+      aPaterno.text = respuesta.apellidoPaterno!;
+      aMaterno.text = respuesta.apellidoMaterno!;
+      email.text = respuesta.correo!;
+    } else {
+      isUserRegistrado.value = false;
+      update();
+    }
   }
 
   String? validadorTextArea(String? value) {
