@@ -80,6 +80,7 @@ class _PerfilImgPickerState extends State<PerfilImgPicker> {
                     controller.tomarFoto(
                       ImageSource.camera,
                     );
+                    Navigator.pop(context);
                   },
                   label: const Text(
                     "Camara",
@@ -100,6 +101,7 @@ class _PerfilImgPickerState extends State<PerfilImgPicker> {
                       //Se toma la foto desde la galeria
                       ImageSource.gallery,
                     );
+                    Navigator.pop(context);
                   },
                   label: const Text(
                     "Galeria",
