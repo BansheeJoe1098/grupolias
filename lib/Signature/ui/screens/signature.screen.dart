@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
-import 'package:grupolias/AcuerdosConformidad/models/acuerdo-conformidad.model.dart';
+import 'package:grupolias/AcuerdosConformidad/models/dto/acuerdo-conformidad-dto.model.dart';
 import 'package:syncfusion_flutter_signaturepad/signaturepad.dart';
 
 import '../../controllers/signature.controller.dart';
 
 class SignatureScreen extends StatefulWidget {
-  final AcuerdoConformidad? acuerdoDto;
+  final AcuerdoDto? acuerdoDto;
   const SignatureScreen({Key? key, required this.acuerdoDto}) : super(key: key);
 
   @override
@@ -21,7 +21,7 @@ class _SignatureScreenState extends State<SignatureScreen> {
   @override
   void initState() {
     super.initState();
-    controller.acuerdoConformidad = widget.acuerdoDto!;
+    controller.acuerdoDto = widget.acuerdoDto!;
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.landscapeRight,
     ]);

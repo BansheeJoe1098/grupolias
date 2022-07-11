@@ -3,6 +3,8 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:grupolias/AcuerdosConformidad/models/acuerdo-conformidad.model.dart';
+import 'package:grupolias/AcuerdosConformidad/models/dto/acuerdo-conformidad-dto.model.dart';
+import 'package:grupolias/AcuerdosConformidad/services/acuerdo-conformidad.service.dart';
 import 'package:grupolias/Signature/services/signature.service.dart';
 
 import 'dart:io';
@@ -17,6 +19,31 @@ import '../../Tickets/services/ticket.service.dart';
 class SignatureController extends GetxController {
   GlobalKey<SfSignaturePadState> signaturePadKey = GlobalKey();
   late AcuerdoConformidad acuerdoConformidad;
+  late AcuerdoDto acuerdoDto;
+
+  guardarAcuerdo() async {
+    var service = AcuerdoService();
+    var respuesta = await service.create(acuerdoDto);
+
+    if (respuesta != null) {
+      acuerdoConformidad = respuesta;
+      Get.snackbar(
+        "Exito",
+        "Acuerdo Enviado",
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.green,
+      );
+
+      return respuesta;
+    } else {
+      Get.snackbar(
+        "Error",
+        "Error al enviar el acuerdo",
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.red,
+      );
+    }
+  }
 
   guardarSignature() async {
     ui.Image image = await signaturePadKey.currentState!.toImage();
@@ -29,6 +56,9 @@ class SignatureController extends GetxController {
     final File firmaComoPng = File(fileName);
 
     await firmaComoPng.writeAsBytes(imageBytes);
+
+    //Se guarda el aucero para obtener el id del acuerdo
+    await guardarAcuerdo();
 
     //Se sube la firma para el acuerdo
     SignatureService signatureService = SignatureService();
@@ -47,12 +77,15 @@ class SignatureController extends GetxController {
         ),
       );
     } else {
+      var service = AcuerdoService();
+      await service.remove(acuerdoConformidad);
       Get.snackbar(
         'Error',
-        'Error al subir la firma',
+        'Error al firmar el acuerdo',
         backgroundColor: Colors.red,
         colorText: Colors.white,
       );
+      Get.back();
     }
   }
 }

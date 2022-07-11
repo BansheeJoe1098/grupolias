@@ -205,7 +205,8 @@ class _BotonesTicketWidgetState extends State<BotonesTicketWidget> {
         ),
         Obx(
           (() => controllerTD.ticket.value.estado != "FINALIZADO" &&
-                  controllerTD.ticket.value.estado != "NUEVO"
+                  controllerTD.ticket.value.estado != "NUEVO" &&
+                  controllerTD.ticket.value.estado != null
               ? ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     primary: Colors.red,

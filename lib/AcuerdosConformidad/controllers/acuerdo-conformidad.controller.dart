@@ -9,7 +9,6 @@ import '../../AcuerdosConformidad/models/acuerdo-conformidad.model.dart';
 import '../../AcuerdosConformidad/models/dto/usuario-final-dto.model.dart';
 import '../../AcuerdosConformidad/services/usuario-final.service.dart';
 import '../../AcuerdosConformidad/ui/screens/acuerdo-conformidad.screen.dart';
-import '../services/acuerdo-conformidad.service.dart';
 
 import '../../Tickets/services/ticket.service.dart';
 import '../../Tickets/models/ticket.model.dart';
@@ -84,31 +83,9 @@ class AcuerdoConformidadController extends GetxController {
         ticketId: ticket.id,
         usuarioFinalId: usuarioFinal.value?.id,
         direccion:
-            '${ticket.calle!},${ticket.numeroDomicilio!},${ticket.colonia!}',
+            '${ticket.calle!},${ticket.numeroDomicilio != "" ? ticket.numeroDomicilio : ""},${ticket.colonia! != "" ? ticket.colonia : ""}',
       );
-
-      var service = AcuerdoService();
-      var respuesta = await service.create(acuerdoDTO);
-
-      if (respuesta != null) {
-        acuerdoConformidad.value = respuesta;
-        Get.snackbar(
-          "Exito",
-          "Acuerdo Enviado",
-          snackPosition: SnackPosition.BOTTOM,
-          backgroundColor: Colors.green,
-        );
-        Get.to(() => SignatureScreen(acuerdoDto: respuesta));
-
-        return respuesta;
-      } else {
-        Get.snackbar(
-          "Error",
-          "Error al enviar el acuerdo",
-          snackPosition: SnackPosition.BOTTOM,
-          backgroundColor: Colors.red,
-        );
-      }
+      Get.to(() => SignatureScreen(acuerdoDto: acuerdoDTO));
     }
     return null;
   }

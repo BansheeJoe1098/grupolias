@@ -34,12 +34,15 @@ class _TicketListItemState extends State<TicketListItem> {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              "${controller.ticket.value.tituloTicket}",
-              maxLines: 2,
-              style: const TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 18,
+            LimitedBox(
+              maxWidth: MediaQuery.of(context).size.width / 1.5,
+              child: Text(
+                "${controller.ticket.value.tituloTicket}",
+                style: const TextStyle(
+                  overflow: TextOverflow.ellipsis,
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
             LimitedBox(

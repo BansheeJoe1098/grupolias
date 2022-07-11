@@ -88,28 +88,6 @@ class _AprobacionCotizacionState extends State<AprobacionCotizacion> {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-
-                  //Calculo de tiempo transcurrido
-
-                  Obx(
-                    () => controller.minutos <= 10
-                        ? Text(
-                            "${controller.minutos} minutos",
-                            style: const TextStyle(
-                              fontSize: 20,
-                              color: Colors.green,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          )
-                        : Text(
-                            "${controller.tiempoTranscurridoMsg}",
-                            style: const TextStyle(
-                              fontSize: 20,
-                              color: Colors.red,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                  ),
                   const SizedBox(height: 10),
                   Obx(
                     () {

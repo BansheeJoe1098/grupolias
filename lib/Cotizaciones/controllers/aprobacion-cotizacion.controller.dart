@@ -24,14 +24,8 @@ class AprobacionCotizacionController extends GetxController {
     int mins =
         (DateTime.now().difference(cotizacion.value.createdAt!).inMinutes);
     tiempoTranscurridoMsg.value = "$mins minutos";
-    Timer.periodic(const Duration(seconds: 20), (timer) {
+    Timer.periodic(const Duration(seconds: 10), (timer) {
       checkEstadoCotizacion();
-
-      var creacionDelTicket = cotizacion.value.createdAt!;
-      int mins = (DateTime.now().difference(creacionDelTicket).inMinutes);
-      if (mins > 1) {
-        tiempoTranscurridoMsg.value = "$mins minutos";
-      }
       update();
     });
   }

@@ -4,6 +4,7 @@ import 'package:grupolias/Tickets/controllers/ticket.controller.dart';
 import 'package:grupolias/Tickets/models/ticket.model.dart';
 import 'package:grupolias/Tickets/services/ticket.service.dart';
 import 'package:grupolias/Tickets/ui/widgets/botones-ticket.widget.dart';
+import 'package:jiffy/jiffy.dart';
 import '../../../Cotizaciones/controllers/aprobacion-cotizacion.controller.dart';
 import '../../controllers/tickets.detalles.controller.dart';
 
@@ -32,6 +33,7 @@ class _TicketDetallesScreenState extends State<TicketDetallesScreen> {
     idTicket = widget.idTicket;
     controllerTD.getTicket(idTicket);
     controllerTD.getCotizacionByIdTicket(idTicket);
+    Jiffy.locale("es_us");
   }
 
   @override
@@ -73,7 +75,8 @@ class _TicketDetallesScreenState extends State<TicketDetallesScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const Text(
-                        "Ocupacion",
+                        "Problematica:",
+                        textAlign: TextAlign.justify,
                         style: TextStyle(
                           fontSize: 30,
                           fontWeight: FontWeight.w900,
@@ -81,6 +84,7 @@ class _TicketDetallesScreenState extends State<TicketDetallesScreen> {
                       ),
                       Text(
                         "${data.tituloTicket}",
+                        textAlign: TextAlign.justify,
                         style: const TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.w300,
@@ -88,7 +92,7 @@ class _TicketDetallesScreenState extends State<TicketDetallesScreen> {
                       ),
                       const SizedBox(height: 10),
                       const Text(
-                        "Problematica",
+                        "Objetivo",
                         style: TextStyle(
                           fontSize: 30,
                           fontWeight: FontWeight.w900,
@@ -103,11 +107,16 @@ class _TicketDetallesScreenState extends State<TicketDetallesScreen> {
                       ),
                       const SizedBox(height: 10),
                       const Text(
-                        "Fecha y Día 🕰",
+                        "Fecha de ticket:",
                         style: TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.bold),
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
-                      Text("${data.fechaLlamada}",
+                      Text(
+                          Jiffy(data.fechaLlamada).format(
+                            "dd MMMM yyyy HH:mm a",
+                          ),
                           style: const TextStyle(
                             fontSize: 15,
                           )),

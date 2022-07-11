@@ -1,5 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:flutter/material.dart';
+import 'package:grupolias/Global/widgets/custom.snackbar.dart';
 import 'package:http/http.dart' as http;
 import 'package:grupolias/AcuerdosConformidad/models/acuerdo-conformidad.model.dart';
 
@@ -40,5 +42,26 @@ class AcuerdoService {
     } else {
       throw Exception("Error al obtener el acuerdo");
     }
+  }
+
+  Future<AcuerdoConformidad?> remove(
+    AcuerdoConformidad acuerdo,
+  ) async {
+    var res = await http.delete(
+      Uri.parse("$acuerdourl/${acuerdo.id}"),
+      headers: {
+        HttpHeaders.contentTypeHeader: 'application/json',
+      },
+    );
+
+    if (res.statusCode == 200) {
+      return AcuerdoConformidad.fromJson(jsonDecode(res.body));
+    } else {
+      CustomSnackBar(
+          titulo: "Error",
+          descripcion: "No se pudo deshacer el acuerdo, consulte a grupo lias",
+          color: Colors.red);
+    }
+    return null;
   }
 }

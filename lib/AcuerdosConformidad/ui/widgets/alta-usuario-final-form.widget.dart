@@ -20,12 +20,12 @@ class AltaUsuariosFinalesForm extends StatelessWidget {
           TextFormField(
             textAlignVertical: TextAlignVertical.top,
             controller: controller.telefono,
-            maxLength: 12,
+            maxLength: 10,
             keyboardType: TextInputType.phone,
             textInputAction: TextInputAction.next,
             validator: (value) {
-              if (value!.length > 12) {
-                return 'El telefono no puede tener más de 12 caracteres';
+              if (value!.length > 10) {
+                return 'El telefono no puede tener más de 10 caracteres';
               }
               if (value == "") {
                 return 'El telefono es requerido';
@@ -196,7 +196,6 @@ class AltaUsuariosFinalesForm extends StatelessWidget {
             maxLength: 100,
             textInputAction: TextInputAction.next,
             keyboardType: TextInputType.emailAddress,
-            autovalidateMode: AutovalidateMode.onUserInteraction,
             validator: (value) {
               value = value!.split(" ").join("");
               //Email Regex expression

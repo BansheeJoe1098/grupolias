@@ -66,14 +66,15 @@ class _AcuerdoConformidadScreenState extends State<AcuerdoConformidadScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const Text(
-                        "Descripcion del Problema 👀 ",
+                        "Descripcion del Problema",
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 20,
                         ),
                       ),
                       Text(
-                        " ${controller.cotizacion.diagnosticoProblema}",
+                        "${controller.cotizacion.diagnosticoProblema}",
+                        textAlign: TextAlign.justify,
                         style: const TextStyle(fontSize: 20),
                       ),
                       const SizedBox(
@@ -87,7 +88,8 @@ class _AcuerdoConformidadScreenState extends State<AcuerdoConformidadScreen> {
                         ),
                       ),
                       Text(
-                        " ${controller.cotizacion.solucionTecnico}",
+                        "${controller.cotizacion.solucionTecnico}",
+                        textAlign: TextAlign.justify,
                         style: const TextStyle(fontSize: 20),
                       ),
                       const SizedBox(
@@ -129,12 +131,28 @@ class _AcuerdoConformidadScreenState extends State<AcuerdoConformidadScreen> {
                         autovalidateMode: AutovalidateMode.onUserInteraction,
                         controller: controller.observaciones,
                         decoration: const InputDecoration(
-                          labelText: 'Diagnostico del problema ',
-                          hintText:
-                              'Ej: Se encontró cocodrilo en la alberca del domicilio',
+                          labelText: 'Observaciones adicionales',
+                          floatingLabelStyle: TextStyle(
+                            color: Colors.black,
+                            fontSize: 20,
+                          ),
                           filled: true,
-                          fillColor: Colors.white,
-                          border: OutlineInputBorder(),
+                          fillColor: Color.fromARGB(255, 230, 230, 230),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.zero),
+                            borderSide: BorderSide.none,
+                          ),
+                          focusedBorder: UnderlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.zero),
+                            borderSide: BorderSide(
+                              color: Colors.black,
+                              width: 2,
+                            ),
+                          ),
+                          errorStyle: TextStyle(
+                            color: Colors.red,
+                            fontSize: 15,
+                          ),
                         ),
                       ),
                     ],

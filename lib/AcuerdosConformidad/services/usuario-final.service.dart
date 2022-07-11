@@ -19,8 +19,6 @@ class UsuarioFinalService {
       headers: {HttpHeaders.contentTypeHeader: 'application/json'},
     );
 
-    print(response.body.toString());
-
     if (response.statusCode == 201) {
       return UsuarioFinal.fromJson(jsonDecode(response.body));
     } else {
