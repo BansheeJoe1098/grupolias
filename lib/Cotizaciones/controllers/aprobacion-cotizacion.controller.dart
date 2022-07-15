@@ -13,6 +13,7 @@ import '../services/gps.service.dart';
 
 class AprobacionCotizacionController extends GetxController {
   Rx<Cotizacion> cotizacion = Cotizacion().obs;
+  var isAprobado = false.obs;
   //Tiempo transcurrido
   Rx<String> tiempoTranscurridoMsg = '0 mintos'.obs;
   Rx<int> minutos = 0.obs;
@@ -34,7 +35,12 @@ class AprobacionCotizacionController extends GetxController {
     try {
       int idCot = cotizacion.value.id!;
       var resCotizacion = await CotizacionesService().statusCotizacion(idCot);
-      cotizacion.value = resCotizacion!;
+      if (resCotizacion != null) {
+        cotizacion.value = resCotizacion;
+        isAprobado.value = resCotizacion.isAprobado!;
+      } else {
+        isAprobado.value = false;
+      }
     } catch (e) {
       // ignore: avoid_print
       print(e);

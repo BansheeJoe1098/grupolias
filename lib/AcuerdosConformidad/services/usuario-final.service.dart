@@ -19,7 +19,7 @@ class UsuarioFinalService {
       var data = json.decode(response.body);
       CustomSnackBar(
         titulo: "El usuario ya fué registrado anteriormente",
-        descripcion: "Puedes continuar con la cotizacion",
+        descripcion: "Puedes continuar con la el acuerdo de conformidad",
         color: Colors.green,
       );
       return UsuarioFinal.fromJson(data);
