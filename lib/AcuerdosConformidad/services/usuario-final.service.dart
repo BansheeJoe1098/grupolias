@@ -46,9 +46,8 @@ class UsuarioFinalService {
     } else {
       CustomSnackBar(
         titulo: "Error",
-        descripcion: List.from(jsonDecode(response.body)['message'])
-            .map((e) => e.toString())
-            .join('\n'),
+        descripcion:
+            "No se pudo registrar el usuario final, es posible que ya haya sido registrado",
         color: Colors.red,
       );
     }

@@ -24,7 +24,7 @@ class _TusTicketsScreenState extends State<TusTicketsScreen> {
         actions: const [
           ImageIcon(
             AssetImage('assets/gpolias.png'),
-            size: 80,
+            size: 50,
           ),
         ],
       ),

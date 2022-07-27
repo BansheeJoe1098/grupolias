@@ -46,7 +46,7 @@ class _PerfilScreenState extends State<PerfilScreen> {
         actions: const <Widget>[
           ImageIcon(
             AssetImage('assets/gpolias.png'),
-            size: 80,
+            size: 50,
           ),
         ],
       ),

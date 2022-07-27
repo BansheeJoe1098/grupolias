@@ -223,12 +223,14 @@ class AltaUsuariosFinalesForm extends StatelessWidget {
                 RegExp regex = RegExp(
                   r"^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$",
                 );
-
-                if (!regex.hasMatch(value)) {
-                  return 'El correo electrónico no es valido';
-                }
-                if (value.length > 50) {
-                  return 'El correo no puede tener más de 100 caracteres';
+                print(value.isNotEmpty);
+                if (value.isNotEmpty) {
+                  if (!regex.hasMatch(value)) {
+                    return 'El correo electrónico no es valido';
+                  }
+                  if (value.length > 50) {
+                    return 'El correo no puede tener más de 100 caracteres';
+                  }
                 }
                 return null;
               },

@@ -45,6 +45,55 @@ class _BotonesTicketWidgetState extends State<BotonesTicketWidget> {
     return Column(
       children: [
         Obx(
+          (() => controllerTD.ticket.value.estado == "FINALIZADO"
+              ? Container(
+                  height: 50,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: Colors.grey,
+                  ),
+                  child: const Center(
+                    child: Text(
+                      "Ticket finalizado",
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                )
+              : const SizedBox()),
+        ),
+        const SizedBox(
+          height: 10,
+        ),
+        Obx(
+          (() => controllerTD.ticket.value.estado == "A CERRAR"
+              ? Container(
+                  height: 50,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: Colors.blueAccent[200],
+                  ),
+                  child: const Center(
+                    child: Text(
+                      "Esperando aprobacion, de acuerdo de conformidad",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                )
+              : const SizedBox()),
+        ),
+        const SizedBox(
+          height: 10,
+        ),
+        Obx(
           (() => controllerTD.ticket.value.estado == "NUEVO"
               ? ElevatedButton(
                   style: ElevatedButton.styleFrom(
@@ -180,32 +229,9 @@ class _BotonesTicketWidgetState extends State<BotonesTicketWidget> {
           height: 10,
         ),
         Obx(
-          (() => controllerTD.ticket.value.estado == "FINALIZADO"
-              ? Container(
-                  height: 50,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: Colors.grey,
-                  ),
-                  child: const Center(
-                    child: Text(
-                      "Ticket finalizado",
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
-                )
-              : const SizedBox()),
-        ),
-        const SizedBox(
-          height: 10,
-        ),
-        Obx(
           (() => controllerTD.ticket.value.estado != "FINALIZADO" &&
                   controllerTD.ticket.value.estado != "NUEVO" &&
+                  controllerTD.ticket.value.estado != "A CERRAR" &&
                   controllerTD.ticket.value.estado != null
               ? ElevatedButton(
                   style: ElevatedButton.styleFrom(

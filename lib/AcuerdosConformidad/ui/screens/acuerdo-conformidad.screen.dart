@@ -121,9 +121,10 @@ class _AcuerdoConformidadScreenState extends State<AcuerdoConformidadScreen> {
                       ),
                       TextFormField(
                         validator: (value) {
-                          if (value!.isEmpty) {
-                            return 'Por favor ingrese una observacion';
+                          if (value!.length > 1 && value.length < 12) {
+                            return 'Ingrese una observacion más detallada';
                           }
+
                           return null;
                         },
                         maxLines: 5,

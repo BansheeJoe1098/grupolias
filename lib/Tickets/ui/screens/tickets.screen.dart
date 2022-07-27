@@ -29,11 +29,10 @@ class _TicketsScreenState extends State<TicketsScreen> {
       appBar: AppBar(
         automaticallyImplyLeading: false,
         backgroundColor: Colors.black,
-        toolbarHeight: 75,
         actions: const [
           ImageIcon(
             AssetImage('assets/gpolias.png'),
-            size: 65,
+            size: 50,
           )
         ],
       ),
