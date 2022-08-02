@@ -130,7 +130,7 @@ class _PerfilScreenState extends State<PerfilScreen> {
                 ),
               ),
               const SizedBox(
-                height: 50.0,
+                height: 25.0,
               ),
               const Text(
                 'Nombre:',
@@ -187,9 +187,9 @@ class _PerfilScreenState extends State<PerfilScreen> {
                 height: 20.0,
               ),
               const Text(
-                'Localidad:',
+                'Tu lugar de origen:',
                 style: TextStyle(
-                  color: Colors.black54,
+                  color: Colors.black,
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
                 ),
@@ -198,11 +198,26 @@ class _PerfilScreenState extends State<PerfilScreen> {
                 () => Text(
                   '${globalController.ciudadTecnico.value?.nombre} - ${globalController.estadoTecnico.value?.nombre}',
                   style: const TextStyle(
-                    color: Colors.black,
+                    color: Colors.black54,
                     fontWeight: FontWeight.bold,
-                    fontSize: 20.0,
+                    fontSize: 18,
                   ),
                 ),
+              ),
+              const SizedBox(
+                height: 20.0,
+              ),
+              const Text(
+                'Cobertura de servicios:',
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: globalController.listaCiudadesCobertura(),
               ),
               const SizedBox(
                 height: 20.0,

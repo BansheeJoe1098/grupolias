@@ -16,10 +16,17 @@ class LoginController extends GetxController {
     var token = await service.login(usuario.text, password.text);
 
     if (token == null) {
-      Get.snackbar('Error', 'Usuario o contraseña incorrectos',
+      Get.snackbar(
+          'NO AUTORIZADO, posibles causas:',
+          '''-Credenciales incorrectas
+          \n-Tecnico inactivo
+          \nEn caso necesitar ayuda Contacte con el administrador''',
           snackPosition: SnackPosition.BOTTOM,
-          backgroundColor: Colors.red,
+          backgroundColor: Colors.orange[900],
           colorText: Colors.white,
+          isDismissible: true,
+          shouldIconPulse: true,
+          duration: const Duration(seconds: 6),
           icon: const Icon(
             Icons.error,
             color: Colors.white,

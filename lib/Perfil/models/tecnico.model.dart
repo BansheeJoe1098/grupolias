@@ -1,14 +1,9 @@
-// To parse this JSON data, do
-//
-//     final tecnico = tecnicoFromJson(jsonString);
-
-// ignore_for_file: prefer_if_null_operators, prefer_null_aware_operators
+// ignore_for_file: prefer_if_null_operators
 
 import 'dart:convert';
 
 import 'package:grupolias/Perfil/models/servicios.model.dart';
-
-import '../../Tickets/models/ciudad.model.dart';
+import 'package:grupolias/Tickets/models/ciudad.model.dart';
 
 class Tecnico {
   Tecnico({
@@ -22,8 +17,8 @@ class Tecnico {
     this.ciudadId,
     this.createdAt,
     this.updatedAt,
+    this.ciudadesCobertura,
     this.servicio,
-    this.ciudad,
   });
 
   int? id;
@@ -36,8 +31,8 @@ class Tecnico {
   int? ciudadId;
   DateTime? createdAt;
   DateTime? updatedAt;
+  List<Ciudad>? ciudadesCobertura;
   List<Servicio>? servicio;
-  List<Ciudad>? ciudad;
 
   factory Tecnico.fromRawJson(String str) => Tecnico.fromJson(json.decode(str));
 
@@ -61,13 +56,14 @@ class Tecnico {
         updatedAt: json["updatedAt"] == null
             ? null
             : DateTime.parse(json["updatedAt"]),
+        ciudadesCobertura: json["Ciudades_Cobertura"] == null
+            ? null
+            : List<Ciudad>.from(
+                json["Ciudades_Cobertura"].map((x) => Ciudad.fromJson(x))),
         servicio: json["Servicio"] == null
             ? null
             : List<Servicio>.from(
                 json["Servicio"].map((x) => Servicio.fromJson(x))),
-        ciudad: json["Ciudad"] == null
-            ? null
-            : List<Ciudad>.from(json["Ciudad"].map((x) => Ciudad.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
@@ -79,13 +75,13 @@ class Tecnico {
         "telefono": telefono == null ? null : telefono,
         "usuarioId": usuarioId == null ? null : usuarioId,
         "ciudadId": ciudadId == null ? null : ciudadId,
-        "createdAt": createdAt == null ? null : createdAt?.toIso8601String(),
-        "updatedAt": updatedAt == null ? null : updatedAt?.toIso8601String(),
+        "createdAt": createdAt == null ? null : createdAt!.toIso8601String(),
+        "updatedAt": updatedAt == null ? null : updatedAt!.toIso8601String(),
+        "Ciudades_Cobertura": ciudadesCobertura == null
+            ? null
+            : List<dynamic>.from(ciudadesCobertura!.map((x) => x.toJson())),
         "Servicio": servicio == null
             ? null
             : List<dynamic>.from(servicio!.map((x) => x.toJson())),
-        "Ciudad": ciudad == null
-            ? null
-            : List<dynamic>.from(ciudad!.map((x) => x.toJson())),
       };
 }

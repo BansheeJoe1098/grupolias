@@ -116,4 +116,35 @@ class GlobalController extends GetxController {
     });
     return list;
   }
+
+  List<Widget> listaCiudadesCobertura() {
+    List<Widget> list = [];
+
+    tecnicoLogueado.value?.ciudadesCobertura?.forEach((ciudad) {
+      list.add(
+        Column(
+          children: [
+            const SizedBox(
+              height: 4.0,
+            ),
+            Container(
+              decoration: BoxDecoration(
+                color: Colors.grey[300],
+                borderRadius: BorderRadius.circular(3),
+              ),
+              child: Text(
+                ciudad.nombre!,
+                style: const TextStyle(
+                  color: Colors.grey,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 16.0,
+                ),
+              ),
+            ),
+          ],
+        ),
+      );
+    });
+    return list;
+  }
 }
