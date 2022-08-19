@@ -223,7 +223,6 @@ class AltaUsuariosFinalesForm extends StatelessWidget {
                 RegExp regex = RegExp(
                   r"^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$",
                 );
-                print(value.isNotEmpty);
                 if (value.isNotEmpty) {
                   if (!regex.hasMatch(value)) {
                     return 'El correo electrónico no es valido';
